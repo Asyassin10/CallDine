@@ -18,11 +18,15 @@ PRICE_RANGES = {"Starters": (8, 14), "Pasta": (15, 24), "Main courses": (18, 28)
 
 
 def to_response(item: MenuItem, category: Category) -> MenuItemResponse:
-    return MenuItemResponse(id=item.id, name=item.name, category=category.name, price=item.price, image_url=item.image_url, available=item.available)
+    return MenuItemResponse(id=item.id, name=item.name, category=category.name, price=item.price, image_url=item.image_url, available=item.available, stock_quantity=item.stock_quantity)
 
 
 def list_menu(session: Session) -> list[MenuItemResponse]:
     return [to_response(item, category) for item, category in menu_repository.list_all(session)]
+
+
+def search_menu(session: Session, query: str) -> list[MenuItemResponse]:
+    return [to_response(item, category) for item, category in menu_repository.search(session, query)]
 
 
 def list_categories(session: Session) -> list[Category]:
@@ -33,7 +37,7 @@ def create_menu_item(session: Session, payload: MenuItemCreate) -> MenuItemRespo
     category = category_repository.get_by_name(session, payload.category)
     if not category:
         return None
-    item = menu_repository.save(session, MenuItem(name=payload.name, category_id=category.id, price=payload.price, image_url=payload.image_url, available=payload.available))
+    item = menu_repository.save(session, MenuItem(name=payload.name, category_id=category.id, price=payload.price, image_url=payload.image_url, available=payload.available, stock_quantity=payload.stock_quantity))
     return to_response(item, category)
 
 
@@ -47,6 +51,7 @@ def update_menu_item(session: Session, item_id: int, payload: MenuItemCreate) ->
     item.price = payload.price
     item.image_url = payload.image_url
     item.available = payload.available
+    item.stock_quantity = payload.stock_quantity
     return to_response(menu_repository.save(session, item), category)
 
 

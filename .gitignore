@@ -1,5 +1,6 @@
 # macOS
 .DS_Store
+AGENTS.md
 
 # Frontend
 Frontend/node_modules/

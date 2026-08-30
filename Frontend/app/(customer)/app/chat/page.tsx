@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
+import { ChatAssistant } from "@/components/chat/ChatAssistant";
 import { PageHeader } from "@/components/ui/PageHeader";
-const messages=[["Assistant","Good evening, this is Osteria Vento. How can I help?"],["You","I’d like a table for four tonight, and something to start with."],["Assistant","I have 20:30 open by the window. Would that work?"],["You","Yes. Add the burrata as well."],["Assistant","Done. Your reservation and order are ready to review."]];
-export default function ChatPage(){return <div className="page"><PageHeader eyebrow="Assistant" title="Chat" sub="Type a message or switch to the voice call."><Link className="button primary" href="/app/ai">Start voice call</Link></PageHeader><div className="grid"><Card className="span8" title="Conversation"><div style={{display:"grid",gap:10}}>{messages.map(([who,text],i)=><div key={i} style={{maxWidth:"82%",justifySelf:who==="You"?"end":"start",background:who==="You"?"var(--soft)":"var(--ink)",color:who==="You"?"var(--ink)":"var(--paper)",borderRadius:12,padding:"10px 12px",fontSize:13}}><div className="eyebrow" style={{marginBottom:4}}>{who}</div>{text}</div>)}</div><div className="field" style={{marginTop:16}}><label>Message</label><div style={{display:"flex",gap:8}}><input className="input" defaultValue="Add two sparkling waters"/><button className="button primary">Send</button></div></div></Card><Card className="span4" title="Recent activity" sub="Read-only"><div className="notice">Table for 4 · tonight 20:30 confirmed</div><div className="notice" style={{marginTop:8}}>3 items · €47.00 preparing</div></Card></div></div>}
+
+export default function ChatPage() {
+  return <div className="page"><PageHeader eyebrow="Assistant" title="Chat with CallDine" sub="Live answers powered by GPT‑OSS 20B."><Link className="button primary" href="/app/ai">Start voice call</Link></PageHeader><ChatAssistant /></div>;
+}

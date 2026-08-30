@@ -12,6 +12,7 @@ export interface MenuItem {
   price: number;
   image: string;
   available: boolean;
+  stock_quantity: number;
 }
 
 export interface Order {

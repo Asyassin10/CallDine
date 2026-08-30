@@ -13,6 +13,7 @@ class MenuItemCreate(SQLModel):
     price: float
     image_url: str
     available: bool = True
+    stock_quantity: int = 20
 
 
 class MenuItemResponse(SQLModel):
@@ -22,3 +23,4 @@ class MenuItemResponse(SQLModel):
     price: float
     image_url: str
     available: bool
+    stock_quantity: int

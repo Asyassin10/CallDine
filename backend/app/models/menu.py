@@ -10,3 +10,4 @@ class MenuItem(SQLModel, table=True):
     price: float
     image_url: str
     available: bool = True
+    stock_quantity: int = 20

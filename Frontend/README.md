@@ -1,6 +1,6 @@
 # CallDine
 
-CallDine is a Next.js 16 demo for restaurant voice ordering, customer self-service, and restaurant operations.
+CallDine is a Next.js 16 interface for restaurant chat, delivery orders, reservations, knowledge management, and operations.
 
 ## Start locally
 
@@ -12,12 +12,12 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Demo accounts
+## Local accounts
 
-- Customer: `mara@ansel.co` / `demo123`
-- Restaurant admin: `sofia@osteriavento.de` / `admin123`
+- Customer: `custmer@custmer.com` / `password`
+- Restaurant admin: `admin@admin.com` / `password`
 
-The demo session is stored in a signed HTTP-only cookie. Change `AUTH_SECRET` in `.env.local` before sharing the app.
+The session token is stored in an HTTP-only cookie. The FastAPI backend must be running on port `8000`.
 
 ## Commands
 

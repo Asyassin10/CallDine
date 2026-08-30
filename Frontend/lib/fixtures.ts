@@ -1,20 +1,20 @@
 import type { CallRecord, Customer, MenuItem, Order, Reservation } from "./types";
 
 export const orders: Order[] = [
-  { id:"1832", customer:"Customer #182", source:"Voice", status:"Preparing", total:38.5, placed:"19:42", items:2 },
-  { id:"1831", customer:"Lena Fischer", source:"Website", status:"Ready", total:24, placed:"19:28", items:1 },
-  { id:"1830", customer:"Customer #164", source:"Chat", status:"Confirmed", total:52.2, placed:"19:15", items:4 },
-  { id:"1829", customer:"Tomas Reiter", source:"Voice", status:"Pending", total:19, placed:"19:07", items:1 },
-  { id:"1828", customer:"Mara Ansel", source:"Voice", status:"Completed", total:47, placed:"18:52", items:3 },
-  { id:"1827", customer:"Customer #151", source:"Website", status:"Completed", total:31.4, placed:"18:33", items:2 },
-  { id:"1826", customer:"Jonas Weber", source:"Chat", status:"Cancelled", total:22, placed:"18:11", items:1 },
+  { id:"1832", customer:"Customer #182", source:"Voice", status:"Preparing", total:38.5, placed:"30 Aug 2026 · 19:42", items:2 },
+  { id:"1831", customer:"Lena Fischer", source:"Website", status:"Ready", total:24, placed:"30 Aug 2026 · 19:28", items:1 },
+  { id:"1830", customer:"Customer #164", source:"Chat", status:"Confirmed", total:52.2, placed:"30 Aug 2026 · 19:15", items:4 },
+  { id:"1829", customer:"Tomas Reiter", source:"Voice", status:"Pending", total:19, placed:"30 Aug 2026 · 19:07", items:1 },
+  { id:"1828", customer:"Mara Ansel", source:"Voice", status:"Completed", total:47, placed:"30 Aug 2026 · 18:52", items:3 },
+  { id:"1827", customer:"Customer #151", source:"Website", status:"Completed", total:31.4, placed:"30 Aug 2026 · 18:33", items:2 },
+  { id:"1826", customer:"Jonas Weber", source:"Chat", status:"Cancelled", total:22, placed:"30 Aug 2026 · 18:11", items:1 },
 ];
 
 export const reservations: Reservation[] = [
-  { id:"442", guest:"Lena Fischer", when:"Tonight 20:30", guests:4, table:"T7 · window", status:"Confirmed" },
-  { id:"441", guest:"Customer #164", when:"Tonight 21:00", guests:2, table:"T3", status:"Confirmed" },
-  { id:"440", guest:"Mara Ansel", when:"Tonight 20:30", guests:4, table:"T7 · window", status:"Seated" },
-  { id:"439", guest:"Tomas Reiter", when:"Tomorrow 19:00", guests:6, table:"T12 · terrace", status:"Confirmed" },
+  { id:"442", guest:"Lena Fischer", when:"30 Aug 2026 · 20:30", guests:4, table:"T7 · window", status:"Confirmed" },
+  { id:"441", guest:"Customer #164", when:"30 Aug 2026 · 21:00", guests:2, table:"T3", status:"Confirmed" },
+  { id:"440", guest:"Mara Ansel", when:"30 Aug 2026 · 20:30", guests:4, table:"T7 · window", status:"Seated" },
+  { id:"439", guest:"Tomas Reiter", when:"31 Aug 2026 · 19:00", guests:6, table:"T12 · terrace", status:"Confirmed" },
 ];
 
 export const calls: CallRecord[] = [
@@ -43,7 +43,7 @@ export const fallbackMenu: MenuItem[] = [
   ["Tiramisù","Desserts",9,"https://www.themealdb.com/images/media/meals/wkhg581762773124.jpg"],
   ["Gnocchi al pesto","Pasta",19.5,"https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=80"],
   ["Insalata Caprese","Vegetarian",12.5,"https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=900&q=80"],
-].map(([name,category,price,image],index)=>({id:`fallback-${index}`,name:String(name),slug:slugify(String(name)),category:category as MenuItem["category"],price:Number(price),image:String(image),available:name!=="Tiramisù"}));
+].map(([name,category,price,image],index)=>({id:`fallback-${index}`,name:String(name),slug:slugify(String(name)),category:category as MenuItem["category"],price:Number(price),image:String(image),available:name!=="Tiramisù",stock_quantity:20}));
 
 export function slugify(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

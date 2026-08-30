@@ -1,5 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { DataTable } from "@/components/ui/DataTable";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { euro, orders } from "@/lib/fixtures";
-export default function OrdersPage(){return <div className="page"><PageHeader eyebrow="Customer" title="Orders" sub="Live status and history"/><Card title="Your orders"><DataTable columns={["ORDER","PLACED","SOURCE","STATUS","ITEMS","TOTAL"]} rows={orders.map(o=>[`#${o.id}`,o.placed,o.source,o.status,o.items,euro(o.total)])} links={orders.map(o=>`/app/orders/${o.id}`)}/></Card></div>}
+import { euro } from "@/lib/fixtures";
+
+type Order = { id: string; delivery_address: string; status: string; total: number; created_at: string };
+
+export default function OrdersPage() {
+  const [orders, setOrders] = useState<Order[]>([]);
+  useEffect(() => { fetch("/api/customer/orders").then(response => response.json()).then(setOrders); }, []);
+  return <div className="page"><PageHeader eyebrow="Customer" title="Orders" sub="Confirmed delivery orders"/><Card title="Your orders"><DataTable columns={["ORDER", "DATE & TIME", "ADDRESS", "STATUS", "TOTAL"]} rows={orders.map(order => [order.id.slice(0, 8), new Date(order.created_at).toLocaleString(), order.delivery_address, order.status, euro(order.total)])}/></Card></div>;
+}

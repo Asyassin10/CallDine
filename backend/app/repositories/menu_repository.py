@@ -19,6 +19,14 @@ def get_by_id(session: Session, item_id: int) -> MenuItem | None:
     return session.get(MenuItem, item_id)
 
 
+def search(session: Session, query: str) -> list[tuple[MenuItem, Category]]:
+    term = f"%{query.lower()}%"
+    statement = select(MenuItem, Category).join(Category, MenuItem.category_id == Category.id).where(
+        MenuItem.name.ilike(term) | Category.name.ilike(term)
+    ).order_by(MenuItem.name)
+    return list(session.exec(statement))
+
+
 def save(session: Session, item: MenuItem) -> MenuItem:
     session.add(item)
     session.commit()
