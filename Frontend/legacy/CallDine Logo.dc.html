@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EFEDE9; }
+  a { color: #B07C34; text-decoration: none; }
+  a:hover { color: #1A1A18; }
+</style>
+</helmet>
+
+<section style="display: flex; flex-direction: column; gap: 28px; padding: 56px; font-family: Manrope, Helvetica, sans-serif; color: #1A1A18;">
+
+  <div style="display: flex; align-items: baseline; gap: 16px;">
+    <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8579;">CallDine — identity, round 1</div>
+    <div style="font-size: 13px; color: #8A8579;">Two directions: <a href="#1a">1a</a> open call ring, <a href="#1b">1b</a> voice bubble</div>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start;">
+
+    <div id="1a" style="width: 620px; display: flex; flex-direction: column; gap: 20px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 20px; padding: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #1A1A18; color: #F7F6F3; padding: 3px 8px; border-radius: 5px;">1a</div>
+        <div style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">Open Ring</div>
+        <div style="font-size: 13px; color: #8A8579;">Call ring opening into a waveform-fork</div>
+      </div>
+
+      <div style="display: flex; gap: 20px;">
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: #1A1A18; display: grid; place-items: center; color: oklch(0.74 0.11 68);">
+          <svg viewBox="0 0 64 64" width="112" height="112" aria-label="CallDine mark"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+        </div>
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: #F7F6F3; border: 1px solid #E2DFD8; display: grid; place-items: center; color: #1A1A18;">
+          <svg viewBox="0 0 64 64" width="112" height="112"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+        </div>
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: oklch(0.74 0.11 68); display: grid; place-items: center; color: #1A1A18;">
+          <svg viewBox="0 0 64 64" width="112" height="112"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #F7F6F3; border: 1px solid #E2DFD8; border-radius: 12px; padding: 30px 34px; display: flex; align-items: center; gap: 16px; color: #1A1A18;">
+          <svg viewBox="0 0 64 64" width="44" height="44"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+          <div style="font-size: 34px; font-weight: 500; letter-spacing: -0.035em;">CallDine</div>
+        </div>
+        <div style="background: #1A1A18; border-radius: 12px; padding: 30px 34px; display: flex; align-items: center; gap: 16px;">
+          <div style="color: oklch(0.74 0.11 68); display: flex;">
+            <svg viewBox="0 0 64 64" width="44" height="44"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+          </div>
+          <div style="font-size: 34px; font-weight: 500; letter-spacing: -0.035em; color: #F7F6F3;">CallDine</div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showSizeTest }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: flex-end; gap: 22px; padding-top: 4px; color: #1A1A18;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="48" height="48"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">48</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="32" height="32"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">32</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="24" height="24"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="22" width="5.5" height="13" rx="2.75" fill="currentColor"></rect><rect x="29.25" y="18" width="5.5" height="26" rx="2.75" fill="currentColor"></rect><rect x="39" y="22" width="5.5" height="13" rx="2.75" fill="currentColor"></rect></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">24</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="16" height="16"><circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-dasharray="121 30" transform="rotate(35 32 32)"></circle><rect x="28.5" y="18" width="7" height="26" rx="3.5" fill="currentColor"></rect><rect x="17.5" y="23" width="7" height="14" rx="3.5" fill="currentColor"></rect><rect x="39.5" y="23" width="7" height="14" rx="3.5" fill="currentColor"></rect></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">16</div>
+          </div>
+          <div style="font-size: 12px; color: #8A8579; line-height: 1.5; max-width: 220px;">At 16px the stroke thickens and the ring closes slightly so the gap and the three bars stay readable.</div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div id="1b" style="width: 620px; display: flex; flex-direction: column; gap: 20px; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 20px; padding: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #1A1A18; color: #F7F6F3; padding: 3px 8px; border-radius: 5px;">1b</div>
+        <div style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em;">Voice Bubble</div>
+        <div style="font-size: 13px; color: #8A8579;">Speech bubble cut by fork tines</div>
+      </div>
+
+      <div style="display: flex; gap: 20px;">
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: #1A1A18; display: grid; place-items: center;">
+          <svg viewBox="0 0 64 64" width="112" height="112" aria-label="CallDine mark"><g fill="oklch(0.74 0.11 68)"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#1A1A18"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+        </div>
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: #F7F6F3; border: 1px solid #E2DFD8; display: grid; place-items: center;">
+          <svg viewBox="0 0 64 64" width="112" height="112"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#F7F6F3"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+        </div>
+        <div style="width: 180px; height: 180px; border-radius: 40px; background: oklch(0.74 0.11 68); display: grid; place-items: center;">
+          <svg viewBox="0 0 64 64" width="112" height="112"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="oklch(0.74 0.11 68)"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: #F7F6F3; border: 1px solid #E2DFD8; border-radius: 12px; padding: 30px 34px; display: flex; align-items: center; gap: 16px;">
+          <svg viewBox="0 0 64 64" width="44" height="44"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#F7F6F3"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+          <div style="font-size: 34px; font-weight: 500; letter-spacing: -0.035em; color: #1A1A18;">CallDine</div>
+        </div>
+        <div style="background: #1A1A18; border-radius: 12px; padding: 30px 34px; display: flex; align-items: center; gap: 16px;">
+          <svg viewBox="0 0 64 64" width="44" height="44"><g fill="oklch(0.74 0.11 68)"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#1A1A18"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+          <div style="font-size: 34px; font-weight: 500; letter-spacing: -0.035em; color: #F7F6F3;">CallDine</div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showSizeTest }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; align-items: flex-end; gap: 22px; padding-top: 4px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="48" height="48"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#FFFFFF"><rect x="19.5" y="21" width="5" height="14" rx="2.5"></rect><rect x="29.5" y="19" width="5" height="23" rx="2.5"></rect><rect x="39.5" y="21" width="5" height="14" rx="2.5"></rect></g></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">48</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="32" height="32"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#FFFFFF"><rect x="19" y="21" width="6" height="14" rx="3"></rect><rect x="29" y="19" width="6" height="23" rx="3"></rect><rect x="39" y="21" width="6" height="14" rx="3"></rect></g></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">32</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="24" height="24"><g fill="#1A1A18"><rect x="4" y="9" width="56" height="39" rx="13"></rect><rect x="15" y="38" width="13" height="13" rx="4" transform="rotate(14 21.5 44.5)"></rect></g><g fill="#FFFFFF"><rect x="18.5" y="21" width="7" height="14" rx="3.5"></rect><rect x="28.5" y="19" width="7" height="23" rx="3.5"></rect><rect x="38.5" y="21" width="7" height="14" rx="3.5"></rect></g></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">24</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 64 64" width="16" height="16"><g fill="#1A1A18"><rect x="2" y="8" width="60" height="41" rx="14"></rect><rect x="14" y="38" width="15" height="15" rx="4" transform="rotate(14 21.5 45.5)"></rect></g><g fill="#FFFFFF"><rect x="17" y="21" width="8" height="14" rx="4"></rect><rect x="28" y="18" width="8" height="24" rx="4"></rect><rect x="39" y="21" width="8" height="14" rx="4"></rect></g></svg>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8579;">16</div>
+          </div>
+          <div style="font-size: 12px; color: #8A8579; line-height: 1.5; max-width: 220px;">The bubble holds its silhouette when tiny; tines widen so the negative space survives.</div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 40px; align-items: flex-start; background: #FFFFFF; border: 1px solid #E2DFD8; border-radius: 20px; padding: 28px 32px; width: 1308px; box-sizing: border-box;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8579;">Palette</div>
+      <div style="display: flex; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="width: 108px; height: 68px; border-radius: 10px; background: #1A1A18;"></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55524A;">#1A1A18<br>warm black</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="width: 108px; height: 68px; border-radius: 10px; background: oklch(0.74 0.11 68);"></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55524A;">#D49B52<br>burnished amber</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="width: 108px; height: 68px; border-radius: 10px; background: #F7F6F3; border: 1px solid #E2DFD8;"></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55524A;">#F7F6F3<br>off-white</div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8579;">Wordmark</div>
+      <div style="font-size: 44px; font-weight: 500; letter-spacing: -0.035em; line-height: 1;">CallDine</div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55524A; line-height: 1.7;">Manrope Medium · tracking −0.035em<br>Icon height = cap height × 1.35 · clear space = icon width ÷ 2</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8579;">Construction</div>
+      <div style="font-size: 13px; color: #55524A; line-height: 1.7; max-width: 300px;">Built on a 64-unit grid. Ring radius 25, stroke 5, gap 40°. Bars share a 5-unit width and 2.5 corner radius — the same radius rhythm as the app-icon squircle.</div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return { showSizeTest: this.props.showSizeTest ?? true };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #E8E6E1; -webkit-font-smoothing: antialiased; }
+  a { color: #B07C34; text-decoration: none; }
+  a:hover { color: #1A1A18; }
+  @keyframes cd-bar { 0%,100% { transform: scaleY(0.16); } 50% { transform: scaleY(1); } }
+  @keyframes cd-ring { 0% { transform: scale(0.86); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+  @keyframes cd-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-thumb { background: #D6D2C9; border: 3px solid transparent; background-clip: content-box; border-radius: 6px; }
+  @media (max-width: 760px) {
+    body { background: #1A1A18; }
+    #cd-app-frame { width: 100vw !important; height: 100dvh !important; min-height: 640px; border-radius: 0 !important; }
+    #cd-app-frame > div:first-child { height: 30px !important; min-height: 30px; padding: 0 8px !important; }
+    #cd-app-frame > div:first-child > div:nth-child(2) > div { min-width: 0 !important; width: 100%; }
+    #cd-app-frame > div:first-child > div:nth-child(2) { flex: 1; min-width: 0; }
+    #cd-app-frame .cd-auth-layout { flex-direction: column !important; overflow: auto; }
+    #cd-app-frame .cd-auth-layout > div:first-child { width: 100% !important; padding: 28px 18px !important; box-sizing: border-box; }
+    #cd-app-frame .cd-auth-aside { width: auto !important; min-height: 220px; margin: 0 12px 12px !important; padding: 24px !important; }
+    #cd-app-frame > div:nth-child(2) { flex-direction: column !important; }
+    #cd-app-frame aside { position: fixed; inset: 0 auto 0 0; z-index: 1000; width: 276px !important; height: 100dvh !important; max-height: none; min-height: 0 !important; padding: 16px 12px !important; border-right: 1px solid #E4E1DA; border-bottom: 0; flex-direction: column !important; align-items: stretch; gap: 8px; overflow: auto; background: #F2F0EC; }
+    #cd-app-frame .cd-mobile-drawer { transform: translateX(-110%); transition: transform 220ms ease; }
+    #cd-app-frame .cd-mobile-drawer.is-open { transform: translateX(0); }
+    #cd-app-frame aside > div:first-child { padding: 4px 8px 18px !important; flex: none; }
+    #cd-app-frame aside > div:first-child > div:last-child { display: flex; }
+    #cd-app-frame aside > div:nth-child(2) { flex: 1; min-width: 0; display: flex !important; flex-direction: column !important; gap: 14px !important; overflow: auto; }
+    #cd-app-frame aside > div:nth-child(2) > div { display: flex; flex-direction: column; gap: 2px; }
+    #cd-app-frame aside > div:nth-child(2) button { min-width: 0; padding: 8px 10px !important; justify-content: flex-start; font-size: 13.5px !important; }
+    #cd-app-frame aside > div:nth-child(2) button span:first-child { display: block; }
+    #cd-app-frame aside > div:last-child { display: flex !important; }
+    #cd-app-frame main { min-height: 0 !important; }
+    #cd-app-frame main > header { padding: 10px 14px !important; }
+    #cd-app-frame main > header > div:first-child { flex-direction: column; gap: 8px; }
+    #cd-app-frame main > header > div:first-child > div:last-child { width: 100%; overflow-x: auto; }
+    #cd-app-frame main > div { padding: 12px !important; }
+    #cd-app-frame .cd-section-grid { display: grid; grid-template-columns: 1fr !important; gap: 12px !important; }
+    #cd-app-frame .cd-section-grid > div { grid-column: 1 / -1 !important; }
+    #cd-app-frame .cd-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+    #cd-app-frame .cd-card-grid > div { min-width: 0; padding: 9px !important; }
+    #cd-app-frame .cd-table { overflow-x: auto; }
+    #cd-app-frame .cd-table > div { min-width: 620px; }
+    #cd-app-frame .cd-voice-layout { flex-direction: column !important; }
+    #cd-app-frame .cd-voice-card { width: 100% !important; height: calc(100dvh - 150px) !important; min-height: 560px; border-radius: 16px !important; }
+    #cd-app-frame .cd-voice-card > div[style*="top: 14px"] { max-width: 55%; flex-wrap: wrap; justify-content: flex-end; }
+    #cd-app-frame .cd-voice-card > div:last-child { flex-wrap: wrap; justify-content: center; }
+    #cd-app-frame .cd-voice-card button { min-height: 40px; }
+    #cd-app-frame .cd-mobile-menu { display: grid !important; }
+    #cd-app-frame .cd-mobile-menu-icon { display: block !important; }
+  }
+</style>
+</helmet>
+
+<div id="cd-app-frame" style="width: 1440px; height: 900px; display: flex; flex-direction: column; font-family: Manrope, Helvetica, sans-serif; color: #1A1A18; background: #F7F6F3; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(26,26,24,0.06), 0 24px 60px -20px rgba(26,26,24,0.28);">
+
+  <div style="height: 34px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 14px; background: #EDEBE6; border-bottom: 1px solid #E0DCD3;">
+    <div style="display: flex; gap: 6px;">
+      <span style="width: 10px; height: 10px; border-radius: 5px; background: #D9D5CC;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 5px; background: #D9D5CC;"></span>
+      <span style="width: 10px; height: 10px; border-radius: 5px; background: #D9D5CC;"></span>
+    </div>
+    <div style="flex: 1; display: flex; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 7px; padding: 3px 12px; min-width: 380px; justify-content: center;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A19B8E;">calldine.app</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #1A1A18;">{{ route }}</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 6px;">
+      <sc-for list="{{ roleSwitch }}" as="r" hint-placeholder-count="2">
+        <button onClick="{{ r.go }}" style="{{ r.style }}">{{ r.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ true }}">
+    <div class="cd-auth-layout" style="flex: 1; min-height: 0; display: flex;">
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px;">
+        <div style="width: 380px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg viewBox="0 0 64 64" width="28" height="28" style="color: #1A1A18;"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+            <div style="font-size: 19px; font-weight: 600; letter-spacing: -0.035em;">CallDine</div>
+            <sc-if value="{{ auth.isAdmin }}" hint-placeholder-val="{{ true }}">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; background: #1A1A18; color: #F7F6F3; padding: 3px 7px; border-radius: 5px;">RESTAURANT ADMIN</span>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="font-size: 27px; font-weight: 600; letter-spacing: -0.035em;">{{ auth.title }}</div>
+            <div style="font-size: 14px; color: #8A8579; text-wrap: pretty;">{{ auth.sub }}</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 13px;">
+            <sc-for list="{{ auth.fields }}" as="f" hint-placeholder-count="2">
+              <label style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-size: 12.5px; font-weight: 500; color: #55524A;">{{ f.label }}</span>
+                <span style="height: 42px; border-radius: 11px; border: 1px solid #E0DCD3; background: #FFFFFF; box-shadow: 0 1px 2px rgba(26,26,24,0.04); display: flex; align-items: center; padding: 0 13px; font-size: 14px; color: {{ f.color }};" style-hover="border-color: #C7C3B9;">{{ f.value }}</span>
+              </label>
+            </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #55524A;">
+              <span style="width: 16px; height: 16px; border-radius: 5px; border: 1px solid #D6D2C9; background: #FFFFFF; display: grid; place-items: center;"><span style="width: 8px; height: 8px; border-radius: 2px; background: #1A1A18;"></span></span>
+              Remember me
+            </label>
+            <span style="font-size: 13px; color: #B07C34; cursor: pointer;" style-hover="color: #1A1A18;">Forgot password?</span>
+          </div>
+          <div style="display: flex, flex-direction: column;">
+            <button onClick="{{ auth.signIn }}" style="width: 100%; height: 46px; border-radius: 12px; border: none; background: #1A1A18; color: #F7F6F3; font-family: Manrope, sans-serif; font-size: 14.5px; font-weight: 600; cursor: pointer; transition: transform 140ms ease;" style-hover="transform: translateY(-1px);">{{ auth.cta }}</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A8579;">
+            <span>{{ auth.altText }}</span>
+            <span onClick="{{ auth.altGo }}" style="color: #B07C34; font-weight: 500; cursor: pointer;" style-hover="color: #1A1A18;">{{ auth.altLink }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cd-auth-aside" style="width: 560px; flex: none; margin: 14px 14px 14px 0; border-radius: 18px; background: #1A1A18; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 34px;">
+        <div style="position: absolute; top: 30px; left: 34px; right: 34px; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(247,246,243,0.45);">{{ auth.badge }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(247,246,243,0.45);">v2.4</span>
+        </div>
+        <div style="position: absolute; inset: 0; display: grid; place-items: center;">
+          <div style="display: flex; align-items: center; gap: 5px; height: 86px;">{{ waveform }}</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
+          <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.03em; color: #F7F6F3; text-wrap: pretty;">{{ auth.quote }}</div>
+          <div style="font-size: 13.5px; color: rgba(247,246,243,0.5);">{{ auth.quoteBy }}</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isShell }}" hint-placeholder-val="{{ true }}">
+    <div style="flex: 1; min-height: 0; display: flex;">
+
+      <aside class="cd-mobile-drawer {{ mobileDrawerClass }}" style="width: 244px; flex: none; background: #F2F0EC; border-right: 1px solid #E4E1DA; display: flex; flex-direction: column; padding: 16px 12px; min-height: 0;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px 18px;">
+          <svg viewBox="0 0 64 64" width="24" height="24" style="color: #1A1A18;"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+          <div style="display: flex; flex-direction: column;">
+            <div style="font-size: 16px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.15;">CallDine</div>
+            <div style="font-size: 11px; color: #8A8579; letter-spacing: 0.02em;">{{ brandSub }}</div>
+          </div>
+        </div>
+
+        <div style="flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 14px;">
+          <sc-for list="{{ navGroups }}" as="g" hint-placeholder-count="2">
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <sc-if value="{{ g.label }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; align-items: center; gap: 7px; padding: 4px 10px 6px;">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #A19B8E;">{{ g.label }}</span>
+                  <span style="flex: 1; height: 1px; background: #E4E1DA;"></span>
+                </div>
+              </sc-if>
+              <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="4">
+                <button onClick="{{ i.go }}" style="{{ i.style }}" style-hover="background: #EAE7E0;">
+                  <span style="{{ i.dot }}"></span>
+                  <span style="flex: 1; text-align: left;">{{ i.label }}</span>
+                  <sc-if value="{{ i.count }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8A8579; background: #EAE7E0; border-radius: 5px; padding: 1px 5px;">{{ i.count }}</span>
+                  </sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex: none; padding-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+          <sc-if value="{{ ctaLabel }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ goAi }}" style="height: 42px; border-radius: 12px; border: none; background: oklch(0.74 0.11 68); color: #1A1A18; font-family: Manrope, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 140ms ease;" style-hover="transform: translateY(-1px);">
+              <span style="width: 6px; height: 6px; border-radius: 3px; background: #1A1A18; animation: cd-pulse 1.6s ease-in-out infinite;"></span>{{ ctaLabel }}
+            </button>
+          </sc-if>
+          <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px;">
+            <div style="font-size: 12.5px; font-weight: 600; letter-spacing: -0.01em;">{{ orgName }}</div>
+            <div style="font-size: 11.5px; color: #8A8579;">{{ orgMeta }}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px; padding: 4px 6px;">
+            <div style="width: 28px; height: 28px; border-radius: 14px; background: #DDD9D0; display: grid; place-items: center; font-size: 11px; font-weight: 600; color: #55524A;">{{ userInitials }}</div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <span style="font-size: 12.5px; font-weight: 500;">{{ userName }}</span>
+              <span style="font-size: 11px; color: #8A8579;">{{ userRole }}</span>
+            </div>
+            <button onClick="{{ logout }}" style="border: 1px solid #E0DCD3; background: #FFFFFF; border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: #55524A; padding: 4px 7px; cursor: pointer;" style-hover="border-color: #C7C3B9;">LOG OUT</button>
+          </div>
+        </div>
+      </aside>
+
+      <main style="flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0;">
+        <button class="cd-mobile-menu" onClick="{{ toggleMobileNav }}" style="display:none;position:fixed;top:10px;right:10px;z-index:1001;width:38px;height:38px;border-radius:12px;border:1px solid rgba(247,246,243,0.18);background:#232320;color:#F7F6F3;place-items:center;cursor:pointer;"><svg class="cd-mobile-menu-icon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+        <header style="flex: none; border-bottom: 1px solid #E4E1DA; background: rgba(247,246,243,0.82); backdrop-filter: blur(20px); padding: 14px 24px 12px; display: flex; flex-direction: column; gap: 12px;{{ voiceHeaderStyle }}">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 7px;">
+                <sc-if value="{{ backLabel }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ goBack }}" style="border: 1px solid #E0DCD3; background: #FFFFFF; border-radius: 8px; font-size: 11.5px; color: #55524A; padding: 3px 8px; cursor: pointer; font-family: Manrope, sans-serif;" style-hover="border-color: #C7C3B9;">← {{ backLabel }}</button>
+                </sc-if>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #A19B8E;">{{ crumb }}</span>
+              </div>
+              <div style="font-size: 21px; font-weight: 600; letter-spacing: -0.032em;">{{ pageTitle }}</div>
+              <div style="font-size: 13px; color: #8A8579; text-wrap: pretty;">{{ pageSub }}</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex: none;">
+              <sc-for list="{{ pageActions }}" as="a" hint-placeholder-count="2">
+                <button onClick="{{ a.run }}" style="{{ a.style }}" style-hover="transform: translateY(-1px);">{{ a.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <sc-if value="{{ hasTabs }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+                <button onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}<sc-if value="{{ t.count }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; opacity: 0.6; margin-left: 6px;">{{ t.count }}</span></sc-if></button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </header>
+
+        <div style="flex: 1; min-height: 0; overflow: auto; padding: 20px 24px 28px; background: {{ contentBg }};">
+
+          <sc-if value="{{ isVoicePage }}" hint-placeholder-val="{{ true }}">
+              <div class="cd-voice-layout" style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; gap: 16px; align-items: stretch;">
+                <div class="cd-voice-card" style="flex: 1; min-width: 0; height: 452px; border-radius: 20px; background: #1A1A18; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;">
+                  <div style="position: absolute; top: 16px; left: 18px; display: flex; align-items: center; gap: 8px;">
+                    <span style="width: 6px; height: 6px; border-radius: 3px; background: {{ dotColor }}; animation: cd-pulse 1.6s ease-in-out infinite;"></span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: rgba(247,246,243,0.5);">{{ stateLabel }} · {{ clock }}</span>
+                  </div>
+                  <div style="position: absolute; top: 14px; right: 16px; display: flex; gap: 6px;">
+                    <sc-for list="{{ states }}" as="s" hint-placeholder-count="4">
+                      <button onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}</button>
+                    </sc-for>
+                  </div>
+                  <div style="position: relative; width: 124px; height: 124px; display: grid; place-items: center;">
+                    <div style="{{ haloStyle }}"></div>
+                    <div style="{{ haloStyle2 }}"></div>
+                    <div style="width: 86px; height: 86px; border-radius: 43px; background: #232320; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.09); display: grid; place-items: center; color: oklch(0.74 0.11 68);">
+                      <svg viewBox="0 0 64 64" width="42" height="42"><circle cx="32" cy="32" r="25" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="126 32" transform="rotate(35 32 32)"></circle><rect x="19.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect><rect x="29.5" y="18" width="5" height="27" rx="2.5" fill="currentColor"></rect><rect x="39.5" y="21" width="5" height="15" rx="2.5" fill="currentColor"></rect></svg>
+                    </div>
+                  </div>
+                  <div style="display: flex; flex-direction: column; align-items: center; gap: 7px;">
+                    <div style="font-size: 24px; font-weight: 600; letter-spacing: -0.03em; color: #F7F6F3;">{{ stageTitle }}</div>
+                    <div style="font-size: 13.5px; color: rgba(247,246,243,0.55); max-width: 400px; text-align: center; text-wrap: pretty;">{{ stageSub }}</div>
+                  </div>
+                  <div style="height: 68px; display: flex; align-items: center; gap: 5px;">{{ waveform }}</div>
+                  <div style="display: flex; align-items: center; gap: 9px;">
+                    <button style="height: 40px; padding: 0 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); color: #F7F6F3; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 500; cursor: pointer; display:flex; align-items:center; gap:7px;" style-hover="background: rgba(255,255,255,0.12);"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="3" width="8" height="12" rx="4"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg>Mute</button>
+                    <button onClick="{{ goChat }}" style="height: 40px; padding: 0 16px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); color: #F7F6F3; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 500; cursor: pointer;" style-hover="background: rgba(255,255,255,0.12);">Switch to chat</button>
+                    <button onClick="{{ goCart }}" style="height: 40px; padding: 0 18px; border-radius: 11px; border: none; background: #F7F6F3; color: #1A1A18; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer;" style-hover="transform: translateY(-1px);">End call</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </sc-if>
+
+          <div class="cd-section-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; align-content: start;">
+            <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+              <div style="{{ s.wrapStyle }}">
+
+                <sc-if value="{{ s.head }}" hint-placeholder-val="{{ true }}">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                      <span style="font-size: 14.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.head }}</span>
+                      <sc-if value="{{ s.sub }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12px; color: #8A8579;">{{ s.sub }}</span></sc-if>
+                    </div>
+                    <sc-if value="{{ s.aside }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; color: #A19B8E;">{{ s.aside }}</span></sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isKpi }}" hint-placeholder-val="{{ true }}">
+                  <div style="{{ s.kpiGrid }}">
+                    <sc-for list="{{ s.items }}" as="k" hint-placeholder-count="4">
+                      <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 14px 15px; display: flex; flex-direction: column; gap: 7px; box-shadow: 0 1px 2px rgba(26,26,24,0.05);">
+                        <div style="font-size: 12px; color: #8A8579;">{{ k.label }}</div>
+                        <div style="font-size: 25px; font-weight: 600; letter-spacing: -0.035em; line-height: 1;">{{ k.value }}</div>
+                        <div style="display: flex; align-items: center; gap: 7px;">
+                          <span style="{{ k.deltaStyle }}">{{ k.delta }}</span>
+                          <span style="font-size: 11.5px; color: #A19B8E;">{{ k.sub }}</span>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isChart }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px 12px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                      <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span>
+                      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8579;">{{ s.meta }}</span>
+                    </div>
+                    <div style="{{ s.chartBoxStyle }}">
+                      <sc-for list="{{ s.bars }}" as="b" hint-placeholder-count="7">
+                        <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; height: 100%;">
+                          <div style="{{ b.style }}"></div>
+                          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #A19B8E;">{{ b.label }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isTable }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(26,26,24,0.05);">
+                    <div style="{{ s.rowGrid }} background: #F7F6F3; border-bottom: 1px solid #E4E1DA; padding: 9px 15px;">
+                      <sc-for list="{{ s.columns }}" as="c" hint-placeholder-count="5">
+                        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #A19B8E;">{{ c }}</span>
+                      </sc-for>
+                    </div>
+                    <sc-for list="{{ s.rows }}" as="r" hint-placeholder-count="5">
+                      <div onClick="{{ r.open }}" style="{{ r.style }}" style-hover="background: #FAF9F6;">
+                        <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="5">
+                          <span style="{{ c.style }}">{{ c.text }}</span>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isCards }}" hint-placeholder-val="{{ true }}">
+                  <div class="cd-card-grid" style="{{ s.cardGrid }}">
+                      <sc-for list="{{ s.items }}" as="c" hint-placeholder-count="3">
+                      <div onClick="{{ c.open }}" style="{{ c.style }}" style-hover="border-color: #C7C3B9; transform: translateY(-1px);">
+                        <sc-if value="{{ c.mediaUrl }}" hint-placeholder-val="{{ true }}"><img src="{{ c.mediaUrl }}" alt="{{ c.title }}" style="width:100%;height:118px;object-fit:cover;border-radius:10px;display:block;"></sc-if>
+                        <sc-if value="{{ c.media }}" hint-placeholder-val="{{ true }}">
+                          <sc-if value="{{ c.mediaUrl }}" hint-placeholder-val="{{ false }}"><div style="{{ c.mediaStyle }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A19B8E;">{{ c.media }}</span></div></sc-if>
+                        </sc-if>
+                        <sc-if value="{{ c.showDetails }}" hint-placeholder-val="{{ true }}"><div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 14px; font-weight: 600; letter-spacing: -0.02em; flex: 1;">{{ c.title }}</span>
+                          <sc-if value="{{ c.tag }}" hint-placeholder-val="{{ true }}"><span style="{{ c.tagStyle }}">{{ c.tag }}</span></sc-if>
+                        </div>
+                        <sc-if value="{{ c.body }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12.5px; color: #8A8579; line-height: 1.5; text-wrap: pretty;">{{ c.body }}</span></sc-if>
+                        <sc-if value="{{ c.metric }}" hint-placeholder-val="{{ true }}">
+                          <div style="display: flex; align-items: baseline; gap: 8px;">
+                            <span style="font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">{{ c.metric }}</span>
+                            <span style="font-size: 11.5px; color: #A19B8E;">{{ c.metricSub }}</span>
+                          </div>
+                          <div style="height: 4px; border-radius: 2px; background: #EDEAE3; overflow: hidden;"><div style="{{ c.barStyle }}"></div></div>
+                        </sc-if>
+                        <sc-if value="{{ c.footer }}" hint-placeholder-val="{{ true }}">
+                          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 2px;">
+                            <span style="font-size: 12.5px; font-weight: 500;">{{ c.footer }}</span>
+                            <span style="font-size: 12px; color: #B07C34;">{{ c.action }}</span>
+                          </div>
+                        </sc-if></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isPanel }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 11px;">
+                    <sc-if value="{{ s.title }}" hint-placeholder-val="{{ true }}">
+                      <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span>
+                        <sc-if value="{{ s.meta }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #A19B8E;">{{ s.meta }}</span></sc-if>
+                      </div>
+                    </sc-if>
+                    <div style="display: flex; flex-direction: column;">
+                      <sc-for list="{{ s.rows }}" as="p" hint-placeholder-count="4">
+                        <div style="{{ p.style }}">
+                          <span style="font-size: 12.5px; color: #8A8579;">{{ p.k }}</span>
+                          <span style="font-size: 13px; font-weight: 500; text-align: right;">{{ p.v }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ s.cta }}" hint-placeholder-val="{{ true }}">
+                      <button onClick="{{ s.ctaRun }}" style="height: 40px; border-radius: 11px; border: none; background: #1A1A18; color: #F7F6F3; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer;" style-hover="transform: translateY(-1px);">{{ s.cta }}</button>
+                    </sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isTimeline }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 12px;">
+                    <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span>
+                    <div style="display: flex; flex-direction: column; gap: 0;">
+                      <sc-for list="{{ s.steps }}" as="st" hint-placeholder-count="5">
+                        <div style="display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; align-items: start;">
+                          <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; height: 100%;">
+                            <span style="{{ st.dotStyle }}"></span>
+                            <span style="{{ st.lineStyle }}"></span>
+                          </div>
+                          <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 12px;">
+                            <span style="{{ st.titleStyle }}">{{ st.title }}</span>
+                            <sc-if value="{{ st.sub }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12px; color: #8A8579;">{{ st.sub }}</span></sc-if>
+                          </div>
+                          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A19B8E;">{{ st.at }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isForm }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 13px;">
+                    <sc-if value="{{ s.title }}" hint-placeholder-val="{{ true }}"><span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span></sc-if>
+                    <div style="{{ s.formGrid }}">
+                      <sc-for list="{{ s.fields }}" as="f" hint-placeholder-count="4">
+                        <label style="{{ f.wrap }}">
+                          <span style="font-size: 12px; font-weight: 500; color: #55524A;">{{ f.label }}</span>
+                          <span style="{{ f.inputStyle }}" style-hover="border-color: #C7C3B9;">{{ f.value }}</span>
+                        </label>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ s.cta }}" hint-placeholder-val="{{ true }}">
+                      <div style="display: flex; gap: 8px;">
+                        <button onClick="{{ s.ctaRun }}" style="height: 40px; padding: 0 18px; border-radius: 11px; border: none; background: #1A1A18; color: #F7F6F3; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer;" style-hover="transform: translateY(-1px);">{{ s.cta }}</button>
+                        <button style="height: 40px; padding: 0 16px; border-radius: 11px; border: 1px solid #E0DCD3; background: #FFFFFF; color: #55524A; font-family: Manrope, sans-serif; font-size: 13.5px; font-weight: 500; cursor: pointer;" style-hover="border-color: #C7C3B9;">Discard</button>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isCalendar }}" hint-placeholder-val="{{ true }}">
+                  <div class="cd-table" style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(26,26,24,0.05);">
+                    <div style="display: grid; grid-template-columns: 74px repeat(7, 1fr); background: #F7F6F3; border-bottom: 1px solid #E4E1DA;">
+                      <span style="padding: 9px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A19B8E;">TIME</span>
+                      <sc-for list="{{ s.days }}" as="d" hint-placeholder-count="7">
+                        <span style="padding: 9px 10px; font-size: 12px; font-weight: 600; border-left: 1px solid #E4E1DA;">{{ d }}</span>
+                      </sc-for>
+                    </div>
+                    <sc-for list="{{ s.slots }}" as="row" hint-placeholder-count="6">
+                      <div style="display: grid; grid-template-columns: 74px repeat(7, 1fr); border-bottom: 1px solid #EFECE5; min-height: 52px;">
+                        <span style="padding: 8px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A19B8E;">{{ row.time }}</span>
+                        <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="7">
+                          <div onClick="{{ cell.open }}" style="{{ cell.style }}" style-hover="background: #FAF9F6;">
+                            <sc-if value="{{ cell.label }}" hint-placeholder-val="{{ true }}">
+                              <span style="{{ cell.chipStyle }}">{{ cell.label }}</span>
+                            </sc-if>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isPlayer }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #1A1A18; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                      <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <span style="font-size: 14px; font-weight: 600; color: #F7F6F3; letter-spacing: -0.02em;">{{ s.title }}</span>
+                        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(247,246,243,0.45);">{{ s.meta }}</span>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <button onClick="{{ s.toggle }}" style="width: 40px; height: 40px; border-radius: 20px; border: none; background: oklch(0.74 0.11 68); color: #1A1A18; font-family: Manrope, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer;">{{ s.playLabel }}</button>
+                        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(247,246,243,0.7);">{{ s.time }}</span>
+                      </div>
+                    </div>
+                    <div style="height: 62px; display: flex; align-items: center; gap: 3px;">{{ playerWave }}</div>
+                    <div style="height: 4px; border-radius: 2px; background: rgba(255,255,255,0.14); overflow: hidden;"><div style="{{ s.progressStyle }}"></div></div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isTranscript }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 11px; max-height: 420px; overflow: auto;">
+                    <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span>
+                    <sc-for list="{{ s.lines }}" as="t" hint-placeholder-count="6">
+                      <div style="{{ t.rowStyle }}">
+                        <div style="{{ t.metaStyle }}">{{ t.who }} · {{ t.at }}</div>
+                        <div style="{{ t.bubbleStyle }}">{{ t.text }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ s.isChecklist }}" hint-placeholder-val="{{ true }}">
+                  <div style="background: #FFFFFF; border: 1px solid #E4E1DA; border-radius: 14px; padding: 15px 16px; box-shadow: 0 1px 2px rgba(26,26,24,0.05); display: flex; flex-direction: column; gap: 11px;">
+                    <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em;">{{ s.title }}</span>
+                    <sc-if value="{{ s.note }}" hint-placeholder-val="{{ true }}">
+                      <div style="background: #F2F0EC; border: 1px solid #E4E1DA; border-radius: 11px; padding: 11px 12px; font-size: 12.5px; line-height: 1.55; color: #55524A; text-wrap: pretty;">{{ s.note }}</div>
+                    </sc-if>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      <sc-for list="{{ s.items }}" as="i" hint-placeholder-count="5">
+                        <div style="display: flex; align-items: flex-start; gap: 9px;">
+                          <span style="{{ i.markStyle }}">{{ i.mark }}</span>
+                          <span style="font-size: 12.5px; line-height: 1.45; flex: 1;">{{ i.text }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </main>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;initialRoute&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;/login&quot;,&quot;/register&quot;,&quot;/admin/login&quot;,&quot;/app&quot;,&quot;/app/ai&quot;,&quot;/app/chat&quot;,&quot;/app/menu&quot;,&quot;/app/cart&quot;,&quot;/app/orders&quot;,&quot;/app/reservations&quot;,&quot;/app/profile&quot;,&quot;/admin&quot;,&quot;/admin/orders&quot;,&quot;/admin/reservations&quot;,&quot;/admin/menu&quot;,&quot;/admin/calls&quot;,&quot;/admin/calls/8291&quot;,&quot;/admin/analytics&quot;,&quot;/admin/recommendations&quot;,&quot;/admin/customers&quot;,&quot;/admin/settings&quot;],&quot;default&quot;:&quot;/login&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+const ACCENT='oklch(0.74 0.11 68)', INK='#1A1A18', LINE='#E4E1DA', MUT='#8A8579';
+const mono="font-family:'IBM Plex Mono',monospace;";
+const slugify=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+const card='background:#FFFFFF;border:1px solid '+LINE+';border-radius:14px;padding:14px 15px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 2px rgba(26,26,24,0.05);cursor:pointer;font-family:Manrope,sans-serif;transition:all 160ms ease;text-align:left;';
+const pill=(bg,fg,bd)=>mono+'font-size:10px;letter-spacing:0.06em;background:'+bg+';color:'+fg+';border:1px solid '+(bd||'transparent')+';padding:2px 7px;border-radius:5px;';
+const STATUS={Pending:pill('#F5F1E6','#8A6A2E','#E7DFCB'),Confirmed:pill('#ECF1EE','#3F6B54','#DBE6DF'),Preparing:pill('#F1EFF8','#4F4790','#E2DEF0'),Ready:pill('#EAF0F4','#3B6079','#DAE5EC'),Completed:pill('#EFEEE9','#55524A','#E2DFD8'),Cancelled:pill('#F6EDEC','#8B4A42','#EBD9D6'),Seated:pill('#ECF1EE','#3F6B54','#DBE6DF'),Successful:pill('#ECF1EE','#3F6B54','#DBE6DF'),Failed:pill('#F6EDEC','#8B4A42','#EBD9D6'),Available:pill('#ECF1EE','#3F6B54','#DBE6DF'),'Sold out':pill('#F6EDEC','#8B4A42','#EBD9D6'),Voice:pill('#1A1A18','#F7F6F3'),Chat:pill('#F5F1E6','#8A6A2E','#E7DFCB'),Website:pill('#EFEEE9','#55524A','#E2DFD8')};
+
+const CUST_NAV=[{items:[['Assistant','/app/ai'],['Menu','/app/menu'],['Orders','/app/orders','2'],['Reservations','/app/reservations','1'],['Profile','/app/profile']]}];
+const ADMIN_NAV=[
+  {items:[['Overview','/admin'],['Orders','/admin/orders','14'],['Reservations','/admin/reservations','9'],['Menu','/admin/menu']]},
+  {label:'AI',items:[['AI Calls','/admin/calls','32'],['Call Analytics','/admin/analytics'],['Recommendations','/admin/recommendations']]},
+  {items:[['Customers','/admin/customers'],['Settings','/admin/settings']]}
+];
+
+const ORDERS=[
+  ['#1832','Customer #182','Voice','Preparing','€38.50','19:42','2 items'],
+  ['#1831','Lena Fischer','Website','Ready','€24.00','19:28','1 item'],
+  ['#1830','Customer #164','Chat','Confirmed','€52.20','19:15','4 items'],
+  ['#1829','Tomas Reiter','Voice','Pending','€19.00','19:07','1 item'],
+  ['#1828','Mara Ansel','Voice','Completed','€47.00','18:52','3 items'],
+  ['#1827','Customer #151','Website','Completed','€31.40','18:33','2 items'],
+  ['#1826','Jonas Weber','Chat','Cancelled','€22.00','18:11','1 item']
+];
+const CALLS=[
+  ['#8291','Customer #182','Today 19:38','04:21','Food Order','Successful','Order #1832','—'],
+  ['#8290','Lena Fischer','Today 19:12','02:48','Table Reservation','Successful','—','Res #442'],
+  ['#8289','Customer #164','Today 18:57','05:03','Food Order','Successful','Order #1830','—'],
+  ['#8288','Tomas Reiter','Today 18:40','01:12','Menu Question','Successful','—','—'],
+  ['#8287','Customer #151','Today 18:22','03:35','Order Status','Successful','—','—'],
+  ['#8286','Jonas Weber','Today 17:58','00:46','Food Order','Failed','—','—'],
+  ['#8285','Mara Ansel','Today 17:31','06:02','Food Order','Successful','Order #1828','Res #440']
+];
+const RES=[
+  ['#442','Lena Fischer','Today 20:30','4','T7 · window','Confirmed'],
+  ['#441','Customer #164','Today 21:00','2','T3','Confirmed'],
+  ['#440','Mara Ansel','Today 20:30','4','T7 · window','Seated'],
+  ['#439','Tomas Reiter','Tomorrow 19:00','6','T12 · terrace','Confirmed']
+];
+const PRODUCTS=[
+  ['Truffle tagliatelle','Pasta','€24.00','Available','182','https://images.unsplash.com/photo-1642354609876-5386fea5e7fc?auto=format&fit=crop&w=900&q=80'],
+  ['Burrata, heirloom tomato','Antipasti','€14.00','Available','143','https://images.unsplash.com/photo-1649400454485-b8ad827f929d?auto=format&fit=crop&w=900&q=80'],
+  ['Margherita Verace','Pizza','€13.50','Available','421','https://images.unsplash.com/photo-1664309641932-0e03e0771b97?auto=format&fit=crop&w=900&q=80'],
+  ['Diavola','Pizza','€15.00','Available','298','https://images.unsplash.com/photo-1655562378704-d5d0a8c3d442?auto=format&fit=crop&w=900&q=80'],
+  ['Garlic bread','Sides','€6.00','Available','266','https://i.pinimg.com/originals/c5/5c/f3/c55cf36a6ec617fb615b75b3959cb81f.jpg'],
+  ['Tiramisù','Desserts','€9.00','Sold out','131','https://www.themealdb.com/images/media/meals/wkhg581762773124.jpg'],
+  ['Gnocchi al pesto','Pasta','€19.50','Available','96','https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=80'],
+  ['Insalata Caprese','Vegetarian','€12.50','Available','88','https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=900&q=80'],
+  ['Panna cotta','Desserts','€8.50','Available','74','https://www.themealdb.com/images/media/meals/ryqwwr1511818878.jpg'],
+  ['Limonata italiana','Drinks','€5.00','Available','121','https://images.unsplash.com/photo-1523677011781-c91d1bbe2f0d?auto=format&fit=crop&w=900&q=80'],
+  ['Espresso','Drinks','€2.50','Available','188','https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=80']
+];
+
+const MEALDB='https://www.themealdb.com/api/json/v1/1';
+const MENU_TABS=['All','Starters','Pasta','Main courses','Seafood','Vegetarian','Sides','Desserts','Breakfast','Specials'];
+const MENU_FALLBACK_IMAGE='https://www.themealdb.com/images/media/meals/1549542994.jpg';
+const MEAL_FALLBACKS={
+  Starters:'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+  Pasta:'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  'Main courses':'https://www.themealdb.com/images/media/meals/1549542994.jpg',
+  Seafood:'https://www.themealdb.com/images/media/meals/1548772327.jpg',
+  Vegetarian:'https://www.themealdb.com/images/media/meals/3m8yae1763257951.jpg',
+  Sides:'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+  Desserts:'https://www.themealdb.com/images/media/meals/wkhg581762773124.jpg',
+  Breakfast:'https://www.themealdb.com/images/media/meals/1550441275.jpg',
+  Specials:'https://www.themealdb.com/images/media/meals/1549542994.jpg'
+};
+const mealCategory=c=>({Starter:'Starters',Pasta:'Pasta',Seafood:'Seafood',Side:'Sides',Dessert:'Desserts',Vegetarian:'Vegetarian',Vegan:'Vegetarian',Breakfast:'Breakfast',Beef:'Main courses',Chicken:'Main courses',Lamb:'Main courses',Goat:'Main courses',Pork:'Main courses',Miscellaneous:'Specials'}[c]||'Specials');
+const stablePrice=(name,category)=>{
+  const ranges={'Starters':[8,14],Pasta:[15,24],'Main courses':[18,28],Seafood:[19,29],Vegetarian:[12,20],Sides:[5,9],Desserts:[7,10],Breakfast:[8,14],Specials:[12,20]};
+  const range=ranges[category]||ranges.Specials;
+  let hash=0; for(let i=0;i<name.length;i++) hash=(hash*31+name.charCodeAt(i))>>>0;
+  const steps=Math.floor((range[1]-range[0])*2);
+  return '€'+(range[0]+(hash%(steps+1))/2).toFixed(2);
+};
+const imageReady=url=>new Promise(resolve=>{const img=new Image(); img.onload=()=>resolve(true); img.onerror=()=>resolve(false); img.src=url;});
+const CUSTOMERS=[
+  ['Mara Ansel','24','6','€1,148','Today 19:38'],
+  ['Lena Fischer','18','9','€982','Today 19:12'],
+  ['Customer #164','11','2','€604','Today 18:57'],
+  ['Tomas Reiter','7','4','€389','Today 18:40'],
+  ['Jonas Weber','3','0','€96','Yesterday']
+];
+const TRANSCRIPT=[
+  ['Assistant','00:03','Good evening, this is Osteria Vento. How can I help?',1],
+  ['Customer','00:07','Hi — I’d like a table for four tonight, and something to start with.',0],
+  ['Assistant','00:12','I have 20:30 open by the window. Would that work?',1],
+  ['Customer','00:16','Yes, 20:30 is perfect. Add the burrata as well.',0],
+  ['Assistant','00:21','Burrata added. The truffle tagliatelle is the kitchen’s pick tonight — shall I add one?',1],
+  ['Customer','00:29','Go ahead, and two sparkling waters.',0],
+  ['Assistant','00:34','Done. Table for four at 20:30 and three items on the order. Anything else?',1]
+];
+const STATES=[
+  ['connecting','Connecting','Connecting to Osteria Vento','Placing a secure line to the restaurant’s CallDine assistant.','#C7C3B9'],
+  ['listening','Listening','Listening','Go ahead — order, book a table, or ask what the kitchen recommends tonight.',ACCENT],
+  ['speaking','Speaking','Assistant speaking','“The truffle tagliatelle is the kitchen’s pick tonight. Shall I add one?”','#7FA08A'],
+  ['processing','Processing','Working on it','Checking table availability for four at 20:30 and holding your order.','#9A93E0']
+];
+
+class Component extends DCLogic {
+  state={route:this.props.initialRoute??'/login',tab:null,call:'listening',t:24,playing:false,pos:38,stack:[],mobileNav:false,menuProducts:PRODUCTS,menuStatus:'loading'};
+
+  componentDidMount(){this.timer=setInterval(()=>this.setState(s=>({t:s.t+1,pos:s.playing?Math.min(100,s.pos+2):s.pos})),1000); this.loadLiveMenu();}
+  componentWillUnmount(){clearInterval(this.timer);}
+
+  async loadLiveMenu(){
+    const sourceCategories=['Starter','Pasta','Seafood','Side','Dessert','Vegetarian','Vegan','Breakfast','Beef','Chicken','Lamb','Goat','Pork','Miscellaneous'];
+    try{
+      const responses=await Promise.all(sourceCategories.map(c=>fetch(MEALDB+'/filter.php?c='+encodeURIComponent(c)).then(r=>r.ok?r.json():{meals:[]})));
+      const seen=new Set(), raw=[];
+      responses.forEach((data,i)=>(data.meals||[]).forEach(meal=>{if(!seen.has(meal.idMeal)){seen.add(meal.idMeal);raw.push({...meal,sourceCategory:sourceCategories[i]});}}));
+      const selected=raw.slice(0,60).map(meal=>{
+        const category=mealCategory(meal.sourceCategory), image=meal.strMealThumb||MEAL_FALLBACKS[category]||MENU_FALLBACK_IMAGE;
+        return [meal.strMeal,category,stablePrice(meal.strMeal,category),'Available','—',image,meal.idMeal];
+      });
+      if(selected.length<50) throw new Error('The live menu returned fewer than 50 dishes');
+      const checked=await Promise.all(selected.map(async item=>{
+        const fallback=MEAL_FALLBACKS[item[1]]||MENU_FALLBACK_IMAGE;
+        return [item[0],item[1],item[2],item[3],item[4],await imageReady(item[5])?item[5]:(await imageReady(fallback)?fallback:MENU_FALLBACK_IMAGE),item[6]];
+      }));
+      this.setState({menuProducts:checked,menuStatus:'live'});
+    }catch(e){this.setState({menuProducts:PRODUCTS,menuStatus:'offline'});}
+  }
+
+  go=(r,tab)=>this.setState(s=>({route:r,tab:tab??null,stack:[...s.stack,s.route].slice(-12),mobileNav:false}));
+  back=()=>this.setState(s=>({route:s.stack.length?s.stack[s.stack.length-1]:'/app',stack:s.stack.slice(0,-1),tab:null}));
+  toggleMobileNav=()=>this.setState(s=>({mobileNav:!s.mobileNav}));
+
+  bars(id,n,palette){
+    const out=[];
+    for(let i=0;i<n;i++){
+      const mid=1-Math.abs(i-(n-1)/2)/((n-1)/2);
+      const base={width:palette==='player'?4:5,borderRadius:3,flex:'none'};
+      let st;
+      if(palette==='player'){
+        const h=8+(Math.sin(i*0.9)*0.5+0.5)*46;
+        const done=i/n<=this.state.pos/100;
+        st={...base,height:h,background:done?ACCENT:'rgba(247,246,243,0.22)'};
+      } else if(id==='listening'){
+        st={...base,height:12+Math.pow(mid,1.3)*50,background:ACCENT,opacity:0.35+mid*0.65,animation:`cd-bar ${700+(i%7)*130}ms ease-in-out ${(i%11)*70}ms infinite`};
+      } else if(id==='speaking'){
+        st={...base,height:10+(Math.sin(i*0.7)*0.5+0.5)*40*(0.4+mid*0.6),background:'#F7F6F3',opacity:0.25+mid*0.5,animation:`cd-bar ${520+(i%5)*190}ms ease-in-out ${(i%9)*55}ms infinite`};
+      } else if(id==='processing'){
+        st={...base,height:8+mid*16,background:'rgba(247,246,243,0.5)',animation:`cd-bar 1400ms ease-in-out ${i*40}ms infinite`};
+      } else {
+        st={...base,height:6,background:'rgba(247,246,243,0.18)'};
+      }
+      out.push(React.createElement('span',{key:i,style:st}));
+    }
+    return out;
+  }
+
+  // ---------- section builders ----------
+  sec(o){return {wrapStyle:`grid-column: span ${o.col||12};`+(o.wrap||''),head:o.head||'',sub:o.sub||'',aside:o.aside||'',...o};}
+  kpi(items,col,head){return this.sec({col:col||12,head,isKpi:true,kpiGrid:`display:grid;grid-template-columns:repeat(${Math.min(items.length,4)},1fr);gap:12px;`,
+    items:items.map(k=>({label:k[0],value:k[1],delta:k[2],sub:k[3],deltaStyle:mono+'font-size:11px;padding:1px 5px;border-radius:5px;'+(String(k[2]).startsWith('−')||String(k[2]).startsWith('-')?'background:#F6EDEC;color:#8B4A42;':'background:#ECF1EE;color:#3F6B54;')}))});}
+  chart(title,meta,vals,labels,col,accent){const max=Math.max(...vals);return this.sec({col:col||6,isChart:true,title,meta,
+    chartBoxStyle:'height:132px;display:flex;align-items:flex-end;gap:6px;',
+    bars:vals.map((v,i)=>({label:labels[i],style:`width:100%;max-width:26px;height:${Math.max(6,(v/max)*104)}px;border-radius:5px;background:${accent?ACCENT:'#1A1A18'};opacity:${accent?1:0.16+0.84*(v/max)};`}))});}
+  table(columns,rows,widths,col,head,sub,onRow){
+    const grid=`display:grid;grid-template-columns:${widths};gap:12px;align-items:center;`;
+    return this.sec({col:col||12,head,sub,isTable:true,columns,rowGrid:grid,
+      rows:rows.map((r,ri)=>({style:grid+'padding:11px 15px;'+(ri?'border-top:1px solid #EFECE5;':'')+(onRow?'cursor:pointer;':''),
+        open:onRow?()=>onRow(r):undefined,
+        cells:r.map(c=>{
+          const s=STATUS[c];
+          return s?{text:c,style:s+'justify-self:start;'}:{text:c,style:'font-size:12.5px;'+(String(c).startsWith('#')||String(c).startsWith('€')?mono+'color:#55524A;':'')};
+        })}))});}
+  cards(items,per,col,head,sub){return this.sec({col:col||12,head,sub,isCards:true,cardGrid:`display:grid;grid-template-columns:repeat(${per},1fr);gap:12px;`,
+    items:items.map(c=>({...c,showDetails:c.showDetails!==false,style:card+(c.open?'':'cursor:default;'),tagStyle:STATUS[c.tag]||pill('#EFEEE9','#55524A','#E2DFD8'),
+      mediaStyle:'height:88px;border-radius:10px;background:repeating-linear-gradient(135deg,#F2F0EC 0 8px,#EAE7E0 8px 16px);display:grid;place-items:center;',
+      barStyle:`height:100%;width:${c.pct||0}%;border-radius:2px;background:${ACCENT};`}))});}
+  panel(title,rows,col,cta,ctaRun,meta){return this.sec({col:col||4,isPanel:true,title,meta,cta,ctaRun,
+    rows:rows.map((p,i)=>({k:p[0],v:p[1],style:'display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:8px 0;'+(i?'border-top:1px solid #EFECE5;':'')}))});}
+  timeline(title,steps,col){return this.sec({col:col||4,isTimeline:true,title,
+    steps:steps.map((s,i)=>({title:s[0],at:s[1],sub:s[2]||'',
+      dotStyle:`width:11px;height:11px;border-radius:6px;flex:none;background:${s[3]===0?'#FFFFFF':INK};border:1px solid ${s[3]===0?'#D6D2C9':INK};`,
+      lineStyle:i===steps.length-1?'display:none;':`width:1px;flex:1;background:${s[3]===0?'#E4E1DA':'#D6D2C9'};`,
+      titleStyle:`font-size:13px;font-weight:${s[3]===0?400:600};letter-spacing:-0.01em;color:${s[3]===0?MUT:INK};`}))});}
+  form(title,fields,col,cta,ctaRun,cols){return this.sec({col:col||6,isForm:true,title,cta,ctaRun,formGrid:`display:grid;grid-template-columns:repeat(${cols||2},1fr);gap:12px;`,
+    fields:fields.map(f=>({label:f[0],value:f[1],wrap:`display:flex;flex-direction:column;gap:6px;`+(f[2]==='wide'?'grid-column:1/-1;':''),
+      inputStyle:`min-height:40px;border-radius:11px;border:1px solid #E0DCD3;background:#FFFFFF;display:flex;align-items:center;padding:10px 12px;font-size:13px;color:${f[1]?INK:'#A19B8E'};transition:border-color 150ms ease;`}))});}
+  checklist(title,items,col,note){return this.sec({col:col||4,isChecklist:true,title,note,
+    items:items.map(i=>({text:i[0],mark:i[1]===0?'·':'✓',markStyle:`width:17px;height:17px;border-radius:5px;flex:none;display:grid;place-items:center;font-size:10px;background:${i[1]===0?'#EFEEE9':'#ECF1EE'};color:${i[1]===0?MUT:'#3F6B54'};`}))});}
+  transcript(title,lines,col){return this.sec({col:col||5,isTranscript:true,title,
+    lines:lines.map(t=>({who:t[0],at:t[1],text:t[2],
+      rowStyle:`display:flex;flex-direction:column;gap:4px;max-width:86%;align-self:${t[3]?'flex-start':'flex-end'};`,
+      metaStyle:mono+`font-size:10px;letter-spacing:0.06em;color:#A19B8E;`+(t[3]?'':'text-align:right;'),
+      bubbleStyle:t[3]?'background:#1A1A18;color:#F7F6F3;border-radius:13px 13px 13px 4px;padding:9px 12px;font-size:12.5px;line-height:1.45;'
+        :'background:#F2F0EC;border:1px solid '+LINE+';border-radius:13px 13px 4px 13px;padding:9px 12px;font-size:12.5px;line-height:1.45;'}))});}
+  calendar(col){
+    const days=['Mon 17','Tue 18','Wed 19','Thu 20','Fri 21','Sat 22','Sun 23'];
+    const times=['18:00','18:30','19:00','19:30','20:00','20:30','21:00'];
+    const book={'19:00|4':['T7 · Fischer · 4'],'20:30|4':['T7 · Ansel · 4'],'20:30|5':['T3 · #164 · 2'],'19:30|5':['T12 · Reiter · 6'],'21:00|6':['T5 · Walk-in · 2'],'18:30|2':['T2 · Nowak · 3']};
+    return this.sec({col:col||12,isCalendar:true,days,
+      slots:times.map(time=>({time,cells:days.map((d,di)=>{
+        const b=book[time+'|'+di];
+        return {label:b?b[0]:'',open:b?()=>this.go('/admin/reservations/442'):undefined,
+          style:'border-left:1px solid #EFECE5;padding:6px;display:flex;align-items:center;'+(b?'cursor:pointer;':''),
+          chipStyle:`width:100%;background:#1A1A18;color:#F7F6F3;border-radius:8px;padding:6px 8px;font-size:11px;font-weight:500;letter-spacing:-0.01em;`};
+      })}))});}
+  player(){return this.sec({col:12,isPlayer:true,title:'Call recording #8291',meta:'Customer #182 · today 19:38 · 04:21',
+    playLabel:this.state.playing?'❙❙':'▶',time:`01:${String(Math.floor(this.state.pos*2.6)%60).padStart(2,'0')} / 04:21`,
+    toggle:()=>this.setState(s=>({playing:!s.playing})),progressStyle:`height:100%;width:${this.state.pos}%;background:${ACCENT};border-radius:2px;`});}
+
+  btn=(label,run,primary)=>({label,run,style:`height:36px;padding:0 15px;border-radius:10px;font-family:Manrope,sans-serif;font-size:13px;font-weight:${primary?600:500};cursor:pointer;transition:transform 140ms ease;border:${primary?'none':'1px solid #E0DCD3'};background:${primary?INK:'#FFFFFF'};color:${primary?'#F7F6F3':'#55524A'};`});
+
+  // ---------- pages ----------
+  page(){
+    const r=this.state.route, go=this.go;
+    const profileTab=this.state.tab||'Preferences';
+    const menuTab=this.state.tab||'All';
+    const menuProducts=this.state.menuProducts||PRODUCTS;
+    const P=(o)=>o;
+
+    if(r==='/app') return P({title:'Good evening, Mara',sub:'Osteria Vento is taking calls until 23:00.',crumb:'/app',
+      actions:[this.btn('Book a table',()=>go('/app/reservations')),this.btn('Assistant',()=>go('/app/ai'),1)],
+      sections:[
+        this.kpi([['Open orders','1','live','#1832 · preparing'],['Next reservation','20:30','tonight','4 guests · T7'],['Saved favourites','7','—','across 3 categories'],['AI calls this month','12','+4','9 ended in an order']],12),
+        this.cards([
+          {title:'Talk to the assistant',body:'Order, book, or ask what the kitchen recommends. Natural voice, no menus to scroll.',tag:'Voice',footer:'Average call 3m 12s',action:'Start call →',open:()=>go('/app/ai')},
+          {title:'Chat instead',body:'Same assistant, typed. Product cards, add to cart, booking in line.',tag:'Chat',footer:'Replies in ~2s',action:'Open chat →',open:()=>go('/app/chat')},
+          {title:'Reorder Friday’s order',body:'Diavola, garlic bread, two sparkling waters.',tag:'Website',footer:'€34.50',action:'Reorder →',open:()=>go('/app/cart')}
+        ],3,12,'Start something'),
+        this.cards([
+          {title:'Truffle tagliatelle',media:'dish photo',body:'Kitchen’s pick tonight. You ordered it twice this month.',footer:'€24.00',action:'View →',open:()=>go('/app/menu/tagliatelle')},
+          {title:'Burrata, heirloom tomato',media:'dish photo',body:'Pairs with 61% of pasta orders.',footer:'€14.00',action:'View →',open:()=>go('/app/menu/burrata')},
+          {title:'Diavola',media:'dish photo',body:'Your most reordered pizza.',footer:'€15.00',action:'View →',open:()=>go('/app/menu/diavola')},
+          {title:'Tiramisù',media:'dish photo',body:'Sold out tonight — back tomorrow.',tag:'Sold out',footer:'€9.00',action:'View →',open:()=>go('/app/menu/tiramisu')}
+        ],4,12,'Picked for you','Based on your last 24 orders and tonight’s kitchen notes')
+      ]});
+
+    if(r==='/app/ai') return P({title:'',sub:'',crumb:'',voice:true,actions:[],sections:[]});
+
+    if(r==='/app/chat') return P({title:'Chat with the assistant',sub:'Type or hold the mic. The assistant can add items and book tables in line.',crumb:'/app/chat',
+      actions:[this.btn('Start voice call',()=>go('/app/ai'),1)],
+      sections:[
+        this.transcript('Conversation',[...TRANSCRIPT.slice(0,5),['Customer','00:31','What’s in the tagliatelle?',0],['Assistant','00:33','Egg pasta, black truffle, Parmigiano 24-month, butter. Contains gluten, eggs and milk.',1]],7),
+        this.cards([
+          {title:'Truffle tagliatelle',media:'dish photo',body:'Suggested by the assistant · €24.00',tag:'Voice',footer:'Add to cart',action:'+ Add',open:()=>go('/app/cart')},
+          {title:'Table for 4 · 20:30',body:'Window table T7 held for 10 minutes.',tag:'Confirmed',footer:'Confirm booking',action:'Confirm →',open:()=>go('/app/reservations/442')}
+        ],1,5,'Assistant actions'),
+        this.form('Message',[['Type a message','Add two sparkling waters','wide']],12,'Send',()=>go('/app/cart'),1)
+      ]});
+
+    if(r==='/app/menu') return P({title:'Menu',sub:'Osteria Vento · '+(this.state.menuStatus==='live'?'live menu · images checked':'saved menu · connecting to live menu'),crumb:'/app/menu',
+      tabs:MENU_TABS,
+      actions:[this.btn('View order',()=>go('/app/cart'),1)],
+      sections:[
+        this.cards(menuProducts.filter(p=>menuTab==='All'||p[1]===menuTab).map(p=>({title:p[0],mediaUrl:p[5],footer:p[2],action:'',open:()=>go('/app/menu/'+slugify(p[0]))})),4,12,'Dishes','Images via TheMealDB · prices curated in EUR')
+      ]});
+
+    if(r.startsWith('/app/menu/')) { const item=menuProducts.find(p=>r.endsWith('/'+slugify(p[0])))||menuProducts[0]||PRODUCTS[0]; return P({title:item[0],sub:item[1]+' · '+item[2]+' · '+item[3].toLowerCase(),crumb:r,back:'Menu',
+      actions:[],
+      sections:[
+        this.cards([{title:item[0],mediaUrl:item[5],showDetails:false}],1,7),
+        this.panel('Details',[['Category',item[1]],['Price',item[2]],['Availability',item[3]],['Orders 30d',item[4]]],5)
+      ]}); }
+
+    if(r==='/app/cart') return P({title:'Your order',sub:'Read-only order summary',crumb:'/app/cart',
+      actions:[this.btn('Back to assistant',()=>go('/app/ai'),1)],
+      sections:[
+        this.table(['ITEM','SOURCE','QTY','UNIT','LINE'],[
+          ['Burrata, heirloom tomato','Voice','1','€14.00','€14.00'],
+          ['Truffle tagliatelle','Voice','1','€24.00','€24.00'],
+          ['Sparkling water 0.75l','Chat','2','€4.50','€9.00']
+        ],'2fr 90px 60px 90px 90px',8,'Items','Added during your call at 19:38'),
+        this.panel('Summary',[['Subtotal','€47.00'],['Service','Included'],['Delivery','—'],['Total','€47.00']],4),
+        this.panel('Order source',[['Created by','Assistant'],['Status','Preparing'],['Restaurant','Osteria Vento']],4)
+      ]});
+
+    if(r==='/app/orders') return P({title:'Orders',sub:'Live status and history',crumb:'/app/orders',
+      tabs:['All','Live','Completed','Cancelled'],
+      actions:[],
+      sections:[
+        this.table(['ORDER','PLACED','SOURCE','STATUS','ITEMS','TOTAL'],
+          ORDERS.map(o=>[o[0],o[5],o[2],o[3],o[6],o[4]]),'110px 90px 90px 120px 1fr 90px',12,'Your orders','Click a row to track it',(row)=>go('/app/orders/'+row[0].slice(1)))
+      ]});
+
+    if(r.startsWith('/app/orders/')) return P({title:'Order #1832',sub:'Placed 19:42 during an AI voice call · preparing',crumb:r,back:'Orders',
+      actions:[],
+      sections:[
+        this.kpi([['Status','Preparing','live','ready ~20:05'],['Total','€47.00','—','3 items'],['Source','Voice call','#8291','04:21 duration'],['Table','T7 · 20:30','confirmed','4 guests']],12),
+        this.table(['ITEM','QTY','UNIT','LINE'],[['Burrata, heirloom tomato','1','€14.00','€14.00'],['Truffle tagliatelle','1','€24.00','€24.00'],['Sparkling water 0.75l','2','€4.50','€9.00']],'2fr 60px 90px 90px',8,'Items'),
+        this.timeline('Timeline',[['Created','19:42','Voice call #8291',1],['Confirmed','19:43','Kitchen accepted',1],['Preparing','19:47','Pasta station',1],['Ready','~20:05','Estimated',0],['Completed','—','',0]],4)
+      ]});
+
+    if(r==='/app/reservations') return P({title:'Reservations',sub:'Read-only reservations',crumb:'/app/reservations',
+      actions:[],
+      sections:[
+        this.table(['RES','WHEN','GUESTS','TABLE','STATUS'],RES.map(x=>[x[0],x[2],x[3],x[4],x[5]]),'100px 1fr 80px 160px 120px',12,'Upcoming','Click to see details',(row)=>go('/app/reservations/'+row[0].slice(1)))
+      ]});
+
+    if(r.startsWith('/app/reservations/')) return P({title:'Reservation #442',sub:'Tonight 20:30 · 4 guests · T7 window',crumb:r,back:'Reservations',
+      actions:[],
+      sections:[
+        this.kpi([['Status','Confirmed','—','held until 20:45'],['Guests','4','—','1 highchair'],['Table','T7','window','quiet corner'],['Booked via','AI voice','#8290','02:48 duration']],12),
+        this.panel('Details',[['Restaurant','Osteria Vento'],['Date','Friday 21 August'],['Time','20:30'],['Guest','Mara Ansel'],['Note','Anniversary — quiet table']],5),
+        this.timeline('History',[['Requested','19:12','Voice call #8290',1],['Table held','19:12','T7 · window',1],['Confirmed','19:13','By the assistant',1],['Reminder','19:30','Sent by email',1],['Seating','20:30','Estimated',0]],4),
+        this.panel('Source',[['Created by','Assistant'],['Status','Confirmed'],['Table','T7 · window']],3)
+      ]});
+
+    if(r==='/app/profile') return P({title:'Profile',sub:'Account information and history',crumb:'/app/profile',
+      tabs:['Preferences','History'],
+      actions:[this.btn('Log out',()=>this.setState({route:'/login',stack:[] }))],
+      sections:profileTab==='History' ? [
+        this.table(['WHEN','TYPE','DETAIL','TOTAL'],[['Today 19:42','Order','#1832 · voice','€47.00'],['Today 19:12','Reservation','#442 · 4 guests','—'],['15 Aug','Order','#1791 · website','€34.50'],['09 Aug','Order','#1744 · chat','€28.00']],'120px 110px 1fr 90px',12,'Recent activity')
+      ] : [
+        this.panel('Personal information',[['Name','Mara Ansel'],['Email','mara@ansel.co'],['Phone','+49 170 2288 41'],['Preferred seating','Window'],['Allergies','None on file'],['Assistant voice','Warm · slow']],7)
+      ]});
+
+    // ---------------- ADMIN ----------------
+    if(r==='/admin') return P({title:'Overview',sub:'Osteria Vento · Friday 21 August, 19:52',crumb:'/admin',
+      tabs:['Today','7 days','30 days'],
+      actions:[this.btn('View orders',()=>go('/admin/orders')),this.btn('Review AI calls',()=>go('/admin/calls'),1)],
+      sections:[
+        this.kpi([['Today’s revenue','€4,182','+12%','vs last Friday'],['Orders','86','+8','14 open'],['Reservations','32','+3','9 upcoming'],['AI calls','32','+11','29 successful']],12),
+        this.kpi([['AI-assisted orders','41','48%','of all orders'],['AI-assisted reservations','19','59%','of all bookings'],['Avg call duration','03:12','−0:18','faster than last week'],['Containment rate','91%','+4%','no staff handover']],12),
+        this.chart('Revenue over time','last 7 days · €',[2840,3120,2960,3480,4182,3960,3610],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6),
+        this.chart('AI call volume','last 7 days · calls',[18,22,19,26,32,29,27],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6,true),
+        this.chart('Orders over time','last 7 days',[62,71,58,74,86,80,77],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6),
+        this.chart('Reservations over time','last 7 days',[24,31,19,27,32,30,28],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6),
+        this.table(['ORDER','CUSTOMER','SOURCE','STATUS','TOTAL','PLACED'],ORDERS.slice(0,5).map(o=>[o[0],o[1],o[2],o[3],o[4],o[5]]),'100px 1fr 90px 120px 90px 80px',7,'Recent orders','Click a row to open it',(row)=>go('/admin/orders/'+row[0].slice(1))),
+        this.panel('Upcoming reservations',RES.map(x=>[x[2]+' · '+x[1],x[3]+' · '+x[4].split(' ')[0]]),5,'Open calendar',()=>go('/admin/reservations')),
+        this.table(['CALL','CUSTOMER','INTENT','RESULT','DURATION','CREATED'],CALLS.slice(0,4).map(c=>[c[0],c[1],c[4],c[5],c[3],c[6]]),'100px 1fr 150px 110px 90px 110px',7,'Recent AI calls','Click to review the recording',(row)=>go('/admin/calls/'+row[0].slice(1))),
+        this.cards([
+          {title:'View AI insights',body:'Weekly pairing and demand analysis.',footer:'3 new insights',action:'Open →',open:()=>go('/admin/recommendations')},
+          {title:'Call analytics',body:'Volume, success rate, intents.',footer:'32 calls today',action:'Open →',open:()=>go('/admin/analytics')},
+          {title:'Menu availability',body:'Tiramisù is sold out tonight.',tag:'Sold out',footer:'1 item off',action:'Fix →',open:()=>go('/admin/menu')}
+        ],1,5,'Quick actions')
+      ]});
+
+    if(r==='/admin/orders'){const tab=this.state.tab||'All';
+      const rows=ORDERS.filter(o=>tab==='All'||o[3]===tab);
+      return P({title:'Orders',sub:'86 orders today · 14 open',crumb:'/admin/orders',
+        tabs:['All','Pending','Confirmed','Preparing','Ready','Completed','Cancelled'],
+        actions:[this.btn('Export CSV',()=>{}),this.btn('New manual order',()=>go('/admin/orders/1832'),1)],
+        sections:[
+          this.kpi([['Open','14','—','across 4 stages'],['From AI voice','41','48%','of today’s orders'],['Avg ticket','€38.60','+€2.10','vs last week'],['Cancelled','3','−1','1.2% of orders']],12),
+          this.table(['ORDER','CUSTOMER','SOURCE','STATUS','TOTAL','PLACED','ITEMS'],rows.map(o=>[o[0],o[1],o[2],o[3],o[4],o[5],o[6]]),'100px 1fr 90px 120px 90px 80px 90px',12,tab+' orders',rows.length+' of '+ORDERS.length+' shown · click a row for detail',(row)=>go('/admin/orders/'+row[0].slice(1)))
+        ]});}
+
+    if(r.startsWith('/admin/orders/')) return P({title:'Order #1832',sub:'Customer #182 · placed 19:42 via AI voice call #8291',crumb:r,back:'Orders',
+      actions:[this.btn('Print ticket',()=>{}),this.btn('Mark as ready',()=>go('/admin/orders'),1)],
+      sections:[
+        this.kpi([['Status','Preparing','live','12 min elapsed'],['Total','€47.00','—','3 items'],['Source','AI voice call','#8291','04:21'],['Customer','#182','returning','24 orders']],12),
+        this.table(['ITEM','QTY','UNIT','LINE','STATION'],[['Burrata, heirloom tomato','1','€14.00','€14.00','Cold'],['Truffle tagliatelle','1','€24.00','€24.00','Pasta'],['Sparkling water 0.75l','2','€4.50','€9.00','Bar']],'2fr 60px 90px 90px 90px',8,'Items'),
+        this.timeline('Timeline',[['Created','19:42','AI voice call',1],['Confirmed','19:43','Auto-accepted',1],['Preparing','19:47','Pasta station',1],['Ready','~20:05','Estimated',0],['Completed','—','',0]],4),
+        this.panel('Order source',[['Channel','AI voice call'],['Call','#8291'],['Intent','Food Order'],['Recommendation accepted','Yes · tagliatelle'],['Staff handover','None']],5,'Open call recording',()=>go('/admin/calls/8291')),
+        this.checklist('AI actions on this order',[['Matched “pasta with truffle” to Truffle tagliatelle',1],['Added Burrata to the order',1],['Recommended sparkling water — accepted',1],['Held table T7 for 20:30',1],['Created Order #1832',1]],7)
+      ]});
+
+    if(r==='/admin/reservations') return P({title:'Reservations',sub:'32 covers booked today · 9 upcoming',crumb:'/admin/reservations',
+      tabs:['Day','Week','Month'],
+      actions:[this.btn('Table plan',()=>go('/admin/settings')),this.btn('New reservation',()=>go('/admin/reservations/442'),1)],
+      sections:[
+        this.kpi([['Covers today','128','+9','78% of capacity'],['Booked by AI','19','59%','of today’s bookings'],['No-shows','2','−1','1.5%'],['Free tables 20:00','2','—','T5, T9']],12),
+        this.calendar(12),
+        this.table(['RES','GUEST','WHEN','GUESTS','TABLE','STATUS'],RES.map(x=>[x[0],x[1],x[2],x[3],x[4],x[5]]),'90px 1fr 150px 80px 160px 120px',12,'All reservations','Click a row for details',(row)=>go('/admin/reservations/'+row[0].slice(1)))
+      ]});
+
+    if(r.startsWith('/admin/reservations/')) return P({title:'Reservation #442',sub:'Lena Fischer · tonight 20:30 · 4 guests · T7',crumb:r,back:'Reservations',
+      actions:[this.btn('Move table',()=>{}),this.btn('Seat now',()=>go('/admin/reservations'),1)],
+      sections:[
+        this.kpi([['Status','Confirmed','—','held to 20:45'],['Guests','4','—','1 highchair'],['Table','T7','window','seats 4'],['Booked via','AI voice','#8290','02:48']],12),
+        this.panel('Guest',[['Name','Lena Fischer'],['Phone','+49 171 664 21'],['Visits','9'],['Total spent','€982'],['Note','Anniversary — quiet table']],5,'Open customer',()=>go('/admin/customers/2')),
+        this.timeline('History',[['Requested','19:12','Voice call #8290',1],['Table held','19:12','T7 window',1],['Confirmed','19:13','By assistant',1],['Reminder sent','19:30','Email',1],['Seated','20:30','Expected',0]],4),
+        this.checklist('Pre-order',[['Burrata ×1',1],['Truffle tagliatelle ×1',1],['Sparkling water ×2',1]],3)
+      ]});
+
+    if(r==='/admin/menu') return P({title:'Menu management',sub:'6 categories · 48 products · 1 unavailable',crumb:'/admin/menu',
+      tabs:['All','Antipasti','Pizza','Pasta','Sides','Dolci'],
+      actions:[this.btn('Manage categories',()=>{}),this.btn('Add product',()=>go('/admin/menu/new'),1)],
+      sections:[
+        this.table(['PRODUCT','CATEGORY','PRICE','AVAILABILITY','ORDERS 30D'],PRODUCTS,'2fr 130px 90px 130px 110px',12,'Products','Click a product to edit it',(row)=>go('/admin/menu/'+row[0].split(' ')[0].toLowerCase())),
+        this.cards([
+          {title:'Tiramisù is sold out',body:'The assistant has stopped offering it and suggests Panna cotta instead.',tag:'Sold out',footer:'Since 18:40',action:'Restore →',open:()=>go('/admin/menu/tiramisu')},
+          {title:'Truffle tagliatelle',body:'Kitchen pick tonight — the assistant recommends it in 68% of calls.',tag:'Available',footer:'182 orders',action:'Edit →',open:()=>go('/admin/menu/tagliatelle')}
+        ],2,12,'Needs attention')
+      ]});
+
+    if(r.startsWith('/admin/menu/')) return P({title:'Truffle tagliatelle',sub:'Pasta · €24.00 · 182 orders in 30 days',crumb:r,back:'Menu',
+      actions:[this.btn('Delete product',()=>go('/admin/menu')),this.btn('Save product',()=>go('/admin/menu'),1)],
+      sections:[
+        this.form('Product',[['Name','Truffle tagliatelle'],['Category','Pasta'],['Price','€24.00'],['Prep time','14 min'],['Description','House egg tagliatelle, black winter truffle, Parmigiano 24-month, cultured butter.','wide']],8,'Save product',()=>go('/admin/menu'),2),
+        this.cards([{title:'Product image',media:'1200×800 dish photo',body:'Drop a plated shot. Used in the app, chat cards and AI suggestions.'}],1,4),
+        this.form('Ingredients & allergens',[['Ingredients','Egg pasta, truffle, Parmigiano, butter, pepper','wide'],['Allergens','Gluten, eggs, milk','wide']],8,null,null,1),
+        this.panel('Availability',[['Status','Available'],['Kitchen pick','Tonight'],['Daily limit','24 portions'],['Left tonight','9'],['AI may recommend','Yes']],4)
+      ]});
+
+    if(r==='/admin/calls') return P({title:'AI Calls',sub:'32 calls today · 29 successful · avg 03:12',crumb:'/admin/calls',
+      tabs:['All','Food Order','Table Reservation','Menu Question','Order Status','Failed'],
+      actions:[this.btn('Export transcripts',()=>{}),this.btn('Open analytics',()=>go('/admin/analytics'),1)],
+      sections:[
+        this.kpi([['Calls today','32','+11','vs yesterday'],['Successful','29','91%','no handover'],['Orders created','12','—','€438 value'],['Reservations created','7','—','26 covers']],12),
+        this.table(['CALL','CUSTOMER','DATE','DURATION','INTENT','RESULT','ORDER','RESERVATION'],CALLS,'90px 1fr 130px 90px 140px 110px 110px 110px',12,'Call log','Every row opens the recording, transcript and AI summary',(row)=>go('/admin/calls/'+row[0].slice(1)))
+      ]});
+
+    if(r.startsWith('/admin/calls/')) return P({title:'Call #8291',sub:'Customer #182 · today 19:38 · 04:21 · Food Order · successful',crumb:r,back:'AI Calls',
+      actions:[this.btn('Download audio',()=>{}),this.btn('Open order #1832',()=>go('/admin/orders/1832'),1)],
+      sections:[
+        this.player(),
+        this.transcript('Transcript',TRANSCRIPT,7),
+        this.panel('AI summary',[['Detected intent','Food Order'],['Confidence','94%'],['Sentiment','Positive'],['Recommendation accepted','Yes'],['Staff handover','None'],['Result','Order #1832']],5,'Open order #1832',()=>go('/admin/orders/1832')),
+        this.checklist('Actions performed by the AI',[['Found Pizza',1],['Added Pizza to cart',1],['Recommended Coca-Cola',1],['Customer accepted recommendation',1],['Created Order #1832',1]],5,'The assistant matched a spoken request to menu items, upsold one drink and closed the order without staff involvement.'),
+        this.table(['CREATED','ITEM','QTY','LINE'],[['Order #1832','Pizza','2','€27.00'],['Order #1832','Coca-Cola','2','€6.00']],'130px 1fr 60px 90px',7,'Order created'),
+        this.panel('Reservation created',[['Reservation','None'],['Table held','No'],['Follow-up','Not required']],5)
+      ]});
+
+    if(r==='/admin/analytics') return P({title:'Call Analytics',sub:'AI voice and chat performance',crumb:'/admin/analytics',
+      tabs:['7 days','30 days','90 days'],
+      actions:[this.btn('Export report',()=>{}),this.btn('Open call log',()=>go('/admin/calls'),1)],
+      sections:[
+        this.kpi([['Total calls','214','+18%','last 7 days'],['Successful','196','92%','contained'],['Failed','18','8%','mostly noise'],['Avg duration','03:12','−0:18','vs last week']],12),
+        this.kpi([['Orders generated','82','38%','of calls'],['Reservations generated','47','22%','of calls'],['Revenue via AI','€3,164','+21%','last 7 days'],['Repeat callers','61%','+5%','recognised by voice']],12),
+        this.chart('Call volume','last 7 days',[18,22,19,26,32,29,27],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6,true),
+        this.chart('Success rate','last 7 days · %',[88,90,89,93,94,92,91],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6),
+        this.chart('Intent distribution','share of calls · %',[38,22,17,13,10],['Order','Booking','Menu Q','Status','Reorder'],6,true),
+        this.panel('Most common intents',[['Food Order','38%'],['Table Reservation','22%'],['Menu Question','17%'],['Order Status','13%'],['Reorder','10%']],6,'Open call log',()=>go('/admin/calls')),
+        this.table(['INTENT','CALLS','SUCCESS','AVG DURATION','CONVERTED'],[['Food Order','82','96%','03:48','82 orders'],['Table Reservation','47','94%','02:31','47 bookings'],['Menu Question','36','89%','01:22','—'],['Order Status','28','93%','01:04','—'],['Reorder','21','98%','01:41','21 orders']],'1fr 90px 90px 130px 130px',12,'Intent performance')
+      ]});
+
+    if(r==='/admin/recommendations') return P({title:'Weekly AI Insights',sub:'Pairings and demand the model found in the last 7 days',crumb:'/admin/recommendations',
+      tabs:['7 days','30 days','90 days'],
+      actions:[this.btn('Filter by category',()=>{}),this.btn('Create combo',()=>go('/admin/menu/new'),1)],
+      sections:[
+        this.cards([
+          {title:'Pizza + Coca-Cola',metric:'82%',metricSub:'frequently ordered together',pct:82,body:'Across 214 orders this week.'},
+          {title:'Burger + Fries',metric:'74%',metricSub:'frequently ordered together',pct:74,body:'Strongest at lunch service.'},
+          {title:'Pizza + Garlic bread',metric:'61%',metricSub:'frequently ordered together',pct:61,body:'The assistant already suggests this in call.'}
+        ],3,12,'Product pairings'),
+        this.cards([
+          {title:'Create a Pizza + Coca-Cola combo',body:'Bundling the pair at €17.50 would protect margin while matching how guests already order.',tag:'Voice',footer:'Projected +€310 / week',action:'Create combo →',open:()=>go('/admin/menu/new')},
+          {title:'Coca-Cola demand increased 23% this week',body:'Stock cover is 4 days at the current rate.',tag:'Chat',footer:'Reorder point reached',action:'Open menu →',open:()=>go('/admin/menu')},
+          {title:'Friday evening has the highest order volume',body:'19:00–21:00 carries 34% of Friday revenue. Two extra pasta covers would clear the queue.',tag:'Website',footer:'Staffing suggestion',action:'View orders →',open:()=>go('/admin/orders')}
+        ],3,12,'AI business recommendations'),
+        this.chart('Pairing strength','top pairs · %',[82,74,61,54,47],['Pizza+Coke','Burger+Fries','Pizza+Bread','Pasta+Wine','Dolci+Coffee'],7,true),
+        this.panel('Filters',[['Time range','7 days'],['Category','All categories'],['Product','All products'],['Min. support','40 orders'],['Channel','Voice, chat, website']],5,'Apply filters')
+      ]});
+
+    if(r==='/admin/customers') return P({title:'Customers',sub:'1,284 customers · 61% returning',crumb:'/admin/customers',
+      tabs:['All','New','Returning','High value'],
+      actions:[this.btn('Export list',()=>{}),this.btn('Open analytics',()=>go('/admin/analytics'),1)],
+      sections:[
+        this.kpi([['Total customers','1,284','+42','last 30 days'],['New','196','+12%','last 30 days'],['Returning','788','61%','of active guests'],['Retention 90d','54%','+3%','order again within 90d']],12),
+        this.chart('New vs returning','last 7 days · orders',[41,52,38,57,68,63,59],['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],6),
+        this.chart('Popular products','orders 30d',[421,298,266,182,143],['Margherita','Diavola','Garlic','Tagliatelle','Burrata'],6,true),
+        this.table(['CUSTOMER','ORDERS','RESERVATIONS','TOTAL SPENT','LAST ACTIVITY'],CUSTOMERS,'1fr 90px 130px 130px 150px',12,'Customer list','Click a customer for their full history',(row)=>go('/admin/customers/1'))
+      ]});
+
+    if(r.startsWith('/admin/customers/')) return P({title:'Mara Ansel',sub:'Customer #182 · since March 2024 · recognised by voice',crumb:r,back:'Customers',
+      actions:[this.btn('Send offer',()=>{}),this.btn('Open last order',()=>go('/admin/orders/1832'),1)],
+      sections:[
+        this.kpi([['Orders','24','+3','last 30 days'],['Reservations','6','—','1 upcoming'],['Total spent','€1,148','€47.80','avg ticket'],['AI interactions','12','9','ended in an order']],12),
+        this.table(['WHEN','TYPE','DETAIL','SOURCE','TOTAL'],[['Today 19:42','Order','#1832','Voice','€47.00'],['Today 19:12','Reservation','#442 · 4 guests','Voice','—'],['15 Aug','Order','#1791','Website','€34.50'],['09 Aug','Order','#1744','Chat','€28.00'],['02 Aug','Reservation','#421 · 2 guests','Website','—']],'130px 120px 1fr 90px 90px',8,'Activity'),
+        this.panel('Preferences on file',[['Preferred seating','Window'],['Usual party size','4'],['Allergies','None'],['Assistant voice','Warm · slow'],['Marketing consent','Yes']],4),
+        this.checklist('Favourite products',[['Truffle tagliatelle · 6 orders',1],['Diavola · 5 orders',1],['Burrata · 4 orders',1],['Sparkling water · 11 orders',1]],5),
+        this.table(['CALL','DATE','INTENT','RESULT','OUTCOME'],[['#8291','Today 19:38','Food Order','Successful','Order #1832'],['#8285','Today 17:31','Food Order','Successful','Order #1828'],['#8240','15 Aug','Order Status','Successful','—']],'90px 130px 150px 110px 1fr',7,'AI interactions','Open a call to hear the recording',(row)=>go('/admin/calls/8291'))
+      ]});
+
+    if(r==='/admin/settings') return P({title:'Settings',sub:'Osteria Vento · Kreuzberg, Berlin',crumb:'/admin/settings',
+      tabs:['Restaurant','Hours','Tables','AI assistant','Voice','Notifications','Account'],
+      actions:[this.btn('Discard',()=>{}),this.btn('Save all changes',()=>go('/admin'),1)],
+      sections:[
+        this.form('Restaurant information',[['Name','Osteria Vento'],['Phone','+49 30 4477 2210'],['Address','Oranienstraße 118, 10999 Berlin','wide'],['Cuisine','Italian'],['Capacity','96 covers']],7,'Save',()=>go('/admin'),2),
+        this.panel('Opening hours',[['Monday','closed'],['Tue – Thu','17:00 – 23:00'],['Fri – Sat','17:00 – 00:30'],['Sunday','12:00 – 22:00'],['Kitchen closes','30 min earlier']],5),
+        this.table(['TABLE','SEATS','ZONE','AI MAY BOOK','STATUS'],[['T2','3','Main room','Yes','Available'],['T3','4','Main room','Yes','Confirmed'],['T5','2','Bar','No','Available'],['T7','4','Window','Yes','Confirmed'],['T12','6','Terrace','Yes','Available']],'90px 80px 150px 130px 130px',7,'Tables'),
+        this.panel('AI assistant',[['Assistant name','Vento'],['Languages','German, English, Italian'],['May take orders','Yes'],['May book tables','Yes'],['May offer discounts','No'],['Handover after','2 failed turns']],5),
+        this.form('Voice settings',[['Voice','Warm · female'],['Speaking rate','0.95×'],['Interrupt sensitivity','Medium'],['Greeting','“Good evening, this is Osteria Vento.”','wide']],7,'Save voice',()=>go('/admin'),2),
+        this.checklist('Notifications',[['New AI order — email + push',1],['Failed AI call — email',1],['Reservation change — push',1],['Daily AI summary at 23:30',1],['Weekly insight digest',0]],5),
+        this.form('Admin account',[['Name','Sofia Klein'],['Email','sofia@osteriavento.de'],['Role','Owner'],['Two-factor','Enabled']],7,'Update account',()=>go('/admin'),2)
+      ]});
+
+    return P({title:'Not found',sub:r,crumb:r,sections:[this.panel('Route',[['Path',r],['Area','unknown']],4)]});
+  }
+
+  auth(){
+    const r=this.state.route, go=this.go, isAdmin=r.startsWith('/admin');
+    const F=(label,value,color)=>({label,value,color:color||'#A19B8E'});
+    if(isAdmin) return {isAdmin:true,title:'CallDine Restaurant Admin',sub:'Sign in to manage orders, reservations and AI calls for your restaurant.',
+      fields:[F('Email','sofia@osteriavento.de',INK),F('Password','••••••••••',INK)],cta:'Sign in',
+      altText:'Not a restaurant?',altLink:'Customer sign-in',altGo:()=>this.setState({route:'/login'}),
+      signIn:()=>this.setState({route:'/admin',stack:[]}),badge:'RESTAURANT ADMIN · OSTERIA VENTO',
+      quote:'Every call, transcript and AI decision in one operational view.',quoteBy:'32 AI calls handled today without staff handover'};
+    if(r==='/register') return {title:'Create your account',sub:'Order and book by voice at every CallDine restaurant.',
+      fields:[F('Full name','Mara Ansel',INK),F('Email','mara@ansel.co',INK),F('Password','••••••••••',INK)],cta:'Create account',
+      altText:'Already have an account?',altLink:'Sign in',altGo:()=>this.setState({route:'/login'}),
+      signIn:()=>this.setState({route:'/app/ai',stack:[]}),badge:'CALLDINE FOR GUESTS',
+      quote:'Talk the way you would to a waiter. The assistant does the rest.',quoteBy:'Average call to confirmed order: 3m 12s'};
+    if(r==='/forgot-password') return {title:'Reset your password',sub:'We’ll email you a link. It expires in 30 minutes.',
+      fields:[F('Email','mara@ansel.co',INK)],cta:'Send reset link',
+      altText:'Remembered it?',altLink:'Back to sign in',altGo:()=>this.setState({route:'/login'}),
+      signIn:()=>this.setState({route:'/login'}),badge:'ACCOUNT RECOVERY',
+      quote:'Your assistant remembers your table, your usual and your allergies.',quoteBy:'Voice recognition is optional and can be switched off'};
+    return {title:'Welcome back to CallDine',sub:'Sign in to order, book a table, or talk to the assistant.',
+      fields:[F('Email','mara@ansel.co',INK),F('Password','••••••••••',INK)],cta:'Sign in',
+      altText:'New here?',altLink:'Create account',altGo:()=>this.setState({route:'/register'}),
+      signIn:()=>this.setState({route:'/app/ai',stack:[]}),badge:'CALLDINE FOR GUESTS',
+      quote:'Talk the way you would to a waiter. The assistant does the rest.',quoteBy:'Average call to confirmed order: 3m 12s'};
+  }
+
+  renderVals(){
+    const r=this.state.route, go=this.go;
+    const isAuth=['/login','/register','/forgot-password','/admin/login','/'].includes(r);
+    const admin=r.startsWith('/admin')&&!isAuth;
+    const p=isAuth?null:this.page();
+
+    const navItem=(label,route,count)=>{
+      const active=route===r||(route!=='/admin'&&route!=='/app'&&r.startsWith(route));
+      return {label,count:count||'',go:()=>go(route),
+        style:`display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;border:none;width:100%;font-family:Manrope,sans-serif;font-size:13.5px;cursor:pointer;transition:background 150ms ease;`+
+          (active?`background:#FFFFFF;box-shadow:0 1px 2px rgba(26,26,24,0.06);font-weight:600;color:${INK};`:`background:transparent;font-weight:500;color:#55524A;`),
+        dot:`width:6px;height:6px;border-radius:3px;flex:none;background:${active?ACCENT:'#C7C3B9'};`};
+    };
+    const groups=(admin?ADMIN_NAV:CUST_NAV).map(g=>({label:g.label||'',items:g.items.map(i=>navItem(i[0],i[1],i[2]))}));
+
+    const st=STATES.find(s=>s[0]===this.state.call)||STATES[1];
+    const mm=String(Math.floor(this.state.t/60)).padStart(2,'0'), ss=String(this.state.t%60).padStart(2,'0');
+    const halo=(delay)=>`position:absolute;inset:0;border-radius:50%;border:1px solid ${this.state.call==='listening'?'rgba(212,155,82,0.5)':'rgba(247,246,243,0.16)'};animation:cd-ring 2.6s ease-out ${delay} infinite;`;
+    const chip=(active)=>`height:26px;padding:0 10px;border-radius:8px;border:1px solid ${active?'rgba(247,246,243,0.9)':'rgba(255,255,255,0.16)'};background:${active?'rgba(247,246,243,0.95)':'rgba(255,255,255,0.05)'};color:${active?INK:'rgba(247,246,243,0.7)'};font-family:Manrope,sans-serif;font-size:11.5px;font-weight:500;cursor:pointer;transition:all 150ms ease;`;
+    const actionStyle='display:flex;flex-direction:column;gap:3px;align-items:flex-start;padding:12px 13px;border-radius:13px;border:1px solid '+LINE+';background:#FFFFFF;box-shadow:0 1px 2px rgba(26,26,24,0.05);cursor:pointer;text-align:left;font-family:Manrope,sans-serif;transition:all 160ms ease;';
+    const intents={connecting:['Awaiting intent','none','—',8,[['Restaurant','Osteria Vento'],['Channel','Voice'],['Guest','Mara Ansel']]],
+      listening:['Reservation + order','compound','94%',94,[['Party size','4 guests'],['Time','Tonight 20:30'],['Items','Burrata ×1']]],
+      speaking:['Upsell suggestion','recommend','88%',88,[['Suggested','Truffle tagliatelle'],['Basis','Kitchen pick + history'],['Awaiting','Guest confirmation']]],
+      processing:['Table availability','book.check','91%',91,[['Party size','4 guests'],['Window','20:15 – 20:45'],['Tables','2 candidates']]]};
+    const it=intents[this.state.call];
+
+    const tabList=(p&&p.tabs)||[];
+    const activeTab=this.state.tab||(tabList[0]||'');
+
+    return {
+      route:r,isAuth,isShell:!isAuth,
+      auth:isAuth?this.auth():{fields:[]},
+      waveform:this.bars(isAuth?'listening':this.state.call,isAuth?46:44),
+      playerWave:this.bars('x',72,'player'),
+      roleSwitch:[
+        {label:'Customer',go:()=>this.setState({route:'/login',stack:[]}),style:`${mono}font-size:10px;letter-spacing:0.06em;padding:4px 8px;border-radius:6px;cursor:pointer;border:1px solid ${!admin?INK:'#E0DCD3'};background:${!admin?INK:'#FFFFFF'};color:${!admin?'#F7F6F3':'#8A8579'};`},
+        {label:'Admin',go:()=>this.setState({route:'/admin/login',stack:[]}),style:`${mono}font-size:10px;letter-spacing:0.06em;padding:4px 8px;border-radius:6px;cursor:pointer;border:1px solid ${admin?INK:'#E0DCD3'};background:${admin?INK:'#FFFFFF'};color:${admin?'#F7F6F3':'#8A8579'};`}
+      ],
+      brandSub:admin?'Restaurant Admin':'Guest app',
+      navGroups:groups,
+      ctaLabel:'',
+      goAi:()=>go('/app/ai'),goChat:()=>go('/app/chat'),goCart:()=>go('/app/cart'),
+      orgName:admin?'Osteria Vento':'Osteria Vento',
+      orgMeta:admin?'Kreuzberg · 96 covers':'Kreuzberg · open until 23:00',
+      userInitials:admin?'SK':'MA',userName:admin?'Sofia Klein':'Mara Ansel',userRole:admin?'Owner':'Guest',
+      logout:()=>this.setState({route:admin?'/admin/login':'/login',stack:[]}),
+      pageTitle:p?p.title:'',pageSub:p?p.sub:'',crumb:p?p.crumb:'',
+      backLabel:p&&p.back?p.back:'',goBack:this.back,
+      pageActions:p?(p.actions||[]):[],
+      hasTabs:tabList.length>0,
+      tabs:tabList.map(t=>({label:t,count:'',pick:()=>this.setState({tab:t}),
+        style:`height:30px;padding:0 12px;border-radius:9px;border:1px solid ${t===activeTab?INK:'#E0DCD3'};background:${t===activeTab?INK:'#FFFFFF'};color:${t===activeTab?'#F7F6F3':'#55524A'};font-family:Manrope,sans-serif;font-size:12.5px;font-weight:500;cursor:pointer;transition:all 150ms ease;`})),
+      sections:p?(p.sections||[]):[],
+      isVoicePage:!!(p&&p.voice),
+      contentBg:p&&p.voice?INK:'#F7F6F3',
+      voiceHeaderStyle:p&&p.voice?'display:none;':'',
+      mobileDrawerClass:this.state.mobileNav?'is-open':'',
+      toggleMobileNav:this.toggleMobileNav,
+      stateLabel:st[1].toUpperCase(),stageTitle:st[2],stageSub:st[3],dotColor:st[4],clock:`${mm}:${ss}`,
+      states:STATES.map(s=>({label:s[1],style:chip(s[0]===this.state.call),pick:()=>this.setState({call:s[0]})})),
+      haloStyle:halo('0s'),haloStyle2:halo('1.3s'),
+      intentName:it[0],intentCode:it[1],intentConfidence:it[2]+' confidence',
+      confBarStyle:`height:100%;width:${it[3]}%;border-radius:2px;background:${ACCENT};transition:width 320ms ease;`,
+      slots:it[4].map(s=>({k:s[0],v:s[1]})),
+      transcript:TRANSCRIPT.slice(0,5).map(t=>({who:t[0]==='Customer'?'You':t[0],at:t[1],text:t[2],
+        rowStyle:`display:flex;flex-direction:column;gap:4px;max-width:290px;align-self:${t[3]?'flex-start':'flex-end'};`,
+        metaStyle:mono+'font-size:10px;letter-spacing:0.06em;color:#A19B8E;'+(t[3]?'':'text-align:right;'),
+        bubbleStyle:t[3]?'background:#1A1A18;color:#F7F6F3;border-radius:14px 14px 14px 4px;padding:10px 13px;font-size:13px;line-height:1.45;'
+          :'background:#FFFFFF;border:1px solid '+LINE+';border-radius:14px 14px 4px 14px;padding:10px 13px;font-size:13px;line-height:1.45;'})),
+      actions:[]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

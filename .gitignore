@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Frontend
+Frontend/node_modules/
+Frontend/.next/
+Frontend/out/
+Frontend/.env*
+!Frontend/.env.example
+Frontend/tsconfig.tsbuildinfo
+
+# Backend
+backend/venv/
+backend/.env*
+!backend/.env.example
+backend/*.db
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+
+# Logs
+*.log
