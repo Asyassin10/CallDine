@@ -21,6 +21,8 @@ class Settings:
     s3_access_point: str
     qdrant_url: str
     qdrant_collection: str
+    polly_voice_id: str
+    chime_media_region: str
 
 
 @lru_cache
@@ -40,4 +42,6 @@ def get_settings() -> Settings:
         s3_access_point=os.getenv("S3_ACCESS_POINT", ""),
         qdrant_url=os.getenv("QDRANT_URL", "http://localhost:6333"),
         qdrant_collection=os.getenv("QDRANT_COLLECTION", "knowledge"),
+        polly_voice_id=os.getenv("POLLY_VOICE_ID", "Joanna"),
+        chime_media_region=os.getenv("CHIME_MEDIA_REGION", os.getenv("AWS_REGION", "us-east-1")),
     )

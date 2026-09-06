@@ -1,5 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { DataTable } from "@/components/ui/DataTable";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { euro, orders } from "@/lib/fixtures";
-export default function AdminOrders(){return <div className="page"><PageHeader eyebrow="Operations" title="Orders" sub="86 orders today · 14 open"><button className="button">Export CSV</button><button className="button primary">New manual order</button></PageHeader><div className="tabs">{["All","Open","Ready","Completed","Cancelled"].map((tab,i)=><button className={`tab ${i===0?"active":""}`} key={tab}>{tab}</button>)}</div><Card title="All orders"><DataTable columns={["ORDER","CUSTOMER","SOURCE","STATUS","TOTAL","PLACED","ITEMS"]} rows={orders.map(o=>[`#${o.id}`,o.customer,o.source,o.status,euro(o.total),o.placed,o.items])} links={orders.map(o=>`/admin/orders/${o.id}`)}/></Card></div>}
+import { euro } from "@/lib/fixtures";
+
+type Order = { id: string; customer_name: string; delivery_address: string; status: string; total: number; created_at: string };
+
+export default function AdminOrders() {
+  const [orders, setOrders] = useState<Order[]>([]);
+  useEffect(() => { fetch("/api/admin/orders").then(response => response.json()).then(setOrders); }, []);
+  return <div className="page"><PageHeader eyebrow="Operations" title="Orders" sub="Confirmed delivery orders"/><Card title="All orders"><DataTable columns={["ORDER", "CUSTOMER", "ADDRESS", "STATUS", "TOTAL", "PLACED"]} rows={orders.map(order => [order.id.slice(0, 8), order.customer_name, order.delivery_address, order.status, euro(order.total), new Date(order.created_at).toLocaleString()])}/></Card></div>;
+}

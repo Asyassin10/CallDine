@@ -2,7 +2,7 @@ export type SessionRole = "customer" | "admin";
 
 export type MenuCategory =
   | "Starters" | "Pasta" | "Main courses" | "Seafood" | "Vegetarian"
-  | "Sides" | "Desserts" | "Breakfast" | "Specials";
+  | "Sides" | "Desserts" | "Breakfast" | "Specials" | "Boissons";
 
 export interface MenuItem {
   id: string;

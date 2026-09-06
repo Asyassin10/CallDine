@@ -16,4 +16,4 @@ export async function getCategories(): Promise<string[]> {
   return categories.map(category => category.name);
 }
 
-export const menuCategories: Array<"All" | MenuCategory> = ["All","Starters","Pasta","Main courses","Seafood","Vegetarian","Sides","Desserts","Breakfast","Specials"];
+export const menuCategories: Array<"All" | MenuCategory> = ["All","Starters","Pasta","Main courses","Seafood","Vegetarian","Sides","Desserts","Breakfast","Specials","Boissons"];

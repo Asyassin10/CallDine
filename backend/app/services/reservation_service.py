@@ -18,6 +18,9 @@ def available_tables(session: Session, date: str, time: str, guests: int) -> lis
 
 
 def check(session: Session, date: str, time: str, guests: int) -> dict:
+    missing = [name for name, value in {"date": date, "time": time, "guests": guests}.items() if not value]
+    if missing:
+        return {"available": False, "missing": missing, "message": "Ask the customer for the missing reservation details."}
     tables = available_tables(session, date, time, guests)
     return {"available": bool(tables), "tables": tables}
 
@@ -30,8 +33,8 @@ def create_draft(session: Session, user_id: int, values: dict) -> dict:
     return {"available": True, "reservation_id": reservation.id, "table": tables[0]}
 
 
-def confirm(session: Session, user_id: int, reservation_id: str, confirmed: bool) -> dict:
-    reservation = reservation_repository.get_reservation(session, reservation_id, user_id)
+def confirm(session: Session, user_id: int, reservation_id: str | None, confirmed: bool) -> dict:
+    reservation = reservation_repository.get_reservation(session, reservation_id, user_id) if reservation_id else reservation_repository.latest_draft(session, user_id)
     if not reservation or not confirmed:
         return {"confirmed": False}
     tables = available_tables(session, reservation.date, reservation.time, reservation.guests)

@@ -1,7 +1,7 @@
-import boto3
+from amazon_transcribe.client import TranscribeStreamingClient
 
 from app.config import get_settings
 
 
 def get_transcribe_client():
-    return boto3.client("transcribe", region_name=get_settings().aws_region)
+    return TranscribeStreamingClient(region=get_settings().aws_region)

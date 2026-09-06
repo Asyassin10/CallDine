@@ -8,6 +8,8 @@ class Conversation(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid4()), primary_key=True)
     user_id: int = Field(foreign_key="user.id", index=True)
     title: str = "New conversation"
+    channel: str = "chat"
+    audio_key: str | None = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 

@@ -7,13 +7,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session
 
 from app.api.routes_auth import router as auth_router
+from app.api.routes_admin import router as admin_router
 from app.api.routes_conversation import router as conversation_router
 from app.api.routes_customer import router as customer_router
 from app.api.routes_knowledge import router as knowledge_router
 from app.api.routes_menu import router as menu_router
+from app.api.routes_voice import router as voice_router
 from app.config import get_settings
 from app.core.database import create_tables, engine
 from app.services.auth_service import seed_users
+from app.services.dashboard_service import seed_metrics
 from app.services.menu_service import seed_menu
 from app.repositories.reservation_repository import seed_tables
 
@@ -26,6 +29,7 @@ async def lifespan(_: FastAPI):
         seed_users(session)
         seed_menu(session)
         seed_tables(session)
+        seed_metrics(session)
     yield
 
 
@@ -40,9 +44,11 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(admin_router)
 app.include_router(conversation_router)
 app.include_router(customer_router)
 app.include_router(menu_router)
+app.include_router(voice_router)
 app.include_router(knowledge_router)
 
 @app.get("/", tags=["system"])

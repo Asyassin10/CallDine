@@ -26,8 +26,8 @@ def create_draft(session: Session, user_id: int, items: list[dict], delivery_add
     return {"valid": True, "order_id": order.id, "items": checked["items"], "delivery_address": order.delivery_address, "total": order.total}
 
 
-def confirm(session: Session, user_id: int, order_id: str, confirmed: bool) -> dict:
-    order = order_repository.get_order(session, order_id, user_id)
+def confirm(session: Session, user_id: int, order_id: str | None, confirmed: bool) -> dict:
+    order = order_repository.get_order(session, order_id, user_id) if order_id else order_repository.latest_draft(session, user_id)
     if not order or not confirmed:
         return {"confirmed": False}
     items = order_repository.list_items(session, order.id)
@@ -45,3 +45,10 @@ def confirm(session: Session, user_id: int, order_id: str, confirmed: bool) -> d
 
 def list_confirmed(session: Session, user_id: int) -> list[Order]:
     return order_repository.list_confirmed(session, user_id)
+
+
+def list_all_confirmed(session: Session):
+    return [
+        {"id": order.id, "customer_name": customer_name, "delivery_address": order.delivery_address, "status": order.status, "total": order.total, "created_at": order.created_at}
+        for order, customer_name in order_repository.list_all_confirmed(session)
+    ]

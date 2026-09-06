@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Card, DetailList, Kpis } from "@/components/ui/Card";
-import { DataTable } from "@/components/ui/DataTable";
+import { Dashboard } from "@/components/dashboard/Dashboard";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { calls, euro, orders, reservations } from "@/lib/fixtures";
-export default function AdminOverview(){return <div className="page"><PageHeader eyebrow="Restaurant Admin" title="Overview" sub="Osteria Vento · operations today"><Link className="button" href="/admin/orders">View orders</Link><Link className="button primary" href="/admin/calls">Review AI calls</Link></PageHeader><div className="grid"><div className="span12"><Kpis items={[["Revenue","€3,842","+12% today"],["Open orders","14","4 preparing"],["Reservations","32","86 covers"],["AI success rate","90.6%","29 of 32 calls"]]}/></div><Card className="span7" title="Recent orders"><DataTable columns={["ORDER","CUSTOMER","SOURCE","STATUS","TOTAL"]} rows={orders.slice(0,5).map(o=>[`#${o.id}`,o.customer,o.source,o.status,euro(o.total)])} links={orders.slice(0,5).map(o=>`/admin/orders/${o.id}`)}/></Card><Card className="span5" title="Upcoming reservations"><DetailList rows={reservations.map(r=>[`${r.when} · ${r.guest}`,`${r.guests} · ${r.table}`])}/></Card><Card className="span7" title="Recent AI calls"><DataTable columns={["CALL","CUSTOMER","INTENT","RESULT","DURATION"]} rows={calls.slice(0,4).map(c=>[`#${c.id}`,c.customer,c.intent,c.result,c.duration])} links={calls.slice(0,4).map(c=>`/admin/calls/${c.id}`)}/></Card><Card className="span5" title="AI insights"><Link href="/admin/recommendations"><strong>3 weekly recommendations →</strong></Link><p className="muted">Pairings, demand, and staffing suggestions.</p></Card></div></div>}
+
+export default function AdminOverview() {
+  return <div className="page"><PageHeader eyebrow="Restaurant Admin" title="Overview" sub="Osteria Vento · operations today"/><Dashboard/></div>;
+}

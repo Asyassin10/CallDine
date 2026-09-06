@@ -34,5 +34,9 @@ class HealthRouteTests(unittest.TestCase):
             token = login.json()["token"]
             headers = {"Authorization": f"Bearer {token}"}
             self.assertEqual(client.get("/api/v1/auth/me", headers=headers).status_code, 200)
+            dashboard = client.get("/api/v1/admin/dashboard", headers=headers)
+            self.assertEqual(dashboard.status_code, 200)
+            self.assertEqual(len(dashboard.json()["days"]), 7)
+            self.assertEqual(client.get("/api/v1/admin/dashboard").status_code, 401)
             self.assertEqual(client.post("/api/v1/auth/logout", headers=headers).status_code, 204)
             self.assertEqual(client.get("/api/v1/auth/me", headers=headers).status_code, 401)

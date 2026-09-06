@@ -11,10 +11,27 @@ from app.models.menu import MenuItem
 from app.repositories import category_repository, menu_repository
 from app.schemas.menu_schema import MenuItemCreate, MenuItemResponse
 
-CATEGORY_NAMES = ["Starters", "Pasta", "Main courses", "Seafood", "Vegetarian", "Sides", "Desserts", "Breakfast", "Specials"]
+CATEGORY_NAMES = ["Starters", "Pasta", "Main courses", "Seafood", "Vegetarian", "Sides", "Desserts", "Breakfast", "Specials", "Boissons"]
 SOURCE_CATEGORIES = ["Starter", "Pasta", "Seafood", "Side", "Dessert", "Vegetarian", "Vegan", "Breakfast", "Beef", "Chicken", "Lamb", "Goat", "Pork", "Miscellaneous"]
 CATEGORY_MAP = {"Starter": "Starters", "Pasta": "Pasta", "Seafood": "Seafood", "Side": "Sides", "Dessert": "Desserts", "Vegetarian": "Vegetarian", "Vegan": "Vegetarian", "Breakfast": "Breakfast", "Beef": "Main courses", "Chicken": "Main courses", "Lamb": "Main courses", "Goat": "Main courses", "Pork": "Main courses", "Miscellaneous": "Specials"}
 PRICE_RANGES = {"Starters": (8, 14), "Pasta": (15, 24), "Main courses": (18, 28), "Seafood": (19, 29), "Vegetarian": (12, 20), "Sides": (5, 9), "Desserts": (7, 10), "Breakfast": (8, 14), "Specials": (12, 20)}
+SODA_IMAGE = "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=600&q=80"
+WATER_IMAGE = "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=600&q=80"
+JUICE_IMAGE = "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80"
+COFFEE_IMAGE = "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80"
+TEA_IMAGE = "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=600&q=80"
+DRINKS = [
+    ("Coca-Cola", 3.5, SODA_IMAGE), ("Coca-Cola Zero", 3.5, SODA_IMAGE),
+    ("Fanta Orange", 3.5, SODA_IMAGE), ("Sprite", 3.5, SODA_IMAGE),
+    ("Schweppes Tonic", 3.5, SODA_IMAGE), ("Ginger Ale", 3.5, SODA_IMAGE),
+    ("Still Water", 2.5, WATER_IMAGE), ("Sparkling Water", 2.5, WATER_IMAGE),
+    ("Orange Juice", 4, JUICE_IMAGE), ("Apple Juice", 4, JUICE_IMAGE),
+    ("Pineapple Juice", 4, JUICE_IMAGE), ("Mango Juice", 4.5, JUICE_IMAGE),
+    ("Fresh Lemonade", 4.5, JUICE_IMAGE), ("Peach Iced Tea", 4, TEA_IMAGE),
+    ("Lemon Iced Tea", 4, TEA_IMAGE), ("Espresso", 2.5, COFFEE_IMAGE),
+    ("Americano", 3, COFFEE_IMAGE), ("Cappuccino", 3.5, COFFEE_IMAGE),
+    ("Mint Tea", 3, TEA_IMAGE), ("Hot Chocolate", 4, COFFEE_IMAGE),
+]
 
 
 def to_response(item: MenuItem, category: Category) -> MenuItemResponse:
@@ -75,6 +92,7 @@ def seed_menu(session: Session) -> None:
     """Save the current 60 TheMealDB dishes the first time the menu is created."""
 
     if menu_repository.has_items(session):
+        seed_drinks(session)
         return
     categories = {}
     for name in CATEGORY_NAMES:
@@ -94,4 +112,16 @@ def seed_menu(session: Session) -> None:
             menu_repository.save(session, MenuItem(name=meal["strMeal"], category_id=categories[category_name].id, price=price_for(meal["strMeal"], category_name), image_url=meal["strMealThumb"]))
             count += 1
             if count == 60:
+                seed_drinks(session)
                 return
+    seed_drinks(session)
+
+
+def seed_drinks(session: Session) -> None:
+    """Add missing demo drinks without duplicating existing menu items."""
+
+    category = category_repository.get_by_name(session, "Boissons") or category_repository.save(session, Category(name="Boissons"))
+    existing = {item.name for item, item_category in menu_repository.list_all(session) if item_category.name == "Boissons"}
+    for name, price, image in DRINKS:
+        if name not in existing:
+            menu_repository.save(session, MenuItem(name=name, category_id=category.id, price=price, image_url=image, stock_quantity=20))

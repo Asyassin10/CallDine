@@ -11,6 +11,10 @@ class CustomerOrderResponse(BaseModel):
     created_at: datetime
 
 
+class AdminOrderResponse(CustomerOrderResponse):
+    customer_name: str
+
+
 class CustomerReservationResponse(BaseModel):
     id: str
     date: str

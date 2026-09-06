@@ -14,6 +14,10 @@ def get_reservation(session: Session, reservation_id: str, user_id: int) -> Rese
     return session.exec(select(Reservation).where(Reservation.id == reservation_id, Reservation.user_id == user_id)).first()
 
 
+def latest_draft(session: Session, user_id: int) -> Reservation | None:
+    return session.exec(select(Reservation).where(Reservation.user_id == user_id, Reservation.status == "draft").order_by(Reservation.created_at.desc())).first()
+
+
 def list_confirmed(session: Session, user_id: int) -> list[Reservation]:
     return list(session.exec(select(Reservation).where(Reservation.user_id == user_id, Reservation.status == "confirmed").order_by(Reservation.date, Reservation.time)))
 
