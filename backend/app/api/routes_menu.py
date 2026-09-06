@@ -1,6 +1,7 @@
 """Menu endpoints."""
 
-from fastapi import APIRouter, Header, HTTPException, status
+from fastapi import APIRouter, File, Header, HTTPException, UploadFile, status
+from fastapi.responses import StreamingResponse
 
 from app.api.deps import SessionDep
 from app.models.user import UserRole
@@ -25,6 +26,20 @@ def get_menu(session: SessionDep) -> list[MenuItemResponse]:
 @router.get("/categories", response_model=list[CategoryResponse])
 def get_categories(session: SessionDep) -> list[CategoryResponse]:
     return [CategoryResponse(name=category.name) for category in menu_service.list_categories(session)]
+
+
+@router.post("/menu/image", status_code=status.HTTP_201_CREATED)
+def upload_menu_image(session: SessionDep, file: UploadFile = File(...), authorization: str | None = Header(default=None)) -> dict[str, str]:
+    admin_token(session, authorization)
+    if not (file.content_type or "").startswith("image/"):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="An image file is required")
+    return {"image_url": menu_service.upload_image(file)}
+
+
+@router.get("/menu/images/{filename}")
+def menu_image(filename: str):
+    image = menu_service.get_image(filename)
+    return StreamingResponse(image["Body"], media_type=image.get("ContentType", "image/jpeg"))
 
 
 @router.post("/menu", response_model=MenuItemResponse, status_code=status.HTTP_201_CREATED)

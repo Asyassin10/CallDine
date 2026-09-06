@@ -18,3 +18,8 @@ def save(session: Session, category: Category) -> Category:
     session.commit()
     session.refresh(category)
     return category
+
+
+def delete(session: Session, category: Category) -> None:
+    session.delete(category)
+    session.commit()

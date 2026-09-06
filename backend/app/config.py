@@ -17,6 +17,8 @@ class Settings:
     environment: str
     frontend_origins: list[str]
     aws_region: str
+    bedrock_guardrail_id: str
+    bedrock_guardrail_version: str
     s3_bucket: str
     s3_access_point: str
     qdrant_url: str
@@ -38,6 +40,8 @@ def get_settings() -> Settings:
         environment=os.getenv("ENVIRONMENT", "development"),
         frontend_origins=[origin.strip() for origin in origins.split(",") if origin.strip()],
         aws_region=os.getenv("AWS_REGION", ""),
+        bedrock_guardrail_id=os.getenv("BEDROCK_GUARDRAIL_ID", ""),
+        bedrock_guardrail_version=os.getenv("BEDROCK_GUARDRAIL_VERSION", ""),
         s3_bucket=os.getenv("S3_BUCKET", ""),
         s3_access_point=os.getenv("S3_ACCESS_POINT", ""),
         qdrant_url=os.getenv("QDRANT_URL", "http://localhost:6333"),

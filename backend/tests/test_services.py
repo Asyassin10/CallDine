@@ -52,6 +52,20 @@ def test_voice_text_removes_formatting_emojis_and_ids() -> None:
     assert "**" not in value and "✅" not in value and "ID" not in value and "5df3987a" not in value
 
 
+def test_guardrail_response_returns_its_blocked_message() -> None:
+    choice = {"output": {"message": {"content": [{"text": "This request was blocked."}]}}}
+    assert chat_service.guardrail_text(choice) == "This request was blocked."
+
+
+def test_empty_guardrail_response_has_safe_fallback() -> None:
+    assert chat_service.guardrail_text({}) == chat_service.BLOCKED_MESSAGE
+
+
+def test_streamed_guardrail_without_text_has_safe_fallback() -> None:
+    response = {"stream": iter([{"messageStop": {"stopReason": "guardrail_intervened"}}])}
+    assert "".join(chat_service.stream(response)) == chat_service.BLOCKED_MESSAGE
+
+
 def test_reservation_blocks_the_same_two_hour_slot() -> None:
     database = session()
     draft = reservation_service.create_draft(database, 1, {"date": "2026-09-01", "time": "19:00", "guests": 4, "customer_name": "Mara", "phone": "123"})

@@ -43,7 +43,7 @@ export const fallbackMenu: MenuItem[] = [
   ["Tiramisù","Desserts",9,"https://www.themealdb.com/images/media/meals/wkhg581762773124.jpg"],
   ["Gnocchi al pesto","Pasta",19.5,"https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=80"],
   ["Insalata Caprese","Vegetarian",12.5,"https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=900&q=80"],
-].map(([name,category,price,image],index)=>({id:`fallback-${index}`,name:String(name),slug:slugify(String(name)),category:category as MenuItem["category"],price:Number(price),image:String(image),available:name!=="Tiramisù",stock_quantity:20}));
+].map(([name,category,price,image],index)=>({id:`fallback-${index}`,name:String(name),slug:slugify(String(name)),category:category as MenuItem["category"],price:Number(price),description:"Freshly prepared with carefully selected ingredients.",image:String(image),available:name!=="Tiramisù",stock_quantity:20}));
 
 export function slugify(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

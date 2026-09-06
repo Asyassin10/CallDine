@@ -27,6 +27,8 @@ def create_tables() -> None:
         columns = [row[1] for row in connection.execute(text("PRAGMA table_info(menuitem)"))]
         if "stock_quantity" not in columns:
             connection.execute(text("ALTER TABLE menuitem ADD COLUMN stock_quantity INTEGER NOT NULL DEFAULT 20"))
+        if "description" not in columns:
+            connection.execute(text("ALTER TABLE menuitem ADD COLUMN description TEXT NOT NULL DEFAULT ''"))
         conversation_columns = [row[1] for row in connection.execute(text("PRAGMA table_info(conversation)"))]
         if "channel" not in conversation_columns:
             connection.execute(text("ALTER TABLE conversation ADD COLUMN channel TEXT NOT NULL DEFAULT 'chat'"))

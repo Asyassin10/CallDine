@@ -8,6 +8,7 @@ class MenuItem(SQLModel, table=True):
     name: str
     category_id: int = Field(foreign_key="category.id")
     price: float
+    description: str = ""
     image_url: str
     available: bool = True
     stock_quantity: int = 20
