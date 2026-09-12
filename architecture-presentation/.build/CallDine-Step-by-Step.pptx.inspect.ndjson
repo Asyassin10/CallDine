@@ -1,0 +1,390 @@
+{"kind":"deck","id":"pr/p8y1e4","name":"Deck"}
+{"kind":"layout","layoutId":"2f2e374f-bcc2-4377-a7d8-4c57c10c522a","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"0c586ade-3a77-41dc-b226-400ec2d588b6","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/j8q9z9","slide":1,"title":"CallDine","textShapes":9}
+{"kind":"textbox","id":"sh/ah8bah4n","slide":1,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/bihs3ml8","slide":1,"text":"AI restaurant assistant","textPreview":"AI restaurant assistant","textChars":23,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/knqtgrmp","slide":1,"text":"Architecture and workflow walkthrough","textPreview":"Architecture and workflow walkthrough","textChars":37,"textLines":1,"bbox":[63,224,1760,75]}
+{"kind":"textbox","id":"sh/loza9w3a","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"textbox","id":"sh/8batkbm1","slide":1,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[265,376,700,130]}
+{"kind":"textbox","id":"sh/9cjudw3m","slide":1,"text":"Voice conversations\nRestaurant knowledge\nOrders and reservations","textPreview":"Voice conversations | Restaurant knowledge | Orders and reservations","textChars":64,"textLines":3,"bbox":[65,590,1050,215]}
+{"kind":"shape","id":"sh/s7e9cf29","slide":1,"bbox":[1530,709,114,114]}
+{"kind":"textbox","id":"sh/6lwra5k3","slide":1,"text":"Next.js","textPreview":"Next.js","textChars":7,"textLines":1,"bbox":[1305,850,230,50]}
+{"kind":"textbox","id":"sh/1c7apkjq","slide":1,"text":"FastAPI","textPreview":"FastAPI","textChars":7,"textLines":1,"bbox":[1510,850,230,50]}
+{"kind":"textbox","id":"sh/gby9gf25","slide":1,"text":"Source-based walkthrough. Forecasting is shown as planned.","textPreview":"Source-based walkthrough. Forecasting is shown as planned.","textChars":58,"textLines":1,"bbox":[65,953,1650,50]}
+{"kind":"image","id":"im/8bytw76h","slide":1,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/zm5sz2p0","slide":1,"name":"","alt":"aws logo","bbox":[1240,295,560,300]}
+{"kind":"image","id":"im/ylwrqxof","slide":1,"name":"","alt":"calldine logo","bbox":[60,340,175,175]}
+{"kind":"image","id":"im/2x4fupkn","slide":1,"name":"","alt":"next logo","bbox":[1290,690,145,145]}
+{"kind":"image","id":"im/ozmxwz2t","slide":1,"name":"","alt":"fastapi logo","bbox":[1530,709,114,114]}
+{"kind":"notes","id":"nt/j8q9z9","slide":1,"text":"CallDine helps restaurant customers use voice or text to ask questions, order food and reserve tables. The interface uses Next.js. FastAPI coordinates AWS AI services and the restaurant database. This walkthrough explains each stage and keeps the planned forecasting feature separate from working application code.\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/6oi0pa","slide":2,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/mp8bitor","slide":2,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/7qhcbypc","slide":2,"text":"A customer request","textPreview":"A customer request","textChars":18,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/knqtgj6l","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/lozu9o76","slide":2,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/yl8be9of","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/4jadsn6p","slide":2,"text":"Customer input","textPreview":"Customer input","textChars":14,"textLines":1,"bbox":[85,496,440,80]}
+{"kind":"shape","id":"sh/5k3ul8na","slide":2,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/lcjmdovy","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/za14beds","slide":2,"text":"Next.js API proxy","textPreview":"Next.js API proxy","textChars":17,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/y9s3i9w7","slide":2,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/x8jm94vm","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"shape","id":"sh/c7algje1","slide":2,"bbox":[1567,375,96,96]}
+{"kind":"textbox","id":"sh/a583e9wb","slide":2,"text":"FastAPI routes","textPreview":"FastAPI routes","textChars":14,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/h43ml8v6","slide":2,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/w3ulc3ul","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/h8b6hc32","slide":2,"text":"Chat and tools","textPreview":"Chat and tools","textChars":14,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/u5knmhkr","slide":2,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/f6tofmlw","slide":2,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/sj25k72l","slide":2,"text":"Repositories","textPreview":"Repositories","textChars":12,"textLines":1,"bbox":[740,752,440,80]}
+{"kind":"shape","id":"sh/t4b6dc36","slide":2,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/6h0nixkf","slide":2,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/7itob2l0","slide":2,"text":"Customer response","textPreview":"Customer response","textChars":17,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/kfi5gn29","slide":2,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/5gr69s3u","slide":2,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/napoji5w","slide":2,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/m9g7qdob","slide":2,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/9cr6lsn2","slide":2,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/gbm9wvel","slide":2,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/6lkrqlwj","slide":2,"name":"","alt":"calldine logo","bbox":[257,375,96,96]}
+{"kind":"image","id":"im/bqxsrul0","slide":2,"name":"","alt":"next logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/onm9wf29","slide":2,"name":"","alt":"fastapi logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/jqpgbmx8","slide":2,"name":"","alt":"bedrock logo","bbox":[1567,685,96,96]}
+{"kind":"notes","id":"nt/6oi0pa","slide":2,"text":"The browser sends requests to Next.js API handlers. These handlers forward the session token to FastAPI. Routes authenticate the request and services handle the work. Chat Service loads saved conversation history and calls Bedrock. Tool requests run in Python business services, which use repositories to access SQLite. Responses return through Next.js. Some chat answers stream tokens, while tool-assisted and voice answers return completed text.\n\nSource files: Frontend/app/api/conversations/[id]/messages/stream/route.ts; backend/app/services/chat_service.py; backend/app/core/database.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/qoqpw6","slide":3,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/hsjado7y","slide":3,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/gra9kjqd","slide":3,"text":"Knowledge ingestion","textPreview":"Knowledge ingestion","textChars":19,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/3ulsfyp4","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/2tcrmt8j","slide":3,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/pw3ah87a","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/jyh83up0","slide":3,"text":"Upload the PDF","textPreview":"Upload the PDF","textChars":14,"textLines":1,"bbox":[85,496,440,80]}
+{"kind":"shape","id":"sh/ix8rap8f","slide":3,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/0nmdo3yh","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/e14vmtgr","slide":3,"text":"Store in S3","textPreview":"Store in S3","textChars":11,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/fmdcvyhw","slide":3,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/or6ds3yt","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/2p4vqtgn","slide":3,"text":"Extract the text","textPreview":"Extract the text","textChars":16,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/nqxwzyh8","slide":3,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/4v2dgji9","slide":3,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"shape","id":"sh/5wbupozu","slide":3,"bbox":[1567,685,96,96]}
+{"kind":"textbox","id":"sh/kfa14b61","slide":3,"text":"Split into chunks","textPreview":"Split into chunks","textChars":17,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/je1kv65g","slide":3,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/ydsj21ov","slide":3,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/8ju18b6x","slide":3,"text":"Create embeddings","textPreview":"Create embeddings","textChars":17,"textLines":1,"bbox":[740,806,440,80]}
+{"kind":"shape","id":"sh/7ilkz65s","slide":3,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/6hcj6lo7","slide":3,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/h83250nu","slide":3,"text":"Index in Qdrant","textPreview":"Index in Qdrant","textChars":15,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/g7ulcv69","slide":3,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/etoz6x4r","slide":3,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/fexgz2lc","slide":3,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/0f6h8nmx","slide":3,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/1gfy1s32","slide":3,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/nu9wr6tc","slide":3,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/xkbex0bu","slide":3,"name":"","alt":"next logo","bbox":[257,375,96,96]}
+{"kind":"image","id":"im/y5gvqtsr","slide":3,"name":"","alt":"s3 logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/a1wvm9sf","slide":3,"name":"","alt":"textract logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/qtcfu9wb","slide":3,"name":"","alt":"fastapi logo","bbox":[1567,685,96,96]}
+{"kind":"image","id":"im/exwfy9c7","slide":3,"name":"","alt":"bedrock logo","bbox":[912,685,96,96]}
+{"kind":"notes","id":"nt/qoqpw6","slide":3,"text":"The admin uploads a PDF. FastAPI stores it in S3 and creates knowledge and job records in SQLite. An in-process background task starts asynchronous Textract detection. FastAPI polls the job and retrieves all text pages. It joins the detected lines, splits the text into one-thousand-character chunks, invokes Titan embeddings through Bedrock, and saves vectors plus document metadata in Qdrant. Progress updates go to SQLite. There is no separate durable queue in this implementation.\n\nSource files: backend/app/services/knowledge_service.py; backend/app/services/embedding_service.py; backend/app/api/routes_knowledge.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/yh4edm","slide":4,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/65w3idsf","slide":4,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/7654bit0","slide":4,"text":"Knowledge retrieval","textPreview":"Knowledge retrieval","textChars":19,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/kjelg3ap","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/54nm98bu","slide":4,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/ihw3edsj","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/4fi5s7at","slide":4,"text":"Customer question","textPreview":"Customer question","textChars":17,"textLines":1,"bbox":[85,496,440,80]}
+{"kind":"shape","id":"sh/p0rmlcre","slide":4,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/h0r218b6","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/fy9kzit0","slide":4,"text":"Select a tool","textPreview":"Select a tool","textChars":13,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/ux0jqdcf","slide":4,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/twr2x8bu","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/7upkvyto","slide":4,"text":"Embed the query","textPreview":"Embed the query","textChars":15,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/6tgjmtcj","slide":4,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/dsb29sby","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/cr2l07at","slide":4,"text":"Search Qdrant","textPreview":"Search Qdrant","textChars":13,"textLines":1,"bbox":[1395,752,440,80]}
+{"kind":"shape","id":"sh/cva5wbip","slide":4,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/xwjm5gja","slide":4,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"shape","id":"sh/a9snu10z","slide":4,"bbox":[912,685,96,96]}
+{"kind":"textbox","id":"sh/o7alsrit","slide":4,"text":"Return the evidence","textPreview":"Return the evidence","textChars":19,"textLines":1,"bbox":[740,806,440,80]}
+{"kind":"shape","id":"sh/p8jm1wje","slide":4,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/2583q10n","slide":4,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/03qlorih","slide":4,"text":"Answer the customer","textPreview":"Answer the customer","textChars":19,"textLines":1,"bbox":[85,806,440,80]}
+{"kind":"shape","id":"sh/14zmxwj2","slide":4,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/3yx47ml4","slide":4,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ixoneh4j","slide":4,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/50z69w3u","slide":4,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4zq5grmp","slide":4,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/8zql4v2p","slide":4,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/ul836lkv","slide":4,"name":"","alt":"calldine logo","bbox":[257,375,96,96]}
+{"kind":"image","id":"im/3q9gre9c","slide":4,"name":"","alt":"bedrock logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/rutgfe9o","slide":4,"name":"","alt":"bedrock logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/cru54rm5","slide":4,"name":"","alt":"fastapi logo","bbox":[912,685,96,96]}
+{"kind":"image","id":"im/ona50rm9","slide":4,"name":"","alt":"bedrock logo","bbox":[257,685,96,96]}
+{"kind":"notes","id":"nt/yh4edm","slide":4,"text":"The assistant can search the restaurant documents when it needs a policy or another restaurant fact. Bedrock chooses the knowledge-search tool. FastAPI embeds the query with Titan, searches Qdrant and returns the top four text chunks as tool results. Bedrock then uses that evidence to produce an answer. Bedrock does not connect directly to Qdrant, and this project does not use managed Bedrock Knowledge Bases.\n\nSource files: backend/app/services/chat_tools.py; backend/app/services/knowledge_service.py; backend/app/services/embedding_service.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/7e97na","slide":5,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/e9s3itk3","slide":5,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/za1kbe1o","slide":5,"text":"AI reasoning and tool execution","textPreview":"AI reasoning and tool execution","textChars":31,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/ofalo32l","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/9gjmh8jq","slide":5,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/mds3mtkf","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/ne14fy10","slide":5,"text":"Conversation memory","textPreview":"Conversation memory","textChars":19,"textLines":1,"bbox":[85,442,440,80]}
+{"kind":"shape","id":"sh/4jqlcz21","slide":5,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/pkz2543m","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/kbm9cv29","slide":5,"text":"Planner request","textPreview":"Planner request","textChars":15,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/jad8jq1o","slide":5,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/y94rqlk3","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"shape","id":"sh/tgfqpkjq","slide":5,"bbox":[1567,375,96,96]}
+{"kind":"textbox","id":"sh/7ed8na10","slide":5,"text":"Controlled dispatch","textPreview":"Controlled dispatch","textChars":19,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/6d4re5kf","slide":5,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/h4fatkj2","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/gj69kf2h","slide":5,"text":"Business validation","textPreview":"Business validation","textChars":19,"textLines":1,"bbox":[1395,752,440,80]}
+{"kind":"shape","id":"sh/0zy1cnup","slide":5,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/10725sva","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/zypk3idk","slide":5,"text":"Tool results","textPreview":"Tool results","textChars":12,"textLines":1,"bbox":[740,806,440,80]}
+{"kind":"shape","id":"sh/onylg7u1","slide":5,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/9o729svm","slide":5,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/m1g3excv","slide":5,"text":"Final answer","textPreview":"Final answer","textChars":12,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/nmpk72dg","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4re143uh","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/psn2x8v2","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/7mt4j6xk","slide":5,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/6lkna1wf","slide":5,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/8jqp4369","slide":5,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/2h432pw3","slide":5,"name":"","alt":"bedrock logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/rmxkzexk","slide":5,"name":"","alt":"fastapi logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/xgz2tobu","slide":5,"name":"","alt":"bedrock logo","bbox":[912,685,96,96]}
+{"kind":"notes","id":"nt/7e97na","slide":5,"text":"The chat model is GPT-OSS 20B on Bedrock. The planner receives conversation history and eight tools. FastAPI dispatches tool selections to knowledge, menu, order or reservation services. Tool results return to Bedrock for the answer or a further tool round. The code allows up to four execution rounds. Guardrails are optional request configuration on chat calls. Their actual AWS policy configuration was not verified. Titan embedding calls do not use this chat guardrail helper.\n\nSource files: backend/app/services/chat_service.py; backend/app/services/chat_tools.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/e0cqt5","slide":6,"title":"CallDine","textShapes":12}
+{"kind":"textbox","id":"sh/jep0re1s","slide":6,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/idgji9k7","slide":6,"text":"The eight business tools","textPreview":"The eight business tools","textChars":24,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/t4rixoju","slide":6,"text":"Tool arguments describe the request. Services validate the operation.","textPreview":"Tool arguments describe the request. Services validate the operation.","textChars":69,"textLines":1,"bbox":[63,224,1760,75]}
+{"kind":"textbox","id":"sh/s3i1oj29","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"textbox","id":"sh/7290ve1o","slide":6,"text":"search-knowledge","textPreview":"search-knowledge","textChars":16,"textLines":1,"bbox":[65,330,650,48]}
+{"kind":"textbox","id":"sh/6hgjm9k3","slide":6,"text":"search-menu","textPreview":"search-menu","textChars":11,"textLines":1,"bbox":[65,403,650,48]}
+{"kind":"textbox","id":"sh/98nilkjq","slide":6,"text":"check-order-items","textPreview":"check-order-items","textChars":17,"textLines":1,"bbox":[65,476,650,48]}
+{"kind":"textbox","id":"sh/87ehcz25","slide":6,"text":"create-order-draft","textPreview":"create-order-draft","textChars":18,"textLines":1,"bbox":[65,549,650,48]}
+{"kind":"textbox","id":"sh/uhwb6h8n","slide":6,"text":"confirm-order","textPreview":"confirm-order","textChars":13,"textLines":1,"bbox":[65,622,650,48]}
+{"kind":"textbox","id":"sh/vi5cfm98","slide":6,"text":"check-table-availability","textPreview":"check-table-availability","textChars":24,"textLines":1,"bbox":[65,695,650,48]}
+{"kind":"textbox","id":"sh/w3et8rqd","slide":6,"text":"create-reservation-draft","textPreview":"create-reservation-draft","textChars":24,"textLines":1,"bbox":[65,768,650,48]}
+{"kind":"textbox","id":"sh/h47uhwry","slide":6,"text":"confirm-reservation","textPreview":"confirm-reservation","textChars":19,"textLines":1,"bbox":[65,841,650,48]}
+{"kind":"image","id":"im/9cve5o3q","slide":6,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"notes","id":"nt/e0cqt5","slide":6,"text":"There are eight tools. Knowledge and menu search retrieve current information. Order tools validate items, create a delivery draft and confirm it. Reservation tools check availability, create a draft and assign a table when confirming. The language model chooses tool arguments, while the service code performs business checks. The separate prototype MCP adapter exposes similar tools but is not the path used by the main Bedrock chat service.\nSource: backend/app/services/chat_tools.py; backend/app/mcp/server.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/uugbnu","slide":7,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/jq9cvehk","slide":7,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/ip0v290z","slide":7,"text":"Voice input and transcription","textPreview":"Voice input and transcription","textChars":29,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/tgbe1ozm","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/sf2d8ji1","slide":7,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/ru9czehg","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/9k7upkz2","slide":7,"text":"Create the session","textPreview":"Create the session","textChars":18,"textLines":1,"bbox":[85,496,440,80]}
+{"kind":"shape","id":"sh/8zydwzix","slide":7,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/idkb2dkf","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/3etsbi10","slide":7,"text":"Capture microphone","textPreview":"Capture microphone","textChars":18,"textLines":1,"bbox":[740,442,440,80]}
+{"kind":"shape","id":"sh/4f2t4n2l","slide":7,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/50vad8j6","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/q14b6d0r","slide":7,"text":"Detect a turn ending","textPreview":"Detect a turn ending","textChars":20,"textLines":1,"bbox":[1395,442,440,80]}
+{"kind":"shape","id":"sh/r2dsfi1c","slide":7,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/s3mt8nih","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/e54bax0n","slide":7,"text":"Upload the PCM turn","textPreview":"Upload the PCM turn","textChars":19,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/f6dsj218","slide":7,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/baxs72hg","slide":7,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/xcfa9cz6","slide":7,"text":"Transcribe the speech","textPreview":"Transcribe the speech","textChars":21,"textLines":1,"bbox":[740,806,440,80]}
+{"kind":"shape","id":"sh/cb6907y1","slide":7,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/n6ds3ih4","slide":7,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"shape","id":"sh/254rudgj","slide":7,"bbox":[257,685,96,96]}
+{"kind":"textbox","id":"sh/o769wnyp","slide":7,"text":"Submit the transcript","textPreview":"Submit the transcript","textChars":21,"textLines":1,"bbox":[85,806,440,80]}
+{"kind":"shape","id":"sh/f2dszih8","slide":7,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/eh4rqdgn","slide":7,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4nip0jel","slide":7,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/58b6tof6","slide":7,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/il07y9wf","slide":7,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/l0judorq","slide":7,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/72lcfy9g","slide":7,"name":"","alt":"chime logo","bbox":[257,375,96,96]}
+{"kind":"image","id":"im/ipkrmh0r","slide":7,"name":"","alt":"next logo","bbox":[1567,685,96,96]}
+{"kind":"image","id":"im/dk3uxkra","slide":7,"name":"","alt":"transcribe logo","bbox":[912,685,96,96]}
+{"kind":"image","id":"im/elcbq58v","slide":7,"name":"","alt":"fastapi logo","bbox":[257,685,96,96]}
+{"kind":"notes","id":"nt/uugbnu","slide":7,"text":"FastAPI creates the Chime session and a voice conversation. The browser joins the meeting with the Chime SDK, but it also captures microphone audio locally for the assistant. After roughly one point eight seconds of silence, the browser uploads the completed PCM utterance. FastAPI reads it and sends chunks through the Transcribe Streaming client. The final transcript returns to the browser, which submits it to the chat endpoint. This is turn-based input, not a continuous microphone stream to the backend.\n\nSource files: Frontend/components/voice/VoiceAssistant.tsx; backend/app/services/voice_service.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/aruaup","slide":8,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/t47upcfm","slide":8,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/83ytw7y1","slide":8,"text":"AI response and speech playback","textPreview":"AI response and speech playback","textChars":31,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/jy5sj2xk","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/yxwbqxgz","slide":8,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/l0nalsfq","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/balsfixo","slide":8,"text":"Reason and act","textPreview":"Reason and act","textChars":14,"textLines":1,"bbox":[85,496,440,80]}
+{"kind":"shape","id":"sh/a9cbmdg3","slide":8,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/wj2107e5","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"shape","id":"sh/hkbitcvq","slide":8,"bbox":[912,375,96,96]}
+{"kind":"textbox","id":"sh/vi90r2d0","slide":8,"text":"Clean the answer","textPreview":"Clean the answer","textChars":16,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/8fi1wne9","slide":8,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/9gripsvu","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/7e90n2do","slide":8,"text":"Request speech","textPreview":"Request speech","textChars":14,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/sbm18rud","slide":8,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/dcvi1wvy","slide":8,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/07i1srmh","slide":8,"text":"Synthesize with Polly","textPreview":"Synthesize with Polly","textChars":21,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/z690jm5c","slide":8,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/e5gjqh4r","slide":8,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/d47ihcn6","slide":8,"text":"Play the response","textPreview":"Play the response","textChars":17,"textLines":1,"bbox":[740,752,440,80]}
+{"kind":"shape","id":"sh/c3yho7ml","slide":8,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/r2p0f250","slide":8,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/q1gzmh4f","slide":8,"text":"Resume listening","textPreview":"Resume listening","textChars":16,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/p07idcnu","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4zyhk7mp","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/utc7y9gb","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/vulo7ehg","slide":8,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/wvup0jy1","slide":8,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/j2lwnils","slide":8,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/tsnets3u","slide":8,"name":"","alt":"bedrock logo","bbox":[257,375,96,96]}
+{"kind":"image","id":"im/hsrm9orm","slide":8,"name":"","alt":"fastapi logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/t4rm54rq","slide":8,"name":"","alt":"next logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/29w3ipcv","slide":8,"name":"","alt":"polly logo","bbox":[1567,685,96,96]}
+{"kind":"notes","id":"nt/aruaup","slide":8,"text":"The transcript follows the same chat and tool process as a text message. Voice responses are cleaned into natural speech. The browser posts the completed answer to the speech endpoint. FastAPI invokes Polly with the configured neural voice, then yields MP3 bytes back through the application. Browser playback streams the audio when supported, with a blob fallback. Listening resumes after playback. The frontend can end the call after detecting an order or reservation confirmation in the answer.\n\nSource files: backend/app/services/chat_service.py; backend/app/services/voice_service.py; Frontend/components/voice/VoiceAssistant.tsx\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/u8orxr","slide":9,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/fy183ix4","slide":9,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/exsrudwj","slide":9,"text":"Call recording and conversation history","textPreview":"Call recording and conversation history","textChars":39,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/twjq18fy","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/sva9s3ed","slide":9,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/7u18zyx8","slide":9,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/6tsrqtwn","slide":9,"text":"Mix both sides","textPreview":"Mix both sides","textChars":14,"textLines":1,"bbox":[85,442,440,80]}
+{"kind":"shape","id":"sh/5sjqxof2","slide":9,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/krqpo3eh","slide":9,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/i1cn2lon","slide":9,"text":"Record the call","textPreview":"Record the call","textChars":15,"textLines":1,"bbox":[740,442,440,80]}
+{"kind":"shape","id":"sh/32lovqp8","slide":9,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/43u54v6t","slide":9,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/uxsnylob","slide":9,"text":"Upload recording","textPreview":"Upload recording","textChars":16,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/vy1orqpw","slide":9,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/gza50b6h","slide":9,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/69snu18f","slide":9,"text":"Store audio in S3","textPreview":"Store audio in S3","textChars":17,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/7a1on6p0","slide":9,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/bexkv25s","slide":9,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/ado32x47","slide":9,"text":"Save the reference","textPreview":"Save the reference","textChars":18,"textLines":1,"bbox":[740,752,440,80]}
+{"kind":"shape","id":"sh/xgf2xcny","slide":9,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/cf6l47md","slide":9,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"shape","id":"sh/z2h4zm5o","slide":9,"bbox":[257,685,96,96]}
+{"kind":"textbox","id":"sh/l4zm1cnu","slide":9,"text":"Admin playback","textPreview":"Admin playback","textChars":14,"textLines":1,"bbox":[85,806,440,80]}
+{"kind":"shape","id":"sh/k3ql8rm9","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/f6dkni5k","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/el43udoz","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4fi98zyl","slide":9,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/5grqhkz6","slide":9,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/h076pc7a","slide":9,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/2hs7mh8b","slide":9,"name":"","alt":"next logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/qls7qh87","slide":9,"name":"","alt":"s3 logo","bbox":[1567,685,96,96]}
+{"kind":"image","id":"im/twf2loje","slide":9,"name":"","alt":"fastapi logo","bbox":[257,685,96,96]}
+{"kind":"notes","id":"nt/u8orxr","slide":9,"text":"The browser mixes microphone input and the assistant’s played audio using Web Audio. MediaRecorder captures the mixed stream in WebM format. On call completion, the recording uploads through Next.js and FastAPI to S3. The conversation row stores the S3 key. Text messages remain in SQLite. When an admin plays the recording, FastAPI serves the stored audio and supports range reads for playback.\n\nSource files: Frontend/components/voice/VoiceAssistant.tsx; backend/app/services/voice_service.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/0mvdoz","slide":10,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/p4rat0va","slide":10,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/o3it0vup","slide":10,"text":"Delivery order confirmation","textPreview":"Delivery order confirmation","textChars":27,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/fypsnqd8","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/exgbulwn","slide":10,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/107ap0ve","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/gzytwvet","slide":10,"text":"Find and validate","textPreview":"Find and validate","textChars":17,"textLines":1,"bbox":[85,442,440,80]}
+{"kind":"shape","id":"sh/ra5sj6dc","slide":10,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/69wbq1wr","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/c7ml4zm5","slide":10,"text":"Confirm the address","textPreview":"Confirm the address","textChars":19,"textLines":1,"bbox":[740,442,440,80]}
+{"kind":"shape","id":"sh/d8vmd43q","slide":10,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/q543294z","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"shape","id":"sh/b6dkbulk","slide":10,"bbox":[1567,375,96,96]}
+{"kind":"textbox","id":"sh/pkv2943e","slide":10,"text":"Create the draft","textPreview":"Create the draft","textChars":16,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/2h43ep43","slide":10,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/3idk7ulo","slide":10,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/8f6lcjmd","slide":10,"text":"Review the summary","textPreview":"Review the summary","textChars":18,"textLines":1,"bbox":[1395,752,440,80]}
+{"kind":"shape","id":"sh/9gzmlo3y","slide":10,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/hwv25ov2","slide":10,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/wvmlwjeh","slide":10,"text":"Confirm and recheck","textPreview":"Confirm and recheck","textChars":19,"textLines":1,"bbox":[740,752,440,80]}
+{"kind":"shape","id":"sh/vutk3edw","slide":10,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/utk3u9wb","slide":10,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/9sb214vq","slide":10,"text":"Save the order","textPreview":"Save the order","textChars":14,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/8r2lsjel","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/7qtkzed0","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/m5k3q9wf","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/l4b2x4vu","slide":10,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/k3iloze9","slide":10,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/jyxwnqxw","slide":10,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/j6tkvahs","slide":10,"name":"","alt":"fastapi logo","bbox":[1567,375,96,96]}
+{"kind":"notes","id":"nt/0mvdoz","slide":10,"text":"The order flow retrieves actual menu data and checks stock. The assistant collects and repeats the delivery address. A draft requires a confirmed-address flag. The assistant then repeats the order summary and asks for final approval. On confirmation, the service rechecks availability, reduces stock and updates the order. These flags come from model tool arguments. The source does not demonstrate an independent consent token or atomic, idempotent stock updates.\n\nSource files: backend/app/services/order_service.py; backend/app/services/chat_service.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/nawdcj","slide":11,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/kbep4fah","slide":11,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/lcnqxkr2","slide":11,"text":"Table reservation confirmation","textPreview":"Table reservation confirmation","textChars":30,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/alc7y5sf","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/bml8ratk","slide":11,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/wnup0fa5","slide":11,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/x83qtkrq","slide":11,"text":"Collect the details","textPreview":"Collect the details","textChars":19,"textLines":1,"bbox":[85,442,440,80]}
+{"kind":"shape","id":"sh/mhs7u5s3","slide":11,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/nil8nato","slide":11,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/bqlkfupo","slide":11,"text":"Check availability","textPreview":"Check availability","textChars":18,"textLines":1,"bbox":[740,442,440,80]}
+{"kind":"shape","id":"sh/qpc3mpo3","slide":11,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/dc32h47u","slide":11,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"shape","id":"sh/cruloz69","slide":11,"bbox":[1567,375,96,96]}
+{"kind":"textbox","id":"sh/ydc3q9oz","slide":11,"text":"Save a draft","textPreview":"Save a draft","textChars":12,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/lgn2l47q","slide":11,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/kfulsz65","slide":11,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/fi1k7apg","slide":11,"text":"Review the booking","textPreview":"Review the booking","textChars":18,"textLines":1,"bbox":[1395,752,440,80]}
+{"kind":"shape","id":"sh/eh8je5ov","slide":11,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/ip0f2xcv","slide":11,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"textbox","id":"sh/3q9wb2d0","slide":11,"text":"Recheck the tables","textPreview":"Recheck the tables","textChars":18,"textLines":1,"bbox":[740,752,440,80]}
+{"kind":"shape","id":"sh/4rix47ul","slide":11,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/5sredcv6","slide":11,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/ulgfyxcj","slide":11,"text":"Assign and confirm","textPreview":"Assign and confirm","textChars":18,"textLines":1,"bbox":[85,752,440,80]}
+{"kind":"shape","id":"sh/vm9w72d4","slide":11,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/gnix07up","slide":11,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/hore9cva","slide":11,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/6hgvudcn","slide":11,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/7ipw3id8","slide":11,"bbox":[0,0,0,0]}
+{"kind":"image","id":"im/e1ofyxw7","slide":11,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/cjix436t","slide":11,"name":"","alt":"fastapi logo","bbox":[1567,375,96,96]}
+{"kind":"notes","id":"nt/nawdcj","slide":11,"text":"The reservation service uses party size and two-hour booking windows to find suitable tables. It saves an unconfirmed draft from the collected details. The assistant asks the customer to approve the summary. On confirmation, the backend checks table availability again, assigns a suitable table and saves the confirmed state. The code does not establish race-free allocation under concurrent requests.\n\nSource files: backend/app/services/reservation_service.py\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/kbneq4","slide":12,"title":"CallDine","textShapes":17}
+{"kind":"textbox","id":"sh/m94fihwn","slide":12,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/7adwrmx8","slide":12,"text":"Planned SageMaker demand forecasting","textPreview":"Planned SageMaker demand forecasting","textChars":36,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/wz6xorep","slide":12,"text":"Planned feature","textPreview":"Planned feature","textChars":15,"textLines":1,"bbox":[63,224,1760,75]}
+{"kind":"textbox","id":"sh/h0fyxwfa","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"shape","id":"sh/uxofm1wj","slide":12,"bbox":[60,345,490,235]}
+{"kind":"textbox","id":"sh/vyxgvmx4","slide":12,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[85,365,75,48]}
+{"kind":"textbox","id":"sh/c3mxc7yl","slide":12,"text":"Prepare history","textPreview":"Prepare history","textChars":15,"textLines":1,"bbox":[85,442,440,80]}
+{"kind":"shape","id":"sh/x4velcf6","slide":12,"bbox":[715,345,490,235]}
+{"kind":"textbox","id":"sh/14nqhovi","slide":12,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[740,365,75,48]}
+{"kind":"textbox","id":"sh/f258fydc","slide":12,"text":"Create the dataset","textPreview":"Create the dataset","textChars":18,"textLines":1,"bbox":[740,496,440,80]}
+{"kind":"shape","id":"sh/ehc7mtwr","slide":12,"bbox":[1370,345,490,235]}
+{"kind":"textbox","id":"sh/p8nql8ve","slide":12,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1395,365,75,48]}
+{"kind":"textbox","id":"sh/n658jyd8","slide":12,"text":"Train and evaluate","textPreview":"Train and evaluate","textChars":18,"textLines":1,"bbox":[1395,496,440,80]}
+{"kind":"shape","id":"sh/25wrqtc3","slide":12,"bbox":[1370,655,490,235]}
+{"kind":"textbox","id":"sh/xc7qp8vq","slide":12,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1395,675,75,48]}
+{"kind":"textbox","id":"sh/wf6tsr21","slide":12,"text":"Run inference","textPreview":"Run inference","textChars":13,"textLines":1,"bbox":[1395,806,440,80]}
+{"kind":"shape","id":"sh/xgfalw3m","slide":12,"bbox":[715,655,490,235]}
+{"kind":"textbox","id":"sh/ad4bqhkb","slide":12,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[740,675,75,48]}
+{"kind":"shape","id":"sh/vexsjmlw","slide":12,"bbox":[912,685,96,96]}
+{"kind":"textbox","id":"sh/54fapw3y","slide":12,"text":"Apply business rules","textPreview":"Apply business rules","textChars":20,"textLines":1,"bbox":[740,806,440,80]}
+{"kind":"shape","id":"sh/ihobu1k7","slide":12,"bbox":[60,655,490,235]}
+{"kind":"textbox","id":"sh/jixsnmls","slide":12,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[85,675,75,48]}
+{"kind":"textbox","id":"sh/lovadc3e","slide":12,"text":"Show recommendations","textPreview":"Show recommendations","textChars":20,"textLines":1,"bbox":[85,806,440,80]}
+{"kind":"shape","id":"sh/321wja5w","slide":12,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/21svq54r","slide":12,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/p43elkn2","slide":12,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/o3adsfmh","slide":12,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/fy1wfq50","slide":12,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/udsvm54f","slide":12,"text":"Planned: live training and inference are not connected.","textPreview":"Planned: live training and inference are not connected.","textChars":55,"textLines":1,"bbox":[60,937,1750,65]}
+{"kind":"image","id":"im/0fi54f2p","slide":12,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/fut8z25w","slide":12,"name":"","alt":"s3 logo","bbox":[912,375,96,96]}
+{"kind":"image","id":"im/3yt83258","slide":12,"name":"","alt":"sagemaker logo","bbox":[1567,375,96,96]}
+{"kind":"image","id":"im/j29ori5o","slide":12,"name":"","alt":"sagemaker logo","bbox":[1567,685,96,96]}
+{"kind":"image","id":"im/z254vulk","slide":12,"name":"","alt":"fastapi logo","bbox":[912,685,96,96]}
+{"kind":"image","id":"im/jyp4rylo","slide":12,"name":"","alt":"next logo","bbox":[257,685,96,96]}
+{"kind":"notes","id":"nt/kbneq4","slide":12,"text":"The proposed forecasting feature is independent of the chat model. Historical category demand would become a time-series dataset in S3. SageMaker DeepAR would train on that data and produce a seven-day forecast with prediction quantiles. A backend endpoint and business rules would turn predictions into dashboard recommendations. The current code has only a SageMaker Runtime client helper and a static demo page. Training, inference and dashboard integration are not connected. Daily category forecasts alone cannot identify the busiest hourly service window.\n\nSource files: backend/app/aws/sagemaker_client.py; Frontend/app/(admin)/admin/recommendations/page.tsx\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}
+{"kind":"slide","id":"sl/fwn3y1","slide":13,"title":"CallDine","textShapes":15}
+{"kind":"textbox","id":"sh/ryt4j2h8","slide":13,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/qxknqx0n","slide":13,"text":"Implementation status","textPreview":"Implementation status","textChars":21,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/1ov6pcza","slide":13,"text":"The architecture distinguishes source-code integrations from planned work.","textPreview":"The architecture distinguishes source-code integrations from planned work.","textChars":74,"textLines":1,"bbox":[63,224,1760,75]}
+{"kind":"textbox","id":"sh/0nm5w7i5","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"textbox","id":"sh/fmdon2hk","slide":13,"text":"Implemented in source","textPreview":"Implemented in source","textChars":21,"textLines":1,"bbox":[65,335,520,60]}
+{"kind":"textbox","id":"sh/el4nuh0z","slide":13,"text":"Next.js, FastAPI, SQLite, Qdrant, Bedrock, Titan, S3, Textract, Chime, Transcribe and Polly.","textPreview":"Next.js, FastAPI, SQLite, Qdrant, Bedrock, Titan, S3, Textract, Chime, Transcribe and Polly.","textChars":92,"textLines":1,"bbox":[645,335,1185,94]}
+{"kind":"textbox","id":"sh/hsrmdsz6","slide":13,"text":"Optional configuration","textPreview":"Optional configuration","textChars":22,"textLines":1,"bbox":[65,451,520,60]}
+{"kind":"textbox","id":"sh/gri5knil","slide":13,"text":"Bedrock Guardrails on chat requests when an ID and version are supplied.","textPreview":"Bedrock Guardrails on chat requests when an ID and version are supplied.","textChars":72,"textLines":1,"bbox":[645,451,1185,94]}
+{"kind":"textbox","id":"sh/2hk7qdcv","slide":13,"text":"Planned feature","textPreview":"Planned feature","textChars":15,"textLines":1,"bbox":[65,567,520,60]}
+{"kind":"textbox","id":"sh/3idozid0","slide":13,"text":"SageMaker training and inference. The recommendations page uses demo values.","textPreview":"SageMaker training and inference. The recommendations page uses demo values.","textChars":76,"textLines":1,"bbox":[645,567,1185,94]}
+{"kind":"textbox","id":"sh/4jmpsnul","slide":13,"text":"Client helpers only","textPreview":"Client helpers only","textChars":19,"textLines":1,"bbox":[65,683,520,60]}
+{"kind":"textbox","id":"sh/pkv61sv6","slide":13,"text":"CloudWatch Logs and Secrets Manager. No connected application use found.","textPreview":"CloudWatch Logs and Secrets Manager. No connected application use found.","textChars":72,"textLines":1,"bbox":[645,683,1185,94]}
+{"kind":"textbox","id":"sh/ql47udcr","slide":13,"text":"Separate prototype","textPreview":"Separate prototype","textChars":18,"textLines":1,"bbox":[65,799,520,60]}
+{"kind":"textbox","id":"sh/bmdo3idc","slide":13,"text":"A stdio MCP adapter exposes services and uses a fixed demo user.","textPreview":"A stdio MCP adapter exposes services and uses a fixed demo user.","textChars":64,"textLines":1,"bbox":[645,799,1185,94]}
+{"kind":"textbox","id":"sh/c7mpwnux","slide":13,"text":"Source-code review only. Live AWS operation and production hosting were not verified.","textPreview":"Source-code review only. Live AWS operation and production hosting were not verified.","textChars":85,"textLines":1,"bbox":[65,955,1750,55]}
+{"kind":"image","id":"im/p0fap0nq","slide":13,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"notes","id":"nt/fwn3y1","slide":13,"text":"The code includes the main AI, knowledge and voice integrations, but this presentation does not claim live AWS tests were run. Guardrails depend on configuration. Forecasting remains planned. CloudWatch and Secrets Manager appear only as client factories with no connected usage found in the scanned application. The separate MCP prototype is not part of the main Bedrock tool path. Local runtime configuration does not establish an AWS production hosting design.\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css."}

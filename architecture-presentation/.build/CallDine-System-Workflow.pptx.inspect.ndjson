@@ -1,0 +1,85 @@
+{"kind":"deck","id":"pr/ofb58j","name":"Deck"}
+{"kind":"layout","layoutId":"0e94cc31-cffc-48f7-9f2c-bca8331ba68c","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"5970bedb-857e-42dc-80cc-0d4aa94b96d7","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/pdv7ir","slide":1,"title":"CallDine","textShapes":34}
+{"kind":"textbox","id":"sh/tsb6xgb2","slide":1,"text":"CallDine","textPreview":"CallDine","textChars":8,"textLines":1,"bbox":[125,47,260,48]}
+{"kind":"textbox","id":"sh/sr2pobuh","slide":1,"text":"Complete system architecture","textPreview":"Complete system architecture","textChars":28,"textLines":1,"bbox":[60,130,1760,90]}
+{"kind":"textbox","id":"sh/j2tormt0","slide":1,"text":"Numbered steps show the conversation. Arrows show requests and returned results.","textPreview":"Numbered steps show the conversation. Arrows show requests and returned results.","textChars":80,"textLines":1,"bbox":[63,224,1760,75]}
+{"kind":"textbox","id":"sh/i10ni1cf","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1790,1002,70,40]}
+{"kind":"textbox","id":"sh/4325krul","slide":1,"text":"APPLICATION RUNTIME","textPreview":"APPLICATION RUNTIME","textChars":19,"textLines":1,"bbox":[60,299,690,42]}
+{"kind":"textbox","id":"sh/3ydo3qt4","slide":1,"text":"AWS MANAGED SERVICES","textPreview":"AWS MANAGED SERVICES","textChars":20,"textLines":1,"bbox":[1320,292,540,42]}
+{"kind":"shape","id":"sh/2x47ulcj","slide":1,"bbox":[60,350,275,215]}
+{"kind":"textbox","id":"sh/lwra94rq","slide":1,"text":"Browser","textPreview":"Browser","textChars":7,"textLines":1,"bbox":[159,372,153,76]}
+{"kind":"textbox","id":"sh/ytgry9sz","slide":1,"text":"1. Speak or type\n7. Receive reply","textPreview":"1. Speak or type | 7. Receive reply","textChars":33,"textLines":2,"bbox":[83,460,229,100]}
+{"kind":"shape","id":"sh/zups7u9k","slide":1,"bbox":[385,350,290,215]}
+{"kind":"textbox","id":"sh/ds7a54ru","slide":1,"text":"Next.js","textPreview":"Next.js","textChars":7,"textLines":1,"bbox":[484,372,168,76]}
+{"kind":"textbox","id":"sh/qpgrups3","slide":1,"text":"Forward requests\nReturn text and audio","textPreview":"Forward requests | Return text and audio","textChars":38,"textLines":2,"bbox":[408,460,244,100]}
+{"kind":"shape","id":"sh/bqps3u9o","slide":1,"bbox":[755,350,390,215]}
+{"kind":"shape","id":"sh/o3e9sfax","slide":1,"bbox":[775,370,64,64]}
+{"kind":"textbox","id":"sh/5kfq5g36","slide":1,"text":"FastAPI","textPreview":"FastAPI","textChars":7,"textLines":1,"bbox":[854,372,268,76]}
+{"kind":"textbox","id":"sh/4j6pwb21","slide":1,"text":"2. Authenticate + route\n6. Return text or audio","textPreview":"2. Authenticate + route | 6. Return text or audio","textChars":47,"textLines":2,"bbox":[778,460,344,100]}
+{"kind":"shape","id":"sh/3ix836lg","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/iho7u1kv","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/hwfq1w3a","slide":1,"bbox":[755,620,390,135]}
+{"kind":"textbox","id":"sh/gv6psr2p","slide":1,"text":"4. Execute tools","textPreview":"4. Execute tools","textChars":16,"textLines":1,"bbox":[778,642,344,55]}
+{"kind":"textbox","id":"sh/vux8z6l4","slide":1,"text":"RAG, orders and reservations","textPreview":"RAG, orders and reservations","textChars":28,"textLines":1,"bbox":[778,691,344,59]}
+{"kind":"shape","id":"sh/uto7q1kj","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/1cjqd0je","slide":1,"bbox":[385,620,290,135]}
+{"kind":"textbox","id":"sh/zyt4721w","slide":1,"text":"Qdrant in Docker","textPreview":"Qdrant in Docker","textChars":16,"textLines":1,"bbox":[408,702,244,43]}
+{"kind":"shape","id":"sh/kz2507ih","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/l0b69sj2","slide":1,"bbox":[755,800,390,130]}
+{"kind":"textbox","id":"sh/at0nud0f","slide":1,"text":"Repositories","textPreview":"Repositories","textChars":12,"textLines":1,"bbox":[778,822,344,55]}
+{"kind":"textbox","id":"sh/but43i10","slide":1,"text":"5. Read / save records","textPreview":"5. Read / save records","textChars":22,"textLines":1,"bbox":[778,871,344,54]}
+{"kind":"shape","id":"sh/cv25wnil","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/xwbm5sj6","slide":1,"bbox":[385,800,290,130]}
+{"kind":"textbox","id":"sh/vqdofm14","slide":1,"text":"Operational records","textPreview":"Operational records","textChars":19,"textLines":1,"bbox":[408,882,244,42]}
+{"kind":"shape","id":"sh/fitkve5k","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ehkj294z","slide":1,"bbox":[60,620,275,190]}
+{"kind":"textbox","id":"sh/gj214jm5","slide":1,"text":"Chime SDK","textPreview":"Chime SDK","textChars":9,"textLines":1,"bbox":[159,642,153,76]}
+{"kind":"textbox","id":"sh/re90re5o","slide":1,"text":"Meeting media\nAPI session setup","textPreview":"Meeting media | API session setup","textChars":31,"textLines":2,"bbox":[83,730,229,75]}
+{"kind":"shape","id":"sh/6t0jy943","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/tgb2t4ne","slide":1,"bbox":[1320,345,540,105]}
+{"kind":"textbox","id":"sh/badk3yls","slide":1,"text":"Bedrock","textPreview":"Bedrock","textChars":7,"textLines":1,"bbox":[1419,367,418,55]}
+{"kind":"shape","id":"sh/qp4jat47","slide":1,"bbox":[1320,464,540,105]}
+{"kind":"textbox","id":"sh/9knqhwzy","slide":1,"text":"Amazon S3","textPreview":"Amazon S3","textChars":9,"textLines":1,"bbox":[1419,486,418,55]}
+{"kind":"shape","id":"sh/mhc761gn","slide":1,"bbox":[1320,583,540,105]}
+{"kind":"textbox","id":"sh/wnepcbyp","slide":1,"text":"Amazon Textract","textPreview":"Amazon Textract","textChars":15,"textLines":1,"bbox":[1419,605,418,55]}
+{"kind":"shape","id":"sh/xonqlgfa","slide":1,"bbox":[1320,702,540,105]}
+{"kind":"textbox","id":"sh/vm58j6x4","slide":1,"text":"Amazon Transcribe","textPreview":"Amazon Transcribe","textChars":17,"textLines":1,"bbox":[1419,724,418,55]}
+{"kind":"shape","id":"sh/kbypgvyl","slide":1,"bbox":[1320,821,540,105]}
+{"kind":"textbox","id":"sh/t83q9g7a","slide":1,"text":"Amazon Polly","textPreview":"Amazon Polly","textChars":12,"textLines":1,"bbox":[1419,843,418,55]}
+{"kind":"textbox","id":"sh/s7up0bqp","slide":1,"text":"3. Select tools / generate answer","textPreview":"3. Select tools / generate answer","textChars":33,"textLines":1,"bbox":[1419,407,419,37]}
+{"kind":"textbox","id":"sh/r6l876p4","slide":1,"text":"Store PDFs, images and recordings","textPreview":"Store PDFs, images and recordings","textChars":33,"textLines":1,"bbox":[1419,526,419,37]}
+{"kind":"textbox","id":"sh/65c7yl8z","slide":1,"text":"Extract text for the knowledge pipeline","textPreview":"Extract text for the knowledge pipeline","textChars":39,"textLines":1,"bbox":[1419,645,419,37]}
+{"kind":"textbox","id":"sh/1w3qd07m","slide":1,"text":"Convert uploaded speech into text","textPreview":"Convert uploaded speech into text","textChars":33,"textLines":1,"bbox":[1419,764,419,37]}
+{"kind":"textbox","id":"sh/gvup4vq1","slide":1,"text":"Convert the answer into speech","textPreview":"Convert the answer into speech","textChars":30,"textLines":1,"bbox":[1419,883,419,37]}
+{"kind":"shape","id":"sh/ful8bqpg","slide":1,"bbox":[1230,397,2,476]}
+{"kind":"shape","id":"sh/e9c72l8v","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/h0j61w72","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/wzapsrqh","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/m5on2xof","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/n6h4b250","slide":1,"bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/87q5476l","slide":1,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/u98n6hor","slide":1,"text":"Guardrails: optional","textPreview":"Guardrails: optional","textChars":20,"textLines":1,"bbox":[120,983,360,47]}
+{"kind":"textbox","id":"sh/wbq5876h","slide":1,"text":"SageMaker: planned","textPreview":"SageMaker: planned","textChars":18,"textLines":1,"bbox":[555,983,360,47]}
+{"kind":"textbox","id":"sh/qd43udo7","slide":1,"text":"CloudWatch: helper only","textPreview":"CloudWatch: helper only","textChars":23,"textLines":1,"bbox":[1015,983,440,47]}
+{"kind":"textbox","id":"sh/vmlwzi18","slide":1,"text":"Secrets: helper only","textPreview":"Secrets: helper only","textChars":20,"textLines":1,"bbox":[1540,983,340,47]}
+{"kind":"image","id":"im/vaxw3e18","slide":1,"name":"","alt":"calldine logo","bbox":[60,40,52,52]}
+{"kind":"image","id":"im/87md8j2h","slide":1,"name":"","alt":"aws logo","bbox":[1530,12,330,145]}
+{"kind":"image","id":"im/jup43yxg","slide":1,"name":"","alt":"calldine logo","bbox":[80,370,64,64]}
+{"kind":"image","id":"im/ry947ixc","slide":1,"name":"","alt":"next logo","bbox":[405,370,64,64]}
+{"kind":"image","id":"im/e10nixw3","slide":1,"name":"","alt":"fastapi logo","bbox":[775,370,64,64]}
+{"kind":"image","id":"im/7qx8b6ho","slide":1,"name":"","alt":"qdrant logo","bbox":[405,638,164,48]}
+{"kind":"image","id":"im/hkzahkj6","slide":1,"name":"","alt":"docker logo","bbox":[591,637,62,52]}
+{"kind":"image","id":"im/tcjap4jy","slide":1,"name":"","alt":"sqlite logo","bbox":[408,813,190,62]}
+{"kind":"image","id":"im/ydgzep03","slide":1,"name":"","alt":"chime logo","bbox":[80,640,64,64]}
+{"kind":"image","id":"im/ni90bu10","slide":1,"name":"","alt":"bedrock logo","bbox":[1340,365,58,58]}
+{"kind":"image","id":"im/rid47il4","slide":1,"name":"","alt":"s3 logo","bbox":[1340,484,58,58]}
+{"kind":"image","id":"im/s3mlgn2p","slide":1,"name":"","alt":"textract logo","bbox":[1340,603,58,58]}
+{"kind":"image","id":"im/5gv2583y","slide":1,"name":"","alt":"transcribe logo","bbox":[1340,722,58,58]}
+{"kind":"image","id":"im/29o3mxkr","slide":1,"name":"","alt":"polly logo","bbox":[1340,841,58,58]}
+{"kind":"image","id":"im/i1wzq9sf","slide":1,"name":"","alt":"bedrock logo","bbox":[60,975,48,48]}
+{"kind":"image","id":"im/s7y1wjax","slide":1,"name":"","alt":"sagemaker logo","bbox":[495,975,48,48]}
+{"kind":"image","id":"im/65gju9sr","slide":1,"name":"","alt":"cloudwatch logo","bbox":[955,975,48,48]}
+{"kind":"image","id":"im/8buhkzad","slide":1,"name":"","alt":"secrets logo","bbox":[1480,975,48,48]}
+{"kind":"notes","id":"nt/pdv7ir","slide":1,"text":"The browser uses the Next.js interface and server API proxy. FastAPI coordinates chat, voice, knowledge, orders and reservations. Controlled services call Bedrock, S3, Textract, Transcribe and Polly through AWS clients. Knowledge search uses Qdrant, while repositories access SQLite. The browser connects to Chime separately and FastAPI creates the session. Guardrails are optional chat configuration. SageMaker remains planned. CloudWatch and Secrets Manager have client factories only. Solid lines represent source-code paths, not verified live AWS operation. AWS hosting is not established.\nSource: CallDine repository scanned 12 September 2026. AWS icons: https://aws.amazon.com/architecture/icons/ . AWS logo: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png . Next.js logo: https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png . FastAPI icon: https://github.com/fastapi/fastapi/blob/master/docs/en/docs/img/icon-white.svg . CallDine logo: Frontend/components/ui/Logo.tsx. Brand colors: Frontend/app/globals.css. SQLite logo: https://sqlite.org/images/sqlite370_banner.gif . Qdrant logo: https://github.com/qdrant/qdrant/blob/master/docs/logo.svg . Docker logo: https://www.docker.com/company/newsroom/media-resources/ ."}
