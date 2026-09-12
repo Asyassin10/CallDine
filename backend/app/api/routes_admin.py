@@ -53,6 +53,8 @@ def call_audio(conversation_id: str, session: SessionDep, authorization: str | N
     if not call or not call.audio_key:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recording not found")
     audio, content_type, headers = voice_service.recording(call.audio_key, byte_range)
+    headers["Content-Disposition"] = 'inline; filename="call.webm"'
+    headers["Cache-Control"] = "private, no-store"
     return StreamingResponse(audio, status_code=206 if byte_range else 200, media_type=content_type, headers=headers)
 
 
