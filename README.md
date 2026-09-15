@@ -4,6 +4,12 @@
   <p>A demo restaurant assistant built with Python, Next.js and AWS.</p>
 </div>
 
+[![Watch the CallDine demo on YouTube](docs/images/demo-thumbnail.png)](https://www.youtube.com/watch?v=02UnSYEdlA8)
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=02UnSYEdlA8">▶ Watch the demo on YouTube</a>
+</p>
+
 ## The idea
 
 Restaurant staff often answer the same questions while taking orders and managing bookings. CallDine explores how an AI assistant can handle those conversations through chat or a browser voice call.
