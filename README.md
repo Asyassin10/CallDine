@@ -8,21 +8,16 @@ CallDine is a restaurant assistant with customer chat, delivery orders, table re
 - `backend/` — FastAPI and SQLite API on port `8000`.
 - Qdrant — Docker vector database for restaurant knowledge on port `6333`.
 
-The customer assistant uses Amazon Bedrock GPT-OSS for responses and Titan Text Embeddings V2 for knowledge search. PDFs are stored in S3, read by Textract, and indexed in Qdrant. CloudWatch monitors the AWS services. Polly is configured for the future voice-response path.
+The customer assistant uses Amazon Bedrock GPT-OSS for responses and Titan Text Embeddings V2 for knowledge search. PDFs are stored in S3, read by Textract, and indexed in Qdrant. Amazon Transcribe handles speech recognition, Chime SDK creates call sessions, and Polly generates voice responses.
 
 ## Start locally
 
 ```bash
+cp backend/.env.example backend/.env
+cp Frontend/.env.example Frontend/.env.local
+make install
 docker compose up -d
-cd backend
-venv\Scripts\uvicorn app.main:app --reload --port 8000
-```
-
-In another terminal:
-
-```bash
-cd Frontend
-npm run dev
+make dev
 ```
 
 Open `http://localhost:3000`.
@@ -38,11 +33,8 @@ Copy `backend/.env.example` to `backend/.env` and set AWS credentials, `AWS_REGI
 ## Checks
 
 ```bash
-cd backend
-venv\Scripts\python -m compileall app
-
-cd ..\Frontend
-npm run typecheck
-npm run lint
-npm run build
+backend/venv/bin/python -m pytest backend/tests -q
+npm --prefix Frontend run typecheck
+npm --prefix Frontend run lint
+npm --prefix Frontend run build
 ```

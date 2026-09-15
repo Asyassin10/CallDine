@@ -22,6 +22,14 @@ def list_confirmed(session: Session, user_id: int) -> list[Reservation]:
     return list(session.exec(select(Reservation).where(Reservation.user_id == user_id, Reservation.status == "confirmed").order_by(Reservation.date, Reservation.time)))
 
 
+def list_all_confirmed(session: Session) -> list[Reservation]:
+    return list(session.exec(select(Reservation).where(Reservation.status == "confirmed").order_by(Reservation.date, Reservation.time)))
+
+
+def get_by_id(session: Session, reservation_id: str) -> Reservation | None:
+    return session.get(Reservation, reservation_id)
+
+
 def confirmed_for_date(session: Session, date: str) -> list[Reservation]:
     return list(session.exec(select(Reservation).where(Reservation.date == date, Reservation.status == "confirmed")))
 

@@ -1,4 +1,3 @@
-import { PageHeader } from "@/components/ui/PageHeader";
 import styles from "./Recommendations.module.css";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -31,7 +30,6 @@ function ForecastChart() {
 
 export default function Recommendations() {
   return <div className="page">
-    
     <div className={styles.kpis}>
       <article><span>Expected orders</span><strong>1,295</strong><small>↑ 14% vs recent average</small></article>
       <article><span>Peak day</span><strong>Saturday</strong><small>236 predicted orders</small></article>

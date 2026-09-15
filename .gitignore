@@ -1,6 +1,7 @@
 # macOS
 .DS_Store
 AGENTS.md
+*.dmg
 
 # Frontend
 Frontend/node_modules/
@@ -18,6 +19,10 @@ backend/*.db
 backend/__pycache__/
 backend/**/__pycache__/
 backend/**/*.pyc
+**/.pytest_cache/
+
+# Generated presentation exports
+architecture-presentation/output/
 
 # Logs
 *.log

@@ -1,5 +1,6 @@
 from collections.abc import Iterator
-from datetime import date
+from datetime import date, datetime
+import json
 import re
 
 from sqlmodel import Session
@@ -9,12 +10,10 @@ from app.config import get_settings
 from app.models.conversation import Conversation
 from app.services.chat_tools import TOOL_CONFIG, run_tool
 from app.services import conversation_service
+from app.services.prompts import ROUTER_PROMPT, ANSWER_PROMPT, VOICE_PROMPT, BLOCKED_MESSAGE
 
 MODEL_ID = "openai.gpt-oss-20b-1:0"
-ROUTER_PROMPT = """You are the CallDine tool planner. Previous messages are the customer's memory: never ask again for information already provided. Ask for only one missing detail at a time and never guess. Use search-menu for current menu, price, availability, or stock; use search-knowledge for restaurant facts. For delivery, collect items and every quantity, then offer a drink exactly once before asking for a missing address. Skip the offer if the order already has a Boissons item or the customer already accepted or declined drinks. If the customer accepts without naming a drink, use search-menu with query Boissons. Collect the chosen drink and quantity, then continue with any missing address details. Repeat the complete address and ask if it is correct before create-order-draft. Then repeat items, quantities, address, and total before confirm-order. For reservations, collect date, time, guests, name, and phone; check availability; repeat the booking summary before confirm-reservation. Never call either confirmation tool without a clear customer yes, confirm, or equivalent. Choose all independent tools needed now, but do not answer the customer yourself."""
-ANSWER_PROMPT = """You are CallDine, a helpful restaurant assistant. Tool execution is already complete. Do not call any tool now: write the final customer-facing response only. Use the complete saved conversation as memory and tool results as the source of truth. Answer warmly and concisely. Ask only the next missing detail; never guess or repeat a detail the customer already gave. For delivery, after food items and quantities are known, offer a drink exactly once before asking for a missing address. Do not offer again when a Boissons item is already included or the customer previously accepted or declined. Collect any accepted drink and its quantity before continuing. Repeat the full address and ask the customer to confirm it before creating a draft. For a reservation, do not ask the customer to choose a table; the restaurant assigns a suitable table after confirmation. Before confirming an order or reservation, repeat the complete summary and ask for explicit approval."""
-VOICE_PROMPT = """This is a voice conversation. Customer-facing answers must be short, natural plain text. Never use Markdown, tables, headings, bullets, emojis, parentheses, or formatting symbols. Never say or display menu item IDs, order IDs, reservation IDs, table IDs, UUIDs, tool names, or database fields. IDs may be used only inside tool inputs. Describe menu results naturally using dish names and prices. When an order or reservation is confirmed, say that it is confirmed, thank the customer, say goodbye, and do not ask another question."""
-BLOCKED_MESSAGE = "I'm sorry, but I can't help with that request."
+TOOL_NAMES = {item["toolSpec"]["name"] for item in TOOL_CONFIG["tools"]}
 
 
 def guardrail_request() -> dict:
@@ -48,6 +47,33 @@ def tool_results(session: Session, user_id: int, message: dict) -> list[dict]:
     return results
 
 
+def normalize_tool_names(message: dict) -> dict:
+    for block in message["content"]:
+        if "toolUse" not in block:
+            continue
+        value = block["toolUse"]["name"].strip().replace("-", "_")
+        block["toolUse"]["name"] = next((name for name in TOOL_NAMES if name in value), re.sub(r"[^a-zA-Z0-9_-]", "_", value))
+    return message
+
+
+def pending_reservation_reply(completed_tools: list[dict]) -> str | None:
+    confirmed = any(item["name"] == "confirm_reservation" and item["result"].get("confirmed") is True for item in completed_tools)
+    draft = next((item["result"] for item in reversed(completed_tools) if item["name"] == "create_reservation_draft" and item["result"].get("reservation_id")), None)
+    if not draft or confirmed:
+        return None
+    time = datetime.strptime(draft["time"], "%H:%M").strftime("%I:%M %p").lstrip("0")
+    return f"I have a table for {draft['guests']} people on {draft['date']} at {time}, under {draft['customer_name']}. Please say confirm to book it."
+
+
+def pending_order_reply(completed_tools: list[dict]) -> str | None:
+    confirmed = any(item["name"] == "confirm_order" and item["result"].get("confirmed") is True for item in completed_tools)
+    draft = next((item["result"] for item in reversed(completed_tools) if item["name"] == "create_order_draft" and item["result"].get("order_id")), None)
+    if not draft or confirmed:
+        return None
+    items = ", ".join(f"{item['quantity']} {item['name']}" for item in draft["items"])
+    return f"I have {items} for delivery to {draft['delivery_address']}. The total is {draft['total']:.2f} euros. Please say confirm to place the order."
+
+
 def response_text(message: dict) -> str:
     return "".join(block.get("text", "") for block in message["content"])
 
@@ -76,6 +102,8 @@ def stream_reply(session: Session, user_id: int, conversation: Conversation, mes
     answer_prompt = f"{ANSWER_PROMPT}\n{VOICE_PROMPT}" if voice else ANSWER_PROMPT
     conversation_service.add_message(session, conversation, "user", message)
     messages = [{"role": item.role, "content": [{"text": item.content}]} for item in conversation_service.messages(session, conversation.id)]
+    conversation_messages = list(messages)
+    completed_tools = []
     choice = client.converse(
         modelId=MODEL_ID,
         system=[{"text": f"{router_prompt}\nToday's restaurant date is {date.today().isoformat()}. Interpret relative dates such as tomorrow from this date."}],
@@ -88,31 +116,31 @@ def stream_reply(session: Session, user_id: int, conversation: Conversation, mes
         yield answer
         conversation_service.add_message(session, conversation, "assistant", answer)
         return
-    if choice["stopReason"] != "tool_use":
-        answer = ""
-        for text in stream(client.converse_stream(
-            modelId=MODEL_ID, system=[{"text": answer_prompt}], messages=messages,
-            **guardrail_request(),
-        )):
-            answer += text
-            if not voice:
-                yield text
-        if voice:
-            answer = clean_for_speech(answer)
-            yield answer
-        conversation_service.add_message(session, conversation, "assistant", answer)
-        return
     for _ in range(4):
-        messages.extend([choice["output"]["message"], {"role": "user", "content": tool_results(session, user_id, choice["output"]["message"])}])
-        choice = client.converse(modelId=MODEL_ID, system=[{"text": answer_prompt}], messages=messages, toolConfig=TOOL_CONFIG, **guardrail_request())
+        if choice["stopReason"] != "tool_use":
+            break
+        planner_message = normalize_tool_names(choice["output"]["message"])
+        results = tool_results(session, user_id, planner_message)
+        tool_uses = [block["toolUse"] for block in planner_message["content"] if "toolUse" in block]
+        completed_tools.extend({"name": tool_use["name"], "result": result["toolResult"]["content"][0]["json"]} for tool_use, result in zip(tool_uses, results))
+        messages.extend([planner_message, {"role": "user", "content": results}])
+        choice = client.converse(modelId=MODEL_ID, system=[{"text": f"{router_prompt}\nToday's restaurant date is {date.today().isoformat()}."}], messages=messages, toolConfig=TOOL_CONFIG, **guardrail_request())
         if choice["stopReason"] == "guardrail_intervened":
             answer = guardrail_text(choice)
             yield answer
             conversation_service.add_message(session, conversation, "assistant", answer)
             return
-        if choice["stopReason"] != "tool_use":
-            break
-    answer = response_text(choice["output"]["message"])
+    answer = ""
+    for text in stream(client.converse_stream(
+        modelId=MODEL_ID,
+        system=[{"text": f"{answer_prompt}\nCompleted tool results: {json.dumps(completed_tools)}"}],
+        messages=conversation_messages,
+        **guardrail_request(),
+    )):
+        answer += text
+    if not answer.strip():
+        answer = "I'm sorry, I couldn't complete that request. Please try again."
+    answer = pending_reservation_reply(completed_tools) or pending_order_reply(completed_tools) or answer
     if voice:
         answer = clean_for_speech(answer)
     yield answer

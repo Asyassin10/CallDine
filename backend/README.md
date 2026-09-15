@@ -5,7 +5,8 @@ FastAPI API for authentication, menu management, knowledge uploads, customer con
 ## Run
 
 ```bash
-venv\Scripts\uvicorn app.main:app --reload --port 8000
+source venv/bin/activate
+uvicorn app.main:app --reload --port 8000
 ```
 
 SQLite data is stored in `calldine.db`. Startup creates tables, adds the menu stock column when needed, and seeds the restaurant tables.
@@ -17,10 +18,11 @@ SQLite data is stored in `calldine.db`. Startup creates tables, adds the menu st
 - S3 — private knowledge PDF storage.
 - Textract — PDF text extraction.
 - Qdrant — vector search, started with Docker Compose from the repository root.
-- Polly — configured client for the voice-response path.
-- CloudWatch — dashboard and logs configuration.
+- Amazon Transcribe — converts customer speech to text.
+- Amazon Chime SDK — creates voice call meetings.
+- Amazon Polly — converts assistant responses to speech.
 
-Transcribe, Chime, Secrets Manager, and SageMaker clients are configuration-only until a feature uses them.
+SageMaker demand forecasting is presented as a planned feature and is not connected yet.
 
 ## Conversation tools
 

@@ -15,6 +15,10 @@ def get_order(session: Session, order_id: str, user_id: int) -> Order | None:
     return session.exec(select(Order).where(Order.id == order_id, Order.user_id == user_id)).first()
 
 
+def get_order_with_customer(session: Session, order_id: str):
+    return session.exec(select(Order, User.name).join(User, User.id == Order.user_id).where(Order.id == order_id)).first()
+
+
 def latest_draft(session: Session, user_id: int) -> Order | None:
     return session.exec(select(Order).where(Order.user_id == user_id, Order.status == "draft").order_by(Order.created_at.desc())).first()
 

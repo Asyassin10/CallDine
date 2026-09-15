@@ -25,5 +25,3 @@ The session token is stored in an HTTP-only cookie. The FastAPI backend must be 
 - `npm run lint` — ESLint
 - `npm run typecheck` — TypeScript validation
 - `npm run build` — production build
-
-The original Design Canvas prototypes are preserved in `legacy/` and are not used by the Next.js application.

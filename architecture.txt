@@ -54,34 +54,39 @@ How the knowledge is used
 3. DETAILED WORKFLOW — COMPLETE VOICE CONVERSATION
 
 Chime setup
-“FastAPI creates a Chime meeting and attendee, and the browser joins through the Chime SDK. The assistant’s speech-processing workflow captures microphone turns separately.”
+“FastAPI creates the meeting and attendee. The browser joins using the Amazon Chime SDK. The assistant captures microphone turns separately for speech processing.”
 
 Step 1 — Customer speaks
-“The customer speaks into the microphone. The browser finishes capturing the turn after a short silence.”
+“The browser captures the customer’s speech. After a short silence, it uploads the audio through Next.js to FastAPI.”
 
-Step 2 — Upload audio
-“The browser sends the completed audio turn through Next.js to FastAPI.”
+Step 2 — Amazon Transcribe
+“FastAPI sends the audio to Amazon Transcribe Streaming, which converts the speech into text.”
 
-Step 3 — Convert speech to text
-“FastAPI uses Amazon Transcribe Streaming to convert the audio into text.”
+Step 3 — Transcript to FastAPI
+“The transcript returns to the browser, which sends it to the FastAPI chat service with the conversation context.”
 
-Step 4 — Send the transcript to chat
-“The transcript returns to the browser, which sends it to the chat service.”
+Step 4 — Guardrails input check
+“When configured, Amazon Bedrock Guardrails checks the input text as part of the Bedrock request. Its policies can filter prompt attacks, harmful content, and blocked words.”
 
-Step 5 — Bedrock and tools
-“Bedrock processes the conversation and can request tools. FastAPI runs those tools to retrieve information or perform restaurant operations.”
+Step 5 — Bedrock LLM
+“Allowed input reaches our language model in Amazon Bedrock. The model uses the conversation context and selects tools when it needs information or an action.”
 
-Step 6 — Return the answer
-“The backend returns the answer, and the browser requests a spoken version.”
+Step 6 — FastAPI runs tools
+“FastAPI executes the selected tools, such as knowledge search, menu search, orders, or reservations. It returns the results to the model. If no tool is needed, the model can answer directly.”
 
-Step 7 — Generate speech with Polly
-“Amazon Polly converts the answer into MP3 audio.”
+Step 7 — Answer and Guardrails
+“Bedrock generates the response from the conversation and tool results. The configured Guardrails policy can also check the response text. If the policy intervenes, the application returns a blocked response.”
 
-Step 8 — Play the response
-“The browser plays the response and then resumes listening for the customer.”
+Step 8 — Polly and playback
+“The browser requests speech for the returned text. FastAPI calls Amazon Polly, and the browser plays the MP3 response before listening again.”
 
-Voice clarification
-“This conversation works one turn at a time. Chime media does not feed directly into Transcribe in the current implementation.”
+Implementation clarification
+“Guardrails is part of the Bedrock requests in this project. It is shown before and after the model to explain the checks, but FastAPI does not make a separate Guardrails call. The policy is optional, and its deployed settings have not been verified.”
+
+Presenter reference
+Guardrails does not evaluate tool definitions, tool-call arguments, or tool-result fields in the Converse API. FastAPI services perform the business validation. Chime meeting media is separate from the microphone-turn uploads to Transcribe.
+Source: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-use-converse-api.html
+Code: backend/app/services/chat_service.py; backend/app/services/voice_service.py; Frontend/components/voice/VoiceAssistant.tsx
 
 
 4. DETAILED WORKFLOW — AI TOOLS AND GUARDRAILS
@@ -139,32 +144,6 @@ Step 5 — Apply business rules
 
 Step 6 — Display results
 “The admin dashboard would show the forecasts and recommendations to the restaurant team.”
-
-6. DETAILED WORKFLOW — BEDROCK GUARDRAILS
-
-Introduction
-“This fifth workflow shows how optional Bedrock Guardrails fits into both text and voice conversations.”
-
-Step 1 — Receive the message
-“FastAPI receives the customer’s chat message or transcribed speech and prepares the conversation.”
-
-Step 2 — Attach the configured policy
-“When a Guardrails policy is configured, FastAPI attaches its identifier and version to the Bedrock chat request.”
-
-Policy filters
-“The policy can filter prompt-injection or jailbreak attempts, harmful or toxic content, and blocked words. Its coverage depends on the settings in AWS.”
-
-Step 3A — Continue an allowed request
-“If the policy allows the request, Bedrock and the backend tools continue the normal conversation workflow.”
-
-Step 3B — Handle an intervention
-“If the policy intervenes, the application handles the blocked response.”
-
-Step 4 — Return the response
-“The response returns as text. In a voice conversation, the browser requests speech from Polly and plays the audio.”
-
-Configuration note
-“Guardrails is optional in this application. The deployed AWS policy has not been verified.”
 
 Closing
 “Together, these workflows show how CallDine combines restaurant knowledge, conversational AI, voice services, and business tools, with forecasting planned as a future addition.”

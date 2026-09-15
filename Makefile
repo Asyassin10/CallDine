@@ -1,4 +1,4 @@
-.PHONY: backend frontend dev install clean
+.PHONY: backend frontend dev install clean reset-demo
 
 # Start the FastAPI backend with hot reload on http://localhost:8000.
 backend:
@@ -28,3 +28,7 @@ install:
 clean:
 	rm -rf backend/venv Frontend/node_modules
 	find backend -type d -name __pycache__ -prune -exec rm -rf {} +
+
+# Remove only demo orders and reservations; users, menu items, and tables stay.
+reset-demo:
+	cd backend && . venv/bin/activate && python reset_demo_data.py

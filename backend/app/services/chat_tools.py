@@ -12,32 +12,32 @@ def tool(name: str, description: str, properties: dict, required: list[str] = []
 ITEMS = {"items": {"type": "array", "items": {"type": "object", "properties": {"menu_item_id": {"type": "integer"}, "quantity": {"type": "integer"}}, "required": ["menu_item_id", "quantity"]}}}
 
 TOOL_CONFIG = {"tools": [
-    tool("search-knowledge", "Search restaurant PDFs for hours, location, policies, FAQs, and general details.", {"query": {"type": "string"}}, ["query"]),
-    tool("search-menu", "Find menu items by name or category, including price and availability.", {"query": {"type": "string"}}, ["query"]),
-    tool("check-order-items", "Validate item quantities, current availability, stock, and subtotal before creating an order.", ITEMS, ["items"]),
-    tool("create-order-draft", "Create an unconfirmed delivery order draft only after the customer confirms the repeated delivery address.", {**ITEMS, "delivery_address": {"type": "string"}, "address_confirmed": {"type": "boolean"}}, ["items", "delivery_address", "address_confirmed"]),
-    tool("confirm-order", "Confirm the customer's latest delivery draft after clear approval. The order ID is optional and must never be shown to the customer.", {"order_id": {"type": "string"}, "confirmed": {"type": "boolean"}}, ["confirmed"]),
-    tool("check-table-availability", "Check tables that can seat a party at a requested date and time.", {"date": {"type": "string"}, "time": {"type": "string"}, "guests": {"type": "integer"}}, ["date", "time", "guests"]),
-    tool("create-reservation-draft", "Create an unconfirmed reservation draft after collecting date, time, guest count, name, and phone.", {"date": {"type": "string"}, "time": {"type": "string"}, "guests": {"type": "integer"}, "customer_name": {"type": "string"}, "phone": {"type": "string"}}, ["date", "time", "guests", "customer_name", "phone"]),
-    tool("confirm-reservation", "Confirm the customer's latest reservation draft after clear approval. The reservation ID is optional and must never be shown to the customer.", {"reservation_id": {"type": "string"}, "confirmed": {"type": "boolean"}}, ["confirmed"]),
+    tool("search_knowledge", "Search restaurant PDFs for hours, location, policies, FAQs, and general details.", {"query": {"type": "string"}}, ["query"]),
+    tool("search_menu", "Find available menu items by name or category, including price and availability. For a general question such as 'what do you have?', send query 'menu'.", {"query": {"type": "string"}}, ["query"]),
+    tool("check_order_items", "Validate item quantities, current availability, stock, and subtotal before creating an order.", ITEMS, ["items"]),
+    tool("create_order_draft", "Create an unconfirmed delivery order draft only after the customer confirms the repeated delivery address.", {**ITEMS, "delivery_address": {"type": "string"}, "address_confirmed": {"type": "boolean"}}, ["items", "delivery_address", "address_confirmed"]),
+    tool("confirm_order", "Confirm the customer's latest delivery draft after clear approval. The order ID is optional and must never be shown to the customer.", {"order_id": {"type": "string"}, "confirmed": {"type": "boolean"}}, ["confirmed"]),
+    tool("check_table_availability", "Check tables that can seat a party at a requested date and time.", {"date": {"type": "string"}, "time": {"type": "string"}, "guests": {"type": "integer"}}, ["date", "time", "guests"]),
+    tool("create_reservation_draft", "Create an unconfirmed reservation draft after collecting date, time, guest count, name, and phone.", {"date": {"type": "string"}, "time": {"type": "string"}, "guests": {"type": "integer"}, "customer_name": {"type": "string"}, "phone": {"type": "string"}}, ["date", "time", "guests", "customer_name", "phone"]),
+    tool("confirm_reservation", "Confirm the customer's latest reservation draft after clear approval. The reservation ID is optional and must never be shown to the customer.", {"reservation_id": {"type": "string"}, "confirmed": {"type": "boolean"}}, ["confirmed"]),
 ]}
 
 
 def run_tool(session: Session, user_id: int, name: str, values: dict) -> dict:
-    if name == "search-knowledge":
+    if name == "search_knowledge":
         return {"chunks": knowledge_service.search(values["query"])}
-    if name == "search-menu":
+    if name == "search_menu":
         return {"items": [item.model_dump() for item in menu_service.search_menu(session, values["query"])]}
-    if name == "check-order-items":
+    if name == "check_order_items":
         return order_service.check_items(session, values["items"])
-    if name == "create-order-draft":
+    if name == "create_order_draft":
         return order_service.create_draft(session, user_id, values["items"], values["delivery_address"], values["address_confirmed"])
-    if name == "confirm-order":
+    if name == "confirm_order":
         return order_service.confirm(session, user_id, values.get("order_id"), values["confirmed"])
-    if name == "check-table-availability":
+    if name == "check_table_availability":
         return reservation_service.check(session, values.get("date", ""), values.get("time", ""), values.get("guests", 0))
-    if name == "create-reservation-draft":
+    if name == "create_reservation_draft":
         return reservation_service.create_draft(session, user_id, values)
-    if name == "confirm-reservation":
+    if name == "confirm_reservation":
         return reservation_service.confirm(session, user_id, values.get("reservation_id"), values["confirmed"])
     return {"error": "Unknown tool"}

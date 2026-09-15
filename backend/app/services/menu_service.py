@@ -44,6 +44,8 @@ DRINKS = [
 ]
 FEATURED_ITEMS = {
     "Main courses": [
+        ("Classic Hamburger", 10.0, "Grilled beef hamburger with lettuce, tomato, onion, and house sauce.", "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"),
+        ("Margherita Pizza", 10.0, "Stone-baked pizza with tomato sauce, mozzarella, basil, and olive oil.", "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"),
         ("Herb-Roasted Chicken", 23.5, "Tender roasted chicken with garden herbs and a savory pan sauce.", "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80"),
         ("Grilled Beef Tenderloin", 28.0, "Juicy grilled beef served with seasonal vegetables and rich jus.", "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"),
         ("Moroccan Lamb Tagine", 25.5, "Slow-cooked lamb with warm spices, apricots, and toasted almonds.", "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80"),
@@ -96,7 +98,9 @@ def list_menu(session: Session) -> list[MenuItemResponse]:
 
 
 def search_menu(session: Session, query: str) -> list[MenuItemResponse]:
-    return [to_response(item, category) for item, category in menu_repository.search(session, query)]
+    general_questions = {"", "all", "available", "food", "menu", "what do you have", "what do you serve"}
+    items = menu_repository.list_all(session) if query.strip().lower() in general_questions else menu_repository.search(session, query)
+    return [to_response(item, category) for item, category in items if item.available]
 
 
 def list_categories(session: Session) -> list[Category]:

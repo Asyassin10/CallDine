@@ -1,30 +1,4 @@
-import type { CallRecord, Customer, MenuItem, Order, Reservation } from "./types";
-
-export const orders: Order[] = [
-  { id:"1832", customer:"Customer #182", source:"Voice", status:"Preparing", total:38.5, placed:"30 Aug 2026 · 19:42", items:2 },
-  { id:"1831", customer:"Lena Fischer", source:"Website", status:"Ready", total:24, placed:"30 Aug 2026 · 19:28", items:1 },
-  { id:"1830", customer:"Customer #164", source:"Chat", status:"Confirmed", total:52.2, placed:"30 Aug 2026 · 19:15", items:4 },
-  { id:"1829", customer:"Tomas Reiter", source:"Voice", status:"Pending", total:19, placed:"30 Aug 2026 · 19:07", items:1 },
-  { id:"1828", customer:"Mara Ansel", source:"Voice", status:"Completed", total:47, placed:"30 Aug 2026 · 18:52", items:3 },
-  { id:"1827", customer:"Customer #151", source:"Website", status:"Completed", total:31.4, placed:"30 Aug 2026 · 18:33", items:2 },
-  { id:"1826", customer:"Jonas Weber", source:"Chat", status:"Cancelled", total:22, placed:"30 Aug 2026 · 18:11", items:1 },
-];
-
-export const reservations: Reservation[] = [
-  { id:"442", guest:"Lena Fischer", when:"30 Aug 2026 · 20:30", guests:4, table:"T7 · window", status:"Confirmed" },
-  { id:"441", guest:"Customer #164", when:"30 Aug 2026 · 21:00", guests:2, table:"T3", status:"Confirmed" },
-  { id:"440", guest:"Mara Ansel", when:"30 Aug 2026 · 20:30", guests:4, table:"T7 · window", status:"Seated" },
-  { id:"439", guest:"Tomas Reiter", when:"31 Aug 2026 · 19:00", guests:6, table:"T12 · terrace", status:"Confirmed" },
-];
-
-export const calls: CallRecord[] = [
-  { id:"8291", customer:"Customer #182", date:"Today 19:38", duration:"04:21", intent:"Food Order", result:"Successful", order:"1832" },
-  { id:"8290", customer:"Lena Fischer", date:"Today 19:12", duration:"02:48", intent:"Table Reservation", result:"Successful", reservation:"442" },
-  { id:"8289", customer:"Customer #164", date:"Today 18:57", duration:"05:03", intent:"Food Order", result:"Successful", order:"1830" },
-  { id:"8288", customer:"Tomas Reiter", date:"Today 18:40", duration:"01:12", intent:"Menu Question", result:"Successful" },
-  { id:"8287", customer:"Customer #151", date:"Today 18:22", duration:"03:35", intent:"Order Status", result:"Successful" },
-  { id:"8286", customer:"Jonas Weber", date:"Today 17:58", duration:"00:46", intent:"Food Order", result:"Failed" },
-];
+import type { Customer, MenuItem } from "./types";
 
 export const customers: Customer[] = [
   { id:"182", name:"Mara Ansel", orders:24, reservations:6, spent:1148, lastActivity:"Today 19:38" },

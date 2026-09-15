@@ -4,7 +4,7 @@ from fastapi.responses import StreamingResponse
 from app.api.deps import SessionDep
 from app.api.routes_auth import bearer_token
 from app.schemas.voice_schema import SpeechRequest, VoiceSessionResponse
-from app.services import auth_service, voice_service
+from app.services import auth_service, conversation_service, voice_service
 
 router = APIRouter(prefix="/api/v1/voice", tags=["voice"])
 

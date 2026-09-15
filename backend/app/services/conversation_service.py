@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 from sqlmodel import Session
 
@@ -37,6 +37,6 @@ def voice_call(session: Session, conversation_id: str) -> Conversation | None:
 def add_message(session: Session, conversation: Conversation, role: str, content: str) -> ChatMessage:
     if conversation.title == "New conversation" and role == "user":
         conversation.title = content[:48]
-    conversation.updated_at = datetime.utcnow()
+    conversation.updated_at = datetime.now(UTC)
     conversation_repository.save_conversation(session, conversation)
     return conversation_repository.save_message(session, ChatMessage(conversation_id=conversation.id, role=role, content=content))

@@ -4,11 +4,11 @@ from fastapi.responses import StreamingResponse
 from app.api.deps import SessionDep
 from app.api.routes_auth import bearer_token
 from app.models.user import UserRole
-from app.schemas.customer_schema import AdminOrderResponse
+from app.schemas.customer_schema import AdminOrderDetail, AdminOrderResponse, CustomerReservationDetail
 from app.schemas.dashboard_schema import DashboardResponse
 from app.schemas.chat_schema import ChatMessageResponse
 from app.schemas.voice_schema import AdminVoiceCallResponse, VoiceSettingsRequest, VoiceSettingsResponse
-from app.services import auth_service, conversation_service, dashboard_service, order_service, voice_settings_service, voice_service
+from app.services import auth_service, conversation_service, dashboard_service, order_service, reservation_service, voice_settings_service, voice_service
 
 router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
 
@@ -24,6 +24,30 @@ def admin(session: SessionDep, authorization: str | None):
 def orders(session: SessionDep, authorization: str | None = Header(default=None)):
     admin(session, authorization)
     return order_service.list_all_confirmed(session)
+
+
+@router.get("/orders/{order_id}", response_model=AdminOrderDetail)
+def order_detail(order_id: str, session: SessionDep, authorization: str | None = Header(default=None)):
+    admin(session, authorization)
+    order = order_service.admin_details(session, order_id)
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return order
+
+
+@router.get("/reservations", response_model=list[CustomerReservationDetail])
+def reservations(session: SessionDep, authorization: str | None = Header(default=None)):
+    admin(session, authorization)
+    return reservation_service.list_all_confirmed(session)
+
+
+@router.get("/reservations/{reservation_id}", response_model=CustomerReservationDetail)
+def reservation_detail(reservation_id: str, session: SessionDep, authorization: str | None = Header(default=None)):
+    admin(session, authorization)
+    reservation = reservation_service.admin_details(session, reservation_id)
+    if not reservation:
+        raise HTTPException(status_code=404, detail="Reservation not found")
+    return reservation
 
 
 @router.get("/dashboard", response_model=DashboardResponse)

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from uuid import uuid4
 
 from sqlmodel import Field, SQLModel
@@ -12,7 +12,7 @@ class Order(SQLModel, table=True):
     status: str = "draft"
     subtotal: float = 0
     total: float = 0
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class OrderItem(SQLModel, table=True):

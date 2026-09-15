@@ -28,7 +28,9 @@ def create_draft(session: Session, user_id: int, items: list[dict], delivery_add
 
 def confirm(session: Session, user_id: int, order_id: str | None, confirmed: bool) -> dict:
     order = order_repository.get_order(session, order_id, user_id) if order_id else order_repository.latest_draft(session, user_id)
-    if not order or not confirmed:
+    if not order:
+        return {"confirmed": False, "message": "No order draft exists. Create the order draft first."}
+    if order.status != "draft" or not confirmed:
         return {"confirmed": False}
     items = order_repository.list_items(session, order.id)
     checked = check_items(session, [{"menu_item_id": item.menu_item_id, "quantity": item.quantity} for item in items])
@@ -47,8 +49,23 @@ def list_confirmed(session: Session, user_id: int) -> list[Order]:
     return order_repository.list_confirmed(session, user_id)
 
 
+def details(session: Session, user_id: int, order_id: str) -> dict | None:
+    order = order_repository.get_order(session, order_id, user_id)
+    if not order or order.status == "draft":
+        return None
+    return {**order.model_dump(), "items": order_repository.list_items(session, order.id)}
+
+
 def list_all_confirmed(session: Session):
     return [
         {"id": order.id, "customer_name": customer_name, "delivery_address": order.delivery_address, "status": order.status, "total": order.total, "created_at": order.created_at}
         for order, customer_name in order_repository.list_all_confirmed(session)
     ]
+
+
+def admin_details(session: Session, order_id: str) -> dict | None:
+    result = order_repository.get_order_with_customer(session, order_id)
+    if not result:
+        return None
+    order, customer_name = result
+    return {**order.model_dump(), "customer_name": customer_name, "items": order_repository.list_items(session, order.id)}

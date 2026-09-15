@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from uuid import uuid4
 
 from sqlmodel import Field, SQLModel
@@ -20,4 +20,4 @@ class Reservation(SQLModel, table=True):
     guests: int
     table_code: str | None = None
     status: str = "draft"
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
