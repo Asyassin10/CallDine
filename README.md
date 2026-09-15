@@ -7,7 +7,7 @@
 [![Watch the CallDine demo on YouTube](docs/images/demo-thumbnail.png)](https://www.youtube.com/watch?v=02UnSYEdlA8)
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=02UnSYEdlA8">▶ Watch the demo on YouTube</a>
+  <a href="https://www.youtube.com/watch?v=02UnSYEdlA8"><img src="docs/images/youtube.svg" alt="YouTube" width="24" height="24" align="absmiddle" /> Watch the demo on YouTube</a>
 </p>
 
 ## The idea
