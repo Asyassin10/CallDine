@@ -16,7 +16,7 @@ A customer can ask about the menu, order food for delivery or reserve a table. T
 | --- | --- |
 | Web application | Next.js, React, TypeScript |
 | API and application data | FastAPI, SQLModel, SQLite |
-| AI and knowledge search | Amazon Bedrock, Titan Text Embeddings V2, Qdrant |
+| AI and knowledge search | Amazon Bedrock (OpenAI GPT-OSS 20B), Titan Text Embeddings V2, Qdrant |
 | Voice | Amazon Chime SDK, Transcribe, Polly |
 | Documents and storage | Amazon S3, Textract |
 | Content filtering | Amazon Bedrock Guardrails, optional |
