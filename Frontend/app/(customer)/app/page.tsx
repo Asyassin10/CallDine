@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { Card } from "@/components/ui/Card";
+import { PageHeader } from "@/components/ui/PageHeader";
+export default function CustomerHome(){return <div className="page"><PageHeader eyebrow="Guest app" title="Good evening, Yassine" sub="Osteria Vento is taking calls until 23:00."><Link className="button" href="/app/reservations">Book a table</Link><Link className="button primary" href="/app/ai">Assistant</Link></PageHeader><div className="grid"><Card className="span4" title="Voice assistant" sub="Order, book, or ask naturally." href="/app/ai"><strong>Start a call →</strong></Card><Card className="span4" title="Chat instead" sub="Use the same assistant by text." href="/app/chat"><strong>Open chat →</strong></Card><Card className="span4" title="Your orders" sub="Review confirmed delivery orders." href="/app/orders"><strong>View orders →</strong></Card></div></div>}

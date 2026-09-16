@@ -1,0 +1,10 @@
+amazon-transcribe==0.6.4
+boto3==1.42.60
+fastapi==0.141.1
+httpx==0.28.1
+python-dotenv==1.2.2
+python-multipart==0.0.20
+qdrant-client>=1.16,<2
+pytest==9.1.1
+sqlmodel==0.0.42
+uvicorn==0.52.4
